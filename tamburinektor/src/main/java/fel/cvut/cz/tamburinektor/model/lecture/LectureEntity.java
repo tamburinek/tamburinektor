@@ -1,6 +1,7 @@
 package fel.cvut.cz.tamburinektor.model.lecture;
 
 
+import fel.cvut.cz.tamburinektor.model.User;
 import fel.cvut.cz.tamburinektor.model.enums.LectureType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,4 +30,7 @@ public class LectureEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private LectureType type;
+
+    @OneToOne(optional = false)
+    private User createdBy;
 }

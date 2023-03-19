@@ -28,6 +28,9 @@ public class QuizQuestion {
     @Column(nullable = false)
     private String question;
 
+    @OneToOne(optional = false)
+    private Quiz quiz;
+
     @OneToOne
     private Image imageLink;
 

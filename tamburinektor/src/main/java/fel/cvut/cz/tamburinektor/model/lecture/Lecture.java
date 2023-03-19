@@ -5,8 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
+
+import fel.cvut.cz.tamburinektor.model.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,6 +30,9 @@ public class Lecture {
 
     @Column(nullable = false, length = 100)
     private String description;
+
+    @OneToOne(optional = false)
+    private User createdBy;
 
     @OneToMany
     @OrderColumn

@@ -1,6 +1,7 @@
 package fel.cvut.cz.tamburinektor.model.lecture;
 
-import fel.cvut.cz.tamburinektor.model.enums.UserType;
+import fel.cvut.cz.tamburinektor.model.enums.GraphType;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,5 +25,5 @@ public class Graph extends LectureEntity{
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private UserType userType;
+    private GraphType graphType;
 }
