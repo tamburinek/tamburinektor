@@ -23,7 +23,7 @@ public class Classroom {
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false)
+    @Column(unique = true)
     private String name;
 
     @OneToMany

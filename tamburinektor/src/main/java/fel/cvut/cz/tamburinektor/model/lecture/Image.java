@@ -18,4 +18,7 @@ public class Image extends LectureEntity {
     @Column(nullable = false)
     private String imageLink;
 
+    @Column(nullable = false)
+    private String description;
+
 }
