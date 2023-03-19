@@ -1,15 +1,15 @@
 package fel.cvut.cz.tamburinektor.model;
 
 import fel.cvut.cz.tamburinektor.model.enums.UserType;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.*;
 
-import jakarta.persistence.Entity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 @Entity
@@ -24,7 +24,7 @@ public class User{
     @Column(unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @Column(unique = true)
     private String username;
 
     @Column(nullable = false)

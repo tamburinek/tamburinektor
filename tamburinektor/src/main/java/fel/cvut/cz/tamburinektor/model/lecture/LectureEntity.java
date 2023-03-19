@@ -1,10 +1,16 @@
 package fel.cvut.cz.tamburinektor.model.lecture;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import fel.cvut.cz.tamburinektor.model.enums.LectureType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,11 +18,14 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "LectureEntity")
-@Getter
-@Setter
-@NoArgsConstructor
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Getter @Setter @NoArgsConstructor
 public class LectureEntity {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private LectureType type;
 }
