@@ -16,12 +16,6 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void createUser(String username){
-        User user = new User();
-        user.setUsername(username);
-        userRepository.save(user);
-    }
-
     public User getUserByUsername(String username){
         return userRepository.getUserByUsername(username);
     }

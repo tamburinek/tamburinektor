@@ -23,5 +23,8 @@ public class Task extends LectureEntity{
     private String answer;
 
     @OneToOne
-    private Image imageLink;
+    private Image questionImage;
+
+    @OneToOne
+    private Image answerImage;
 }
