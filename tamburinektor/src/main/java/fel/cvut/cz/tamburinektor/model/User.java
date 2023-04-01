@@ -22,9 +22,6 @@ public class User{
     private Long id;
 
     @Column(unique = true)
-    private String email;
-
-    @Column(unique = true)
     private String username;
 
     @Column(nullable = false)

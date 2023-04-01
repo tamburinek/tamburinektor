@@ -14,7 +14,7 @@ export const HeaderSection = () => {
             <Link to={'/'} className={styles.link}>Profil</Link>
             <Link to={'/'} className={styles.link}>Materiály</Link>
             <Link to={'/'} className={styles.link}>Info</Link>
-            <Link to={'/'}>
+            <Link to={'/login'}>
                 <button type={"button"} className={styles.button}>
                     Log in
                 </button>

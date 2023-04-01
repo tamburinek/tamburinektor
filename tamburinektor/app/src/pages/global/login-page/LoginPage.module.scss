@@ -1,0 +1,36 @@
+.computer{
+  object-fit: fill;
+  height: 100vh;
+}
+
+.logo{
+  width: 80px;
+  height: 80px;
+  border-radius: 20%;
+  position: fixed;
+  left: 60px;
+  top: 60px;
+}
+
+.main{
+  display: flex;
+}
+
+.right{
+  height: 100vh;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dot {
+  height: 1300px;
+  width: 1300px;
+  background-color: #8E8D8A;
+  border-radius: 50%;
+  position: absolute;
+  top: -750px;
+  right: -600px;
+  z-index: -1;
+}

@@ -1,5 +1,8 @@
 //GLOBAL
 export * from './global/index-page/IndexPage'
+export * from './global/login-page/LoginPage'
+export * from './global/registration-page/RegistrationPage'
+
 /*export * from './global/welcome-page/Welcome'
 export * from './global/documentaion-page/DocumentationPage'
 export * from './global/registration-page/RegistrationPage'
