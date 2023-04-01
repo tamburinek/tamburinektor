@@ -1,0 +1,19 @@
+body{
+  background-color: #EAE7DC;
+}
+
+.dot {
+  height: 1300px;
+  width: 1300px;
+  background-color: #8E8D8A;
+  border-radius: 50%;
+  position: absolute;
+  top: -750px;
+  right: -600px;
+  z-index: -1;
+}
+
+.downPart{
+  display: flex;
+  margin-top:5%;
+}
