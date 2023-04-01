@@ -12,12 +12,12 @@ export const TextIndexSection = () => {
             <div className={styles.buttons}>
                 <Link to={'/login'}>
                     <button type={"button"} className={styles.login}>
-                        Log in
+                        Přihlásit
                     </button>
                 </Link>
                 <Link to={'/register'}>
                     <button type={"button"} className={styles.register}>
-                        Register
+                        Registrovat
                     </button>
                 </Link>
             </div>

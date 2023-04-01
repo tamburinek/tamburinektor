@@ -1,5 +1,8 @@
-body{
+html,body{
   background-color: #EAE7DC;
+  overflow-x: hidden;
+  -ms-overflow-x: hidden;
+  position:relative;
 }
 
 .dot {
@@ -10,7 +13,7 @@ body{
   position: absolute;
   top: -750px;
   right: -600px;
-  z-index: -1;
+  z-index: 0;
 }
 
 .downPart{

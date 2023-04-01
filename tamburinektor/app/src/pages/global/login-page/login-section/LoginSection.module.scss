@@ -4,6 +4,11 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  z-index: 10;
+}
+
+a{
+  text-decoration: none;
 }
 
 .main{
@@ -21,16 +26,21 @@
   margin-bottom: 60px;
 }
 
-a{
+.link{
   color: #8E8D8A;
   font-size: 10px;
+  z-index: 100;
+}
+
+.link:hover{
+  color: #E98074;
 }
 
 .input{
   background: #D8C3A5;
   width: 50%;
   height: 45px;
-  border-radius: 20px;
+  border-radius: 30px;
   margin-bottom: 20px;
   padding-left: 20px;
   border: 2px solid #D8C3A5;
@@ -49,9 +59,9 @@ a{
   outline: none;
 }
 
-label{
+.label{
   position: relative;
-  left: -20%;
+  display: block;
   margin-bottom: 10px;
 }
 
@@ -96,4 +106,9 @@ label{
   border: 2px solid #8E8D8A;
   margin-top: 40px;
   margin-bottom: 20px;
+}
+
+.login:hover{
+  color: #E98074;
+  border: 2px solid #E98074;
 }

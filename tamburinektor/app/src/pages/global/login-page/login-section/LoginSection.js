@@ -5,12 +5,13 @@ export const LoginSection = () => {
 
     return (
         <div className={styles.main}>
-            <form className={styles.form} autocomplete="off">
-                <h1 className={styles.text}> Login </h1>
+            <form className={styles.form} autoComplete="off">
+                <h1 className={styles.text}> Přihlášení </h1>
 
                 <div className={styles.username}>
-                <label htmlFor="username"> Username </label>
+                <label className={styles.label} htmlFor="username"> Uživatelské jméno </label>
                 <input
+                    autoComplete="off"
                     id="username"
                     type={'text'}
                     placeholder={'@Tamburinek'}
@@ -18,16 +19,17 @@ export const LoginSection = () => {
                 </div>
 
                 <div className={styles.password}>
-                <label htmlFor="password"> Password </label>
+                <label className={styles.label} htmlFor="password"> Heslo </label>
                 <input
+                    autoComplete="off"
                     id="password"
                     type={'password'}
                     className={styles.input}/>
                 </div>
 
-                <button className={styles.login}>Login</button>
+                <button className={styles.login}>Přihlásit</button>
 
-                <Link to={'/register'} >Don't have account yet?</Link>
+                <Link to={'/register'} className={styles.link}>Ještě nemáš účet?</Link>
             </form>
         </div>
     )

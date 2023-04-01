@@ -16,7 +16,7 @@ export const HeaderSection = () => {
             <Link to={'/'} className={styles.link}>Info</Link>
             <Link to={'/login'}>
                 <button type={"button"} className={styles.button}>
-                    Log in
+                    Přihlásit
                 </button>
             </Link>
             </div>
