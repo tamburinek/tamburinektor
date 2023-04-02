@@ -1,12 +1,128 @@
 import styles from '../../login-page/login-section/LoginSection.module.scss'
 import style from './RegistrationSection.module.scss'
 import {Link} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {baseUrl} from "../../../../config/const";
+import AuthService from "../../../../services/auth.service";
+import authHeader from "../../../../services/auth-header";
 
 export const RegistrationSection = () => {
 
+const [name, setName] = useState('');
+const [surname, setSurname] = useState('');
+const [username, setUsername] = useState('');
+const [password, setPassword] = useState('');
+const [passwordAgain, setPasswordAgain] = useState('');
+
+const options = ["ROLE_STUDENT", "ROLE_TEACHER"];
+const [type, setType] = useState(options[0])
+
+const [error, setError] = useState('');
+
+const valid = (e) => {
+        e.preventDefault();
+
+        const userType = "ROLE_STUDENT";
+
+        let valid = true;
+
+        if (name.trim().length === 0 ||
+            surname.trim().length === 0 ||
+            username.trim().length === 0 ||
+            password.trim().length === 0 ||
+            passwordAgain.trim().length === 0
+        ) {
+            setError('Please fill data')
+            console.log(name)
+            console.log(surname)
+            console.log(username)
+            console.log(password)
+            console.log(passwordAgain)
+            valid = false;
+            e.preventDefault()
+        } else {
+            const regex = /[^a-zA-ZÀ-Žà-ž]/;
+            if (name.trim().length >= 2) {
+                if (name.match(regex)) {
+                    setError("Incorrect first name format.")
+                    valid = false;
+                    e.preventDefault();
+                            console.log(error)
+                    return;
+
+                }
+            } else {
+                setError("First name is too short")
+                valid = false;
+                e.preventDefault();
+                        console.log(error)
+                return;
+            }
+            if (surname.trim().length >= 2) {
+                if (surname.match(regex)) {
+                    setError("Incorrect last name format.")
+                    valid = false;
+                    e.preventDefault();
+                            console.log(error)
+                    return;
+                }
+            } else {
+                setError("Last name is too short")
+                valid = false;
+                e.preventDefault();
+                        console.log(error)
+                return;
+            }
+            if (username.trim().length >= 4) {
+                if (surname.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,20}$/)) {
+                    setError("Incorrect last name format.")
+                    valid = false;
+                    e.preventDefault();
+                            console.log(error)
+                    return;
+                }
+            } else {
+                setError("Username is too short")
+                valid = false;
+                e.preventDefault();
+                        console.log(error)
+                return;
+            }
+            if (password.trim().length <= 3) {
+                setError("Password is too short")
+                valid = false;
+                e.preventDefault();
+                        console.log(error)
+                return;
+            }
+            if (passwordAgain !== password) {
+                setError("Passwords do not match")
+                valid = false;
+                e.preventDefault();
+                        console.log(error)
+                return;
+            }
+        }
+        console.log("everything is ok")
+
+        if (valid) {
+            AuthService.register(name, surname, username, password, type)
+            /*.then(
+                () => {
+                        //navigate("/login");
+                        //window.location.reload();
+                        console.log("i was logged")
+                    }
+            );*/
+        }
+    }
+
+
+
+    //return for app
     return (
         <div className={styles.main}>
-            <form className={styles.form} autoComplete="off">
+            <form className={styles.form} autoComplete="off" onSubmit={e => valid(e)}>
                 <h1 className={style.text}> Registrace </h1>
                 <div className={styles.username}>
                     <label className={styles.label} htmlFor="username"> Uživatelské jméno </label>
@@ -15,6 +131,10 @@ export const RegistrationSection = () => {
                         id="username"
                         type={'text'}
                         placeholder={'@Tamburinek'}
+                        value={username}
+                        onChange={(e) => {
+                            setUsername(e.target.value)
+                        }}
                         className={styles.input}/>
                 </div>
                 <div className={style.names}>
@@ -22,6 +142,10 @@ export const RegistrationSection = () => {
                         <label className={styles.label} htmlFor="name"> Jméno </label>
                         <input
                             autoComplete="off"
+                            value={name}
+                            onChange={(e) => {
+                                setName(e.target.value)
+                            }}
                             id="name"
                             type={'text'}
                             className={style.input}/>
@@ -33,6 +157,10 @@ export const RegistrationSection = () => {
                             autoComplete="off"
                             id="surname"
                             type={'text'}
+                            value={surname}
+                            onChange={(e) => {
+                                setSurname(e.target.value)
+                            }}
                             className={style.input}/>
                     </div>
                 </div>
@@ -43,6 +171,10 @@ export const RegistrationSection = () => {
                     autoComplete="off"
                     id="password"
                     type={'password'}
+                    value={password}
+                    onChange={(e) => {
+                        setPassword(e.target.value)
+                    }}
                     className={styles.input}/>
                 </div>
 
@@ -52,13 +184,22 @@ export const RegistrationSection = () => {
                     autoComplete="off"
                     id="passwordAgain"
                     type={'password'}
+                    value={passwordAgain}
+                    onChange={(e) => {
+                        setPasswordAgain(e.target.value)
+                    }}
                     className={styles.input}/>
                 </div>
 
-                <label className={styles.label} htmlFor="type"> Typ uživatele </label>
-                <select className={style.selection} id="type" name="type" default="student">
-                    <option value="student">Student</option>
-                    <option value="teacher">Učitel</option>
+                <label className={styles.label} htmlFor="typ"> Typ uživatele </label>
+                <select
+                value={type}
+                onChange={(e) => {
+                    setType(e.target.value);
+                }}
+                className={style.selection} id="typ" name="type" default="student">
+                    <option value="ROLE_STUDENT">Student</option>
+                    <option value="ROLE_TEACHER">Učitel</option>
                 </select>
 
                 <button className={styles.login}>Registrovat</button>

@@ -13,6 +13,12 @@ public class UserMapper {
     }
 
     public User toUser(UserDto userDTO) {
-        return null;
+        User user = new User();
+        user.setUsername(userDTO.getUsername());
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setPassword(userDTO.getPassword());
+        user.setUserType(userDTO.getUserType());
+        return user;
     }
 }
