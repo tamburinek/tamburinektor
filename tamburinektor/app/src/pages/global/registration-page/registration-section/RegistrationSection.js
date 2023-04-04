@@ -33,13 +33,9 @@ const valid = (e) => {
             passwordAgain.trim().length === 0
         ) {
             setError('Please fill data')
-            console.log(name)
-            console.log(surname)
-            console.log(username)
-            console.log(password)
-            console.log(passwordAgain)
             valid = false;
             e.preventDefault()
+            return;
         } else {
             const regex = /[^a-zA-ZÀ-Žà-ž]/;
             if (name.trim().length >= 2) {
@@ -47,7 +43,6 @@ const valid = (e) => {
                     setError("Incorrect first name format.")
                     valid = false;
                     e.preventDefault();
-                            console.log(error)
                     return;
 
                 }
@@ -55,7 +50,6 @@ const valid = (e) => {
                 setError("First name is too short")
                 valid = false;
                 e.preventDefault();
-                        console.log(error)
                 return;
             }
             if (surname.trim().length >= 2) {
@@ -63,14 +57,12 @@ const valid = (e) => {
                     setError("Incorrect last name format.")
                     valid = false;
                     e.preventDefault();
-                            console.log(error)
                     return;
                 }
             } else {
                 setError("Last name is too short")
                 valid = false;
                 e.preventDefault();
-                        console.log(error)
                 return;
             }
             if (username.trim().length >= 4) {
@@ -78,33 +70,27 @@ const valid = (e) => {
                     setError("Incorrect last name format.")
                     valid = false;
                     e.preventDefault();
-                            console.log(error)
                     return;
                 }
             } else {
                 setError("Username is too short")
                 valid = false;
                 e.preventDefault();
-                        console.log(error)
                 return;
             }
             if (password.trim().length <= 3) {
                 setError("Password is too short")
                 valid = false;
                 e.preventDefault();
-                        console.log(error)
                 return;
             }
             if (passwordAgain !== password) {
                 setError("Passwords do not match")
                 valid = false;
                 e.preventDefault();
-                        console.log(error)
                 return;
             }
         }
-        console.log("everything is ok")
-
         if (valid) {
             AuthService.register(name, surname, username, password, type)
             /*.then(

@@ -14,6 +14,9 @@ export const LoginSection = () => {
 
     const login = (e) => {
         e.preventDefault();
+        if(username.trim().length === 0 || password.trim().length === 0){
+            return
+        }
         AuthService.login(username, password).then(
             console.log("i am logged")
         )
