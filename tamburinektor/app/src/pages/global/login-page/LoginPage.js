@@ -1,5 +1,5 @@
-import computer from "../../../assets/computer.png";
-import logo from "../../../assets/logo.png";
+import computer from "../../../assets/png/computer.png";
+import logo from "../../../assets/png/logo.png";
 import {LoginSection} from "./login-section/LoginSection";
 import styles from './LoginPage.module.scss'
 import {Link} from "react-router-dom";

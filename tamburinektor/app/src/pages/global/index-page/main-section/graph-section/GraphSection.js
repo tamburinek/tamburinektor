@@ -1,6 +1,6 @@
-import graphUp from "../../../../../assets/graphUp.png";
-import graphLeft from "../../../../../assets/graphLeft.png";
-import graphRight from "../../../../../assets/graphRight.png";
+import graphUp from "../../../../../assets/graphs/graphUp.png";
+import graphLeft from "../../../../../assets/graphs/graphLeft.png";
+import graphRight from "../../../../../assets/graphs/graphRight.png";
 
 import styles from './GraphSection.module.scss'
 
