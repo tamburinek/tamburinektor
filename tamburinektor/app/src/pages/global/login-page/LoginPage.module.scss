@@ -1,18 +1,8 @@
 .computer{
   object-fit: contain;
   height: 100vh;
+  max-width: 50vw;
   z-index: 10;
-}
-
-.logo{
-  width: 80px;
-  height: 80px;
-  border-radius: 20%;
-  position: fixed;
-  left: 60px;
-  top: 60px;
-  z-index: 100;
-  box-shadow: 0px 0px 10px 5px rgb(142, 141, 138, 0.5);
 }
 
 .main{
@@ -29,8 +19,8 @@
 }
 
 .dot {
-  height: 1300px;
-  width: 1300px;
+  height: 170vh;
+  width: 120vw;
   background-color: #E98074;
   //opacity: 80%;
   border-radius: 50%;

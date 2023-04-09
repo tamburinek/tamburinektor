@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import {baseUrl} from "../../../../config/const";
 import AuthService from "../../../../services/auth.service";
 import authHeader from "../../../../services/auth-header";
+import logo from "../../../../assets/png/logo.png";
 
 export const RegistrationSection = () => {
 
@@ -108,6 +109,7 @@ const valid = (e) => {
     //return for app
     return (
         <div className={styles.main}>
+            <Link to={'/'}> <img className={styles.logo} src={logo} alt={'logo'}/> </Link>
             <form className={styles.form} autoComplete="off" onSubmit={e => valid(e)}>
                 <h1 className={style.text}> Registrace </h1>
                 <div className={styles.username}>

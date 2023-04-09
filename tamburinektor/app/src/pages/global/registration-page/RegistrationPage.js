@@ -8,8 +8,7 @@ export const RegistrationPage = () => {
 
     return (
         <div>
-            <div className={styles.dot}></div>
-            <Link to={'/'}> <img className={styles.logo} src={logo} alt={'logo'}/> </Link>
+            <div className={styles.dot}/>
             <div className={styles.main}>
                 <RegistrationSection/>
                 <div className={styles.right}>

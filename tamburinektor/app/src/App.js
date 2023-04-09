@@ -3,9 +3,10 @@ import './App.css';
 import { Helmet } from "react-helmet";
 
 import {
-  IndexPage,
-  LoginPage,
-  RegistrationPage
+    DashboardPageTeacher,
+    IndexPage,
+    LoginPage,
+    RegistrationPage
 } from "./pages";
 
 import {Route, Routes} from "react-router-dom";
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/" element={<IndexPage/>}/>
           <Route exact path="/login" element={<LoginPage/>}/>
           <Route exact path="/register" element={<RegistrationPage/>}/>
+          <Route exact path="/dashboard" element={<DashboardPageTeacher/>}/>
         </Routes>
       </div>
   );

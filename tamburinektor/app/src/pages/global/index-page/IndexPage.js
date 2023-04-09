@@ -8,7 +8,7 @@ export const IndexPage = () => {
 
     return (
         <div className={styles.mainContainer}>
-            <div className={styles.dot}></div>
+            <div className={styles.dot}/>
             <HeaderSection/>
             <div className={styles.downPart}>
                 <TextIndexSection/>

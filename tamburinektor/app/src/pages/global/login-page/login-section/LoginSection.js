@@ -4,6 +4,7 @@ import {baseUrl} from "../../../../config/const";
 import AuthService from "../../../../services/auth.service";
 import authHeader from "../../../../services/auth-header";
 import {useEffect, useState} from "react";
+import logo from "../../../../assets/png/logo.png";
 
 export const LoginSection = () => {
 
@@ -25,6 +26,7 @@ export const LoginSection = () => {
 
     return (
         <div className={styles.main}>
+            <Link to={'/'}><img className={styles.logo} src={logo} alt={'logo'}/> </Link>
             <form className={styles.form} autoComplete="off" onSubmit={(e) => login(e)}>
                 <h1 className={styles.text}> Přihlášení </h1>
 
@@ -34,7 +36,6 @@ export const LoginSection = () => {
                     autoComplete="off"
                     id="username"
                     type={'text'}
-                    placeholder={'@Tamburinek'}
                     value={username}
                     onChange={(e) => {
                         setUsername(e.target.value)

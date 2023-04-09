@@ -6,18 +6,18 @@ export * from './global/registration-page/RegistrationPage'
 /*export * from './global/welcome-page/Welcome'
 export * from './global/documentaion-page/DocumentationPage'
 export * from './global/registration-page/RegistrationPage'
-export * from './global/login-page/LoginPage'
+export * from './global/login-page/LoginPage'*/
 
 
 //TEACHER
-export * from './teacher/dashboard-page/DashboardPage.customer'
-export * from './teacher/events-page/EventsPage.customer'
+export * from './teacher/dashboard-page/DashboardPage.teacher'
+/*export * from './teacher/events-page/EventsPage.customer'
 export * from './teacher/profile-page/ProfilePage.customer'
-export * from './teacher/reservations-page/ReservationsPage.customer'
+export * from './teacher/reservations-page/ReservationsPage.customer'*/
 
 
 //STUDENT
-export * from './student/resources-page/ResourcesPage.client'
+/*export * from './student/resources-page/ResourcesPage.client'
 export * from './student/dashboard-page/DashboardPage.client'
 export * from './student/events-page/EventsPage.client'
 export * from './student/reservations-page/ReservationsPage.client'
