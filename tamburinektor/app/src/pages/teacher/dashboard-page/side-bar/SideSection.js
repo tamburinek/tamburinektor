@@ -23,6 +23,8 @@ export const SideSection = () => {
     const activeDiv = styles.item + " " + styles.active
     const nonActiveDiv = styles.item
 
+
+    //todo change name depend on user
     return (
         <div className={styles.main}>
             <Link to={'/'}><img className={styles.logo} src={logo} alt={'logo'}/> </Link>
@@ -65,7 +67,8 @@ export const SideSection = () => {
                 </div>
             </div>
             <div className={styles.right}>
-                {activeName === "testy" && <TestSection/>}
+                <span className={styles.name}>Arťom Ňorba</span>
+                {activeName === "testy" && <TestSection text={"Novy text"}/>}
                 {activeName === "lekce" && <LectionSection/>}
                 {activeName === "materialy" && <MaterialsSection/>}
                 {activeName === "tridy" && <ClassroomSection/>}

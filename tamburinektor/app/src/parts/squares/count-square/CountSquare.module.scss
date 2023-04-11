@@ -1,0 +1,25 @@
+.square{
+  position: absolute;
+  width: 15vw;
+  height: 15vw;
+  left: 72vw;
+  bottom: 15vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #E98074;
+  border: 1px solid #E98074;
+  box-shadow: 0px 0px 60px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 40px;
+}
+
+.square div{
+  font-family: 'Manrope', serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 2.5vw;
+  line-height: 4vw;
+  color: #D8C3A5;
+  width: 70%;
+  text-align: center;
+}
