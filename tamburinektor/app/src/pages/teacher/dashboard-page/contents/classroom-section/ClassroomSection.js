@@ -14,8 +14,10 @@ export const ClassroomSection = () => {
 
     return (
         <div className={styles.main}>
-            <Link onClick={() => setCreateVisible(true)}><CreateSquare text={"Vytvořit třídu"}/></Link>
-            {createModalVisible === true && <CreateClassModal/>}
+            <Link onClick={() => setCreateVisible(true)}>
+                <CreateSquare text={"Vytvořit třídu"}/>
+            </Link>
+            {createModalVisible === true && <CreateClassModal onClose={() => setCreateVisible(false)}/>}
             <Link><AllSquare text={"Zobrazit vše"}/></Link>
             <Link><CountSquare text={"176 tříd"}/></Link>
             <Link><LastSquare text={"TODO"}/></Link>

@@ -28,20 +28,15 @@
   height: 45px;
   border-radius: 30px;
   margin-bottom: 20px;
-  padding-left: 15px;
   border: 2px solid #D8C3A5;
-  color: #8E8D8A;
+  color: #505050;
   font-size: 20px;
   margin-right: 20px;
   margin-left: 20px;
   box-shadow: 0px 0px 10px #8E8D8A;
   opacity: 80%;
-}
-
-.input::placeholder{
-  font-size: 20px;
-  font-weight: bold;
-  opacity: 0.5;
+  text-align-last:center;
+  caret-color: transparent;
 }
 
 .input:focus{
@@ -72,11 +67,11 @@
   border: 2px solid #D8C3A5;
   list-style: none;
   appearance: none;
-  padding-left: 20px;
-  color: #8E8D8A;
+  color: #505050;
   font-size: 20px;
   box-shadow: 0px 0px 10px #8E8D8A;
   opacity: 80%;
+  text-align-last:center;
 }
 
 .selection:active{
@@ -87,4 +82,8 @@
 .selection::before,
 .selection::after {
   box-sizing: border-box;
+}
+
+.selection:hover{
+  cursor: pointer;
 }

@@ -6,12 +6,18 @@ import {AllSquare} from "../../../../../parts/squares/all-square/AllSquare";
 import {CountSquare} from "../../../../../parts/squares/count-square/CountSquare";
 import {LastSquare} from "../../../../../parts/squares/last-square/LastSquare";
 import {GraphSquare} from "../../../../../parts/squares/graph-square/GraphSquare";
+import {CreateMaterialModal} from "./createMaterials-modal/CreateMaterialModal"
 
 export const MaterialsSection = () => {
 
+    const [createModalVisible, setCreateVisible] = useState(false)
+
     return (
         <div className={styles.main}>
-            <CreateSquare text={"Vytvořit materiál"}/>
+            <Link onClick={() => setCreateVisible(true)}>
+                <CreateSquare text={"Vytvořit materiál"}/>
+            </Link>
+            {createModalVisible === true && <CreateMaterialModal onClose={() => setCreateVisible(false)}/>}
             <AllSquare text={"Zobrazit vše"}/>
             <Link><CountSquare text={"176 materiálů"}/></Link>
             <Link><LastSquare text={"TODO"}/></Link>

@@ -43,12 +43,13 @@ a{
   height: 45px;
   border-radius: 30px;
   margin-bottom: 20px;
-  padding-left: 20px;
   border: 2px solid #D8C3A5;
-  color: #8E8D8A;
+  color: #505050;
   font-size: 20px;
   box-shadow: 0px 0px 10px #8E8D8A;
   opacity: 80%;
+  text-align-last:center;
+  caret-color: transparent;
 }
 
 .input::placeholder{
