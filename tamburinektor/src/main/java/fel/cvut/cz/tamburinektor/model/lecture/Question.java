@@ -1,6 +1,5 @@
 package fel.cvut.cz.tamburinektor.model.lecture;
 
-import fel.cvut.cz.tamburinektor.model.User;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,9 +27,6 @@ public class Question extends LectureEntity {
 
     @OneToOne
     private Image imageLink;
-
-    @OneToOne(optional = false)
-    private User createdBy;
 
     @Column(nullable = false)
     private boolean anonymous = true;

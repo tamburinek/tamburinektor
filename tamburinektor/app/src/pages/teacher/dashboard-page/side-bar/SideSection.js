@@ -67,8 +67,8 @@ export const SideSection = () => {
                 </div>
             </div>
             <div className={styles.right}>
-                <span className={styles.name}>Arťom Ňorba</span>
-                {activeName === "testy" && <TestSection text={"Novy text"}/>}
+                <span className={styles.name}>Tomáš Bahník</span>
+                {activeName === "testy" && <TestSection/>}
                 {activeName === "lekce" && <LectionSection/>}
                 {activeName === "materialy" && <MaterialsSection/>}
                 {activeName === "tridy" && <ClassroomSection/>}

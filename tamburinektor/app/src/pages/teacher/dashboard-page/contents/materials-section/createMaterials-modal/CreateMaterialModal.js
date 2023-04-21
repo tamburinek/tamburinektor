@@ -4,6 +4,11 @@ import {DefinitionForm} from "../../../../../../parts/lecture-types/definition-f
 import closeImage from "../../../../../../assets/png/close.png"
 
 import {useEffect, useState} from "react";
+import {QuizForm} from "../../../../../../parts/lecture-types/quiz-form/QuizForm";
+import {TaskForm} from "../../../../../../parts/lecture-types/task-form/TaskForm";
+import {QuestionForm} from "../../../../../../parts/lecture-types/question-form/QuestionForm";
+import {ImageForm} from "../../../../../../parts/lecture-types/image-form/ImageForm";
+import {GraphForm} from "../../../../../../parts/lecture-types/graph-form/GraphForm";
 
 export const CreateMaterialModal = (props) => {
 
@@ -27,6 +32,11 @@ export const CreateMaterialModal = (props) => {
                     <option value="quiz">Quiz</option>
                 </select>
                 {type === "definition" && <DefinitionForm/>}
+                {type === "graph" && <GraphForm/>}
+                {type === "image" && <ImageForm/>}
+                {type === "question" && <QuestionForm/>}
+                {type === "task" && <TaskForm/>}
+                {type === "quiz" && <QuizForm/>}
             </div>
         </div>
     )

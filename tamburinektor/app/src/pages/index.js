@@ -17,8 +17,8 @@ export * from './teacher/reservations-page/ReservationsPage.customer'*/
 
 
 //STUDENT
-/*export * from './student/resources-page/ResourcesPage.client'
-export * from './student/dashboard-page/DashboardPage.client'
+export * from './student/dashboard-page/DashboardPage.student'
+/*export * from './student/dashboard-page/DashboardPage.client'
 export * from './student/events-page/EventsPage.client'
 export * from './student/reservations-page/ReservationsPage.client'
 export * from './student/customers-page/CustomersPage.client'

@@ -14,7 +14,7 @@ export const TestSection = () => {
         <div className={styles.main}>
             <Link><CreateSquare text={"Vytvořit test"}/></Link>
             <Link><AllSquare text={"Zobrazit vše"}/></Link>
-            <Link><CountSquare text={"176 testů"}/></Link>
+            <Link><CountSquare text={"Vytvořit otázku"}/></Link>
             <Link><LastSquare text={"TODO"}/></Link>
             <Link><GraphSquare text={"TODO"}/></Link>
         </div>

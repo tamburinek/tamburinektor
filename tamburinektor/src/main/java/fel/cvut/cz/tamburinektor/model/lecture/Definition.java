@@ -1,6 +1,5 @@
 package fel.cvut.cz.tamburinektor.model.lecture;
 
-import fel.cvut.cz.tamburinektor.model.User;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -25,7 +24,4 @@ public class Definition extends LectureEntity {
 
     @OneToOne
     private Image imageLink;
-
-    @OneToOne(optional = false)
-    private User createdBy;
 }
