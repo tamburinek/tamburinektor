@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,9 +24,6 @@ public class Question extends LectureEntity {
     @Column(nullable = false, length = 200)
     private String question;
 
-    @OneToOne
-    private Image imageLink;
-
     @Column(nullable = false)
-    private boolean anonymous = true;
+    private boolean anonymous;
 }

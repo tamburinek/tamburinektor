@@ -21,12 +21,12 @@ export const DefinitionForm = () => {
     return (
         <div className={styles.main}>
             <form className={styles.form}>
-                <label>Popis definice</label>
-                <input type={"text"}/>
-                <label>Definice</label>
+                <label className={styles.descr}>Popis definice</label>
+                <input className={styles.description} type={"text"}/>
+                <label className={styles.descr}>Definice</label>
                 <textarea className={styles.area} name="allDef" id="allDef" cols="30" rows="10"/>
                 <button onClick={addImage} className={styles.image}>{text}</button>
-                {text === "Odstranit obrázek" && <input/>}
+                {text === "Odstranit obrázek" && <input className={styles.inputImage}/>}
                 <button onClick={confirm} className={styles.add}>Přídat</button>
             </form>
         </div>

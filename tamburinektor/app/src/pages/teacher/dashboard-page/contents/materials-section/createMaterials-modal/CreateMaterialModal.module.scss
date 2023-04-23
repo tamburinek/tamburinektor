@@ -26,6 +26,10 @@
   box-shadow: 0px 0px 10px 2px rgba(233, 128, 116, 0.5);
 }
 
+.typeText{
+  margin-bottom: 5px;
+}
+
 .h1, .typeText{
   color: #8E8D8A;
   font-weight: bold;
@@ -45,7 +49,7 @@
   width: 20%;
   height: 50px;
   outline: none;
-  border: 2px solid #D8C3A5;
+  border: 1px solid #8E8D8A;
   list-style: none;
   appearance: none;
   color: #505050;
@@ -53,6 +57,7 @@
   box-shadow: 0px 0px 10px #8E8D8A;
   opacity: 80%;
   text-align-last:center;
+  margin-bottom: 30px;
 }
 
 .selection:active{

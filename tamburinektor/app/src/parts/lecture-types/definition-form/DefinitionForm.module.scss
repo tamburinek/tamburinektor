@@ -46,13 +46,16 @@ input{
 
 .area{
   background-color: #D8C3A5;
-  border-radius: 40px;
-  box-shadow: #505050;
-  margin-bottom: 10%;
+  border-radius: 20px;
+  box-shadow: 0px 0px 4px #8E8D8A;
+  margin-bottom: 20px;
   width: 80%;
   height: 70%;
   opacity: 70%;
-
+  color: #505050;
+  font-weight: bold;
+  padding-left: 10px;
+  border: 1px solid #8E8D8A;
 }
 
 .main{
@@ -62,8 +65,30 @@ input{
 .image{
   margin-bottom: 20px;
   border-radius: 40px;
-  width: 30%;
-  height: 10%;
-  background-color: #E98074;
-  opacity: 40%;
+  background-color: #D8C3A5;
+  color: #8E8D8A;
+  font-weight: bold;
+  border: 1px solid #8E8D8A;
+  padding: 10px;
+  box-shadow: 0px 0px 4px #8E8D8A;
+}
+
+.descr{
+  color: #8E8D8A;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.description, .inputImage{
+  margin-bottom: 20px;
+  border-radius: 40px;
+  background-color: #D8C3A5;
+  color: #505050;
+  font-weight: bold;
+  width: 80%;
+  height: 40px;
+  opacity: 70%;
+  box-shadow: 0px 0px 4px #8E8D8A;
+  border: 1px solid #8E8D8A;
+  padding-left: 10px;
 }

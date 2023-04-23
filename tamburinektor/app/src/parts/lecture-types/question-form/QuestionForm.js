@@ -8,10 +8,14 @@ export const QuestionForm = () => {
     }
 
     return (
-        <div>
+        <div className={styles.main}>
             <form className={styles.form}>
-                <label>Popis otázky</label>
-                <input type={"text"}/>
+                <label className={styles.label}>Otázka</label>
+                <input className={styles.question} type={"text"}/>
+                <div className={styles.div}>
+                    <label className={styles.label} htmlFor={"anonymous"}>Anonymní</label>
+                    <input className={styles.check} type={"checkbox"} name={"anonymous"} id={"anonymous"}/>
+                </div>
                 <button onClick={confirm} className={styles.add}>Přídat</button>
             </form>
         </div>

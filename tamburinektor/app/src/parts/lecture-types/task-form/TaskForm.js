@@ -8,9 +8,15 @@ export const TaskForm = () => {
     }
 
     return (
-        <div>
+        <div className={styles.main}>
             <form className={styles.form}>
-                <label>Popis úkolu</label>
+                <label>Otázka</label>
+                <input type={"text"}/>
+                <label>Otázka - obrázek</label>
+                <input type={"text"}/>
+                <label>Odpověď</label>
+                <input type={"text"}/>
+                <label>Odpověď - obrázek</label>
                 <input type={"text"}/>
                 <button onClick={confirm} className={styles.add}>Přídat</button>
             </form>

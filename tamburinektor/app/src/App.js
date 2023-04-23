@@ -11,6 +11,7 @@ import {
 } from "./pages";
 
 import {Route, Routes} from "react-router-dom";
+import {TestCreatePage} from "./pages/teacher/test-create/TestCreatePage";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route exact path="/register" element={<RegistrationPage/>}/>
           <Route exact path="/dashboard" element={<DashboardPageTeacher/>}/>
           <Route exact path="/dashboardStudent" element={<DashboardPageStudent/>}/>
+          <Route exact path="/test/creation" element={<TestCreatePage/>}/>
         </Routes>
       </div>
   );
