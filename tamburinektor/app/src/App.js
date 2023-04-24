@@ -12,6 +12,7 @@ import {
 
 import {Route, Routes} from "react-router-dom";
 import {TestCreatePage} from "./pages/teacher/test-create/TestCreatePage";
+import {LectureCreatePage} from "./pages/teacher/lecture-create/LectureCreatePage";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route exact path="/dashboard" element={<DashboardPageTeacher/>}/>
           <Route exact path="/dashboardStudent" element={<DashboardPageStudent/>}/>
           <Route exact path="/test/creation" element={<TestCreatePage/>}/>
+          <Route exact path="/lecture/creation" element={<LectureCreatePage/>}/>
         </Routes>
       </div>
   );

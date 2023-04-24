@@ -19,7 +19,7 @@ import {StatisticsSection} from "../contents/statistics-section/StatisticsSectio
 
 export const SideSection = () => {
 
-    const [activeName, setActiveName] = useState("testy");
+    const [activeName, setActiveName] = useState("materialy");
     const activeDiv = styles.item + " " + styles.active
     const nonActiveDiv = styles.item
 
@@ -30,12 +30,6 @@ export const SideSection = () => {
             <Link to={'/'}><img className={styles.logo} src={logo} alt={'logo'}/> </Link>
             <div className={styles.square}/>
             <div className={styles.side}>
-
-                <div className={activeName === "testy" ? activeDiv : nonActiveDiv}
-                     onClick={() => setActiveName("testy")}>
-                    <img src={test} alt={"file"}/>
-                    <p>Testy</p>
-                </div>
                 <div className={activeName === "lekce" ? activeDiv : nonActiveDiv}
                      onClick={() => setActiveName("lekce")}>
                     <img src={file} alt={"file"}/>
@@ -45,6 +39,11 @@ export const SideSection = () => {
                      onClick={() => setActiveName("materialy")}>
                     <img src={material} alt={"file"}/>
                     <p>Materiály</p>
+                </div>
+                <div className={activeName === "testy" ? activeDiv : nonActiveDiv}
+                     onClick={() => setActiveName("testy")}>
+                    <img src={test} alt={"file"}/>
+                    <p>Testy</p>
                 </div>
                 <div className={activeName === "tridy" ? activeDiv : nonActiveDiv}
                      onClick={() => setActiveName("tridy")}>
