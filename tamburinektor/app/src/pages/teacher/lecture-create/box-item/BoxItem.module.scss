@@ -1,26 +1,15 @@
 .itemList{
-  width: 88%;
+  width: 85%;
   height: 7%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-right: 5%;
-  padding-left: 2%;
+  padding-left: 5%;
   border: 1px solid #E98074;
   margin-top: 5px;
-  margin-bottom: 5px;
   background: rgba(233, 128, 116, 0.5);
   border-radius: 20px;
-}
-
-.dot{
-  background-color: #61C454;
-  height: 80%;
-  aspect-ratio: 1/1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 100%;
 }
 
 .description{
@@ -30,9 +19,16 @@
   width: 80%;
 }
 
-.close{
-  height: 40%;
+.pencil, .eye{
+  height: 50%;
   aspect-ratio: 1/1;
   cursor: pointer;
 }
 
+.images{
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 12%;
+}

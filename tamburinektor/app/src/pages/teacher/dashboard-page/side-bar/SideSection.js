@@ -19,7 +19,7 @@ import {StatisticsSection} from "../contents/statistics-section/StatisticsSectio
 
 export const SideSection = () => {
 
-    const [activeName, setActiveName] = useState("materialy");
+    const [activeName, setActiveName] = useState("lekce");
     const activeDiv = styles.item + " " + styles.active
     const nonActiveDiv = styles.item
 

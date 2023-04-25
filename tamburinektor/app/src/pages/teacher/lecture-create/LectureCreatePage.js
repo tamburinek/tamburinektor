@@ -1,10 +1,13 @@
 import styles from './LectureCreatePage.module.scss'
 import {Link} from "react-router-dom";
 import logo from "../../../assets/png/logo.png";
+
 import {useEffect, useState} from "react";
 import {
     CreateMaterialModal
 } from "../dashboard-page/contents/materials-section/createMaterials-modal/CreateMaterialModal";
+import {BoxItem} from "./box-item/BoxItem";
+import {PaperItem} from "./paper-item/PaperItem";
 
 
 export const LectureCreatePage = () => {
@@ -14,6 +17,17 @@ export const LectureCreatePage = () => {
 
     const activeDiv = styles.categoryItem + " " + styles.active
     const nonActiveDiv = styles.categoryItem
+
+    let boxItems = ["prvni velmi dlouha definice ktera se cela nevejde zrovna do tohoto okna", "druha definice", 1,2,3,4,5,6,2,3,3,3,3,3,3,3,3]
+    //let boxItems = ["prvni lekce", "druha lekce"]
+    const listBoxItems = boxItems.map((item) =>
+        <BoxItem item={item}/>
+    );
+
+    let paperItems = ["prvni velmi dlouha definice ktera se cela nevejde zrovna do tohoto okna", "druha definice", 1,2,3,4,5,6,2,3,3,3,3,3,3,3,3]
+    const listPaperItems = paperItems.map((item) =>
+        <PaperItem item={item}/>
+    );
 
     return (
         <div className={styles.main}>
@@ -56,7 +70,7 @@ export const LectureCreatePage = () => {
                         </select>
                     </div>
                     <div className={styles.items}>
-                        Itemy
+                        {listBoxItems}
                     </div>
                 </div>
                 <button className={styles.add} onClick={() => setCreateModal(true)}>Vytvořit materiál</button>
@@ -66,7 +80,7 @@ export const LectureCreatePage = () => {
                 <label className={styles.label}>Popis lekce</label>
                 <input className={styles.description} placeholder={'Lineární rovnice 4.A.'} type={"text"}/>
                 <div className={styles.paper}>
-
+                    {listPaperItems}
                 </div>
                 <button className={styles.create}>Vytvořit lekci</button>
             </div>

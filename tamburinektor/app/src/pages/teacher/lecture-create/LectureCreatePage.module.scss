@@ -41,8 +41,6 @@
   width: 80%;
   height: 80%;
   background: rgba(233, 128, 116, 0.3);
-  border-bottom-right-radius: 40px;
-  border-bottom-left-radius: 40px;
   margin-bottom: 20px;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
   display: flex;
@@ -64,11 +62,16 @@
 
 .paper{
   width: 80%;
-  height: 70%;
+  height: 68%;
   background: rgba(233, 128, 116, 0.3);
-  border-radius: 40px;
+  border-radius: 20px;
   margin-bottom: 20px;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  padding-top: 10px;
 }
 
 .label{
@@ -172,10 +175,11 @@
   overflow: hidden;
 }
 
-
 .items{
   height: 85%;
   width: 100%;
-  border: 1px solid #505050;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  overflow-x: hidden;
 }
-

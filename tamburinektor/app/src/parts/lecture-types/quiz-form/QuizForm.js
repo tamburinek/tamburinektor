@@ -8,10 +8,18 @@ export const QuizForm = () => {
     }
 
     return (
-        <div>
+        <div className={styles.main}>
             <form className={styles.form}>
-                <label>Popis quizu</label>
-                <input type={"text"}/>
+                <label className={styles.text}>Popis quizu</label>
+                <input className={styles.name} type={"text"}/>
+                <div className={styles.bottom}>
+                    <div className={styles.create}>
+
+                    </div>
+                    <div className={styles.overview}>
+
+                    </div>
+                </div>
                 <button onClick={confirm} className={styles.add}>Přídat</button>
             </form>
         </div>
