@@ -8,7 +8,6 @@ import {QuizForm} from "../../../../../../parts/lecture-types/quiz-form/QuizForm
 import {TaskForm} from "../../../../../../parts/lecture-types/task-form/TaskForm";
 import {QuestionForm} from "../../../../../../parts/lecture-types/question-form/QuestionForm";
 import {ImageForm} from "../../../../../../parts/lecture-types/image-form/ImageForm";
-import {GraphForm} from "../../../../../../parts/lecture-types/graph-form/GraphForm";
 
 export const CreateMaterialModal = (props) => {
 
@@ -25,14 +24,12 @@ export const CreateMaterialModal = (props) => {
                     }}
                     className={styles.selection} id="typ" name="type">
                     <option value="definition">Definice</option>
-                    <option value="graph">Graf</option>
                     <option value="image">Obrázek</option>
                     <option value="question">Otázka</option>
                     <option value="task">Úkol</option>
                     <option value="quiz">Quiz</option>
                 </select>
                 {type === "definition" && <DefinitionForm/>}
-                {type === "graph" && <GraphForm/>}
                 {type === "image" && <ImageForm/>}
                 {type === "question" && <QuestionForm/>}
                 {type === "task" && <TaskForm/>}
