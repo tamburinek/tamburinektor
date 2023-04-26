@@ -20,6 +20,8 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class Graph extends LectureEntity{
 
+    //todo consider JSXGraph library
+
     @Column(nullable = false)
     private String name;
 
