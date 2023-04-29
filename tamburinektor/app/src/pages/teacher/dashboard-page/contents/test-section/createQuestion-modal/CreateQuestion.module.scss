@@ -15,7 +15,7 @@
   background-color: #EAE7DC;
   position: fixed;
   width: 80%;
-  height: 80%;
+  height: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,9 +26,100 @@
   box-shadow: 0px 0px 10px 2px rgba(233, 128, 116, 0.5);
 }
 
+.add{
+  align-items: center;
+  background-color: #8E8D8A;
+  border-radius: 24px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #EAE7DC;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "Google Sans",Roboto,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  height: 48px;
+  justify-content: center;
+  letter-spacing: .25px;
+  line-height: normal;
+  max-width: 100%;
+  overflow: visible;
+  padding: 2px 24px;
+  text-align: center;
+  width: 120px;
+  box-shadow: 0px 0px 10px 2px rgb(142, 141, 138, 0.5);
+  margin-bottom: 20px;
+}
+
+.image{
+  align-items: center;
+  background-color: transparent;
+  border-radius: 24px;
+  box-sizing: border-box;
+  color: #8E8D8A;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "Google Sans",Roboto,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  height: 48px;
+  justify-content: center;
+  letter-spacing: .25px;
+  line-height: normal;
+  max-width: 100%;
+  overflow: visible;
+  padding: 2px 24px;
+  text-align: center;
+  width: 120px;
+  border: 1px solid #8E8D8A;
+  box-shadow: 0px 0px 10px 2px rgb(142, 141, 138, 0.5);
+  margin-bottom: 20px;
+}
+
+.add:hover, .image:hover{
+  color: #E98074;
+  border: 2px solid #E98074;
+}
+
 .close{
   position: absolute;
   right: 5%;
   top: 5%;
   cursor: pointer;
+}
+
+.form h1, .form h2{
+  color: #8E8D8A;
+  margin: 1%;
+}
+
+.select{
+  width: 20%;
+  height: 5%;
+  background-color: rgb(216, 195, 165, 0.4);
+  border: 1px solid #E98074;
+  box-shadow: 0px 0px 4px #E98074;
+  border-radius: 20px;
+  text-align: center;
+  outline: none;
+  color: #8E8D8A;
+  font-weight: bold;
+}
+
+.input{
+  width: 78%;
+  padding-left: 2%;
+  background-color: rgb(216, 195, 165, 0.4);
+  border: 1px solid #E98074;
+  box-shadow: 0px 0px 4px #E98074;
+  height: 5%;
+  border-radius: 30px;
+  margin-bottom: 2%;
+}
+
+.modal{
+  display: flex;
+  flex-direction: column;
+  height: 25%;
+  width: 80%;
 }

@@ -179,16 +179,18 @@ const valid = (e) => {
                     className={styles.input}/>
                 </div>
 
-                <label className={styles.label} htmlFor="typ"> Typ uživatele </label>
-                <select
-                value={type}
-                onChange={(e) => {
-                    setType(e.target.value);
-                }}
-                className={style.selection} id="typ" name="type" default="student">
-                    <option value="ROLE_STUDENT">Student</option>
-                    <option value="ROLE_TEACHER">Učitel</option>
-                </select>
+                <div className={style.selectionDiv}>
+                    <label className={styles.label} htmlFor="typ"> Typ uživatele </label>
+                    <select
+                        value={type}
+                        onChange={(e) => {
+                            setType(e.target.value);
+                        }}
+                        className={style.selection} id="typ" name="type" default="student">
+                        <option value="ROLE_STUDENT">Student</option>
+                        <option value="ROLE_TEACHER">Učitel</option>
+                    </select>
+                </div>
 
                 <button className={styles.login}>Registrovat</button>
 
