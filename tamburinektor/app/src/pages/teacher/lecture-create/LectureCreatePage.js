@@ -8,12 +8,14 @@ import {
 } from "../dashboard-page/contents/materials-section/createMaterials-modal/CreateMaterialModal";
 import {BoxItem} from "./box-item/BoxItem";
 import {PaperItem} from "./paper-item/PaperItem";
+import {EditMaterialModal} from "../dashboard-page/contents/materials-section/editMaterial-modal/EditMaterialModal";
 
 
 export const LectureCreatePage = () => {
 
     const [createModal, setCreateModal] = useState(false);
-    const [activeName, setActiveName] = useState("definice");
+    const [activeName, setActiveName] = useState("definition");
+    const [editMaterialVisible, setMaterialVisible] = useState(false)
 
     const activeDiv = styles.categoryItem + " " + styles.active
     const nonActiveDiv = styles.categoryItem
@@ -21,7 +23,7 @@ export const LectureCreatePage = () => {
     let boxItems = ["prvni velmi dlouha definice ktera se cela nevejde zrovna do tohoto okna", "druha definice", 1,2,3,4,5,6,2,3,3,3,3,3,3,3,3]
     //let boxItems = ["prvni lekce", "druha lekce"]
     const listBoxItems = boxItems.map((item) =>
-        <BoxItem item={item}/>
+        <BoxItem type={activeName} edit={() => setMaterialVisible(true)} item={item}/>
     );
 
     let paperItems = ["prvni velmi dlouha definice ktera se cela nevejde zrovna do tohoto okna", "druha definice", 1,2,3,4,5,6,2,3,3,3,3,3,3,3,3]
@@ -35,24 +37,24 @@ export const LectureCreatePage = () => {
             <div className={styles.left}>
                 <div className={styles.box}>
                     <div className={styles.category}>
-                        <div className={activeName === "definice" ? activeDiv : nonActiveDiv}
-                             onClick={() => setActiveName("definice")}>
+                        <div className={activeName === "definition" ? activeDiv : nonActiveDiv}
+                             onClick={() => setActiveName("definition")}>
                             Definice
                         </div>
-                        <div className={activeName === "grafy" ? activeDiv : nonActiveDiv}
-                             onClick={() => setActiveName("grafy")}>
+                        <div className={activeName === "graph" ? activeDiv : nonActiveDiv}
+                             onClick={() => setActiveName("graph")}>
                             Grafy
                         </div>
-                        <div className={activeName === "obrazky" ? activeDiv : nonActiveDiv}
-                             onClick={() => setActiveName("obrazky")}>
+                        <div className={activeName === "image" ? activeDiv : nonActiveDiv}
+                             onClick={() => setActiveName("image")}>
                             Obrázky
                         </div>
-                        <div className={activeName === "otazky" ? activeDiv : nonActiveDiv}
-                             onClick={() => setActiveName("otazky")}>
+                        <div className={activeName === "question" ? activeDiv : nonActiveDiv}
+                             onClick={() => setActiveName("question")}>
                             Otázky
                         </div>
-                        <div className={activeName === "ukoly" ? activeDiv : nonActiveDiv}
-                             onClick={() => setActiveName("ukoly")}>
+                        <div className={activeName === "task" ? activeDiv : nonActiveDiv}
+                             onClick={() => setActiveName("task")}>
                             Úkoly
                         </div>
                         <div className={activeName === "quiz" ? activeDiv : nonActiveDiv}
@@ -83,6 +85,7 @@ export const LectureCreatePage = () => {
                     {listPaperItems}
                 </div>
                 <button className={styles.create}>Vytvořit lekci</button>
+                {editMaterialVisible === true && <EditMaterialModal type={activeName} onClose={() => setMaterialVisible(false)}/>}
             </div>
         </div>
     )

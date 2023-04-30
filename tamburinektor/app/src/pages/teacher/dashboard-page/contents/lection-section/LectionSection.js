@@ -20,7 +20,7 @@ export const LectionSection = () => {
                 <CountSquare text={"Vytvořit materiál"}/>
             </Link>
             {createModalVisible === true && <CreateMaterialModal onClose={() => setCreateVisible(false)}/>}
-            <Link><LastSquare text={"TODO"}/></Link>
+            <LastSquare onClick={() => window.location = "/lecture/creation"} button={"Spustit"} text={"Lineární rovnice 4A"}/>
             <Link><GraphSquare text={"TODO"}/></Link>
         </div>
     )

@@ -18,9 +18,9 @@ export const ClassroomSection = () => {
                 <CreateSquare text={"Vytvořit třídu"}/>
             </Link>
             {createModalVisible === true && <CreateClassModal onClose={() => setCreateVisible(false)}/>}
-            <Link><AllSquare text={"Zobrazit vše"}/></Link>
+            <Link><AllSquare text={"Správa tříd"}/></Link>
             <CountSquare text={"176 tříd"}/>
-            <Link><LastSquare text={"TODO"}/></Link>
+            <LastSquare button={"Spravovat"} text={"TODO"}/>
             <Link><GraphSquare text={"TODO"}/></Link>
         </div>
     )

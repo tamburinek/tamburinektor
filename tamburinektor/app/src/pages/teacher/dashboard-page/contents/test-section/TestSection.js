@@ -22,7 +22,7 @@ export const TestSection = () => {
                 <CountSquare text={"Vytvořit otázku"}/>
             </Link>
             {createModalVisible === true && <CreateQuestion onClose={() => setCreateVisible(false)}/>}
-            <Link><LastSquare text={"TODO"}/></Link>
+            <LastSquare onClick={() => window.location = "/test/creation"} text={"TODO"}/>
             <Link><GraphSquare text={"TODO"}/></Link>
         </div>
     )

@@ -8,11 +8,15 @@ import {LastSquare} from "../../../../../parts/squares/last-square/LastSquare";
 import {GraphSquare} from "../../../../../parts/squares/graph-square/GraphSquare";
 import {CreateMaterialModal} from "./createMaterials-modal/CreateMaterialModal"
 import {ViewMaterialsModal} from "./viewMaterials-modal/ViewMaterialsModal";
+import {EditMaterialModal} from "./editMaterial-modal/EditMaterialModal";
 
 export const MaterialsSection = () => {
 
     const [createModalVisible, setCreateVisible] = useState(false)
     const [viewAllModalVisible, setViewAllModalVisible] = useState(false)
+    const [editMaterialVisible, setMaterialVisible] = useState(false)
+    const [materialType, setMaterialType] = useState("definition")
+
 
     return (
         <div className={styles.main}>
@@ -23,9 +27,13 @@ export const MaterialsSection = () => {
             <Link onClick={() => setViewAllModalVisible(true)}>
                 <AllSquare text={"Zobrazit vše"}/>
             </Link>
-            {viewAllModalVisible === true && <ViewMaterialsModal onClose={() => setViewAllModalVisible(false)}/>}
+            {viewAllModalVisible === true && <ViewMaterialsModal
+                editMaterial={() => setMaterialVisible(true)}
+                onClose={() => setViewAllModalVisible(false)}
+                onChange={(type) => setMaterialType(type)}/>}
+            {editMaterialVisible === true && <EditMaterialModal type={materialType} onClose={() => setMaterialVisible(false)}/>}
             <CountSquare text={"176 materiálů"}/>
-            <Link><LastSquare text={"TODO"}/></Link>
+            <LastSquare onClick={() => setMaterialVisible(true)} text={"TODO"}/>
             <Link><GraphSquare text={"TODO"}/></Link>
         </div>
     )

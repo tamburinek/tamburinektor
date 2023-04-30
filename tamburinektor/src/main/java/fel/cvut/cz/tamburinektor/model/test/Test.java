@@ -30,9 +30,6 @@ public class Test {
     @Column(nullable = false, length = 100)
     private String description;
 
-    @Column(nullable = false)
-    private boolean randomOrder = false;
-
     @OneToOne
     private User createBy;
 

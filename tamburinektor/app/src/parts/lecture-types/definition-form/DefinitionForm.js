@@ -1,7 +1,7 @@
 import styles from "./DefinitionForm.module.scss"
 import {useEffect, useState} from "react";
 
-export const DefinitionForm = () => {
+export const DefinitionForm = (props) => {
 
     const [text, setText] = useState("Přidat obrázek");
 
@@ -27,7 +27,7 @@ export const DefinitionForm = () => {
                 <textarea className={styles.area} name="allDef" id="allDef" cols="30" rows="10"/>
                 <button onClick={addImage} className={styles.image}>{text}</button>
                 {text === "Odstranit obrázek" && <input className={styles.inputImage}/>}
-                <button onClick={confirm} className={styles.add}>Přídat</button>
+                <button onClick={confirm} className={styles.add}>Přidat</button>
             </form>
         </div>
     )

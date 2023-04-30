@@ -27,12 +27,23 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  width: 80%;
+  width: 65%;
 }
 
 .close{
   height: 40%;
   aspect-ratio: 1/1;
   cursor: pointer;
+}
+
+.mark{
+  background: rgba(233, 128, 116, 0.2);
+  outline: none;
+  border: 1px solid #E98074;
+  width: 10%;
+  height: 70%;
+  border-radius: 40px;
+  text-align: center;
+  color: #505050;
 }
 

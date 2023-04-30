@@ -8,9 +8,12 @@
   justify-content: center;
   align-items: center;
   background: #8E8D8A;
-  border: 1px solid rgba(233, 128, 116, 0.2);
-  box-shadow: 0px 0px 30px 5px rgba(233, 128, 116, 0.5);
   border-radius: 40px;
+  border: 1px solid rgba(233, 128, 116, 0.2);
+}
+
+.square:hover{
+  box-shadow: 0px 0px 30px 5px rgba(233, 128, 116, 0.5);
 }
 
 .square div{
