@@ -8,9 +8,15 @@ const login = (username, password) => {
             "username": username,
             "password": password
         }).then(response => {
-        if (response.data.accessToken) {
-            localStorage.setItem('user', JSON.stringify(response.data));
-        }
+            if (response.data.token) {
+                localStorage.setItem('token', response.data.token);
+            }
+            if (response.data.username) {
+                localStorage.setItem('username', response.data.username);
+            }
+            if (response.data.role) {
+                localStorage.setItem('role', response.data.role);
+            }
         console.log(response.data)
         return response.data
     }));
@@ -18,6 +24,10 @@ const login = (username, password) => {
 
 const logout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('username');
+    localStorage.removeItem('role');
+    localStorage.removeItem('token');
+    window.location = "/"
 }
 
 const register = (name, surname, username, password, userType) => {

@@ -94,13 +94,11 @@ const valid = (e) => {
         }
         if (valid) {
             AuthService.register(name, surname, username, password, type)
-            /*.then(
+            .then(
                 () => {
-                        //navigate("/login");
-                        //window.location.reload();
-                        console.log("i was logged")
+                        window.location = "/login";
                     }
-            );*/
+            );
         }
     }
 

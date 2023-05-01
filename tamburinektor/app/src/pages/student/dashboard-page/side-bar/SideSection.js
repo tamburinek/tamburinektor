@@ -6,6 +6,7 @@ import test from "../../../../assets/png/dashboard/test.png"
 import stats from "../../../../assets/png/dashboard/stats.png"
 import room from "../../../../assets/png/dashboard/room.png"
 import logout from "../../../../assets/png/dashboard/logout.png"
+import AuthService from "../../../../services/auth.service";
 
 export const SideSection = () => {
 
@@ -39,7 +40,7 @@ export const SideSection = () => {
                     <img src={room} alt={"file"}/>
                     <p>Třídy</p>
                 </div>
-                <div className={styles.item + " " + styles.last} >
+                <div onClick={() => AuthService.logout()} className={styles.item + " " + styles.last} >
                     <img src={logout} alt={"file"}/>
                     <p>Odhlásit</p>
                 </div>

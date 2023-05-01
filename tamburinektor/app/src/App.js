@@ -5,12 +5,14 @@ import {
     DashboardPageTeacher,
     IndexPage,
     LoginPage,
-    RegistrationPage
+    RegistrationPage,
+    TestCreatePage,
+    LectureCreatePage,
+    ClassRoomPage
 } from "./pages";
 
 import {Route, Routes} from "react-router-dom";
-import {TestCreatePage} from "./pages/teacher/test-create/TestCreatePage";
-import {LectureCreatePage} from "./pages/teacher/lecture-create/LectureCreatePage";
+
 
 function App() {
   return (
@@ -24,10 +26,11 @@ function App() {
           <Route exact path="/" element={<IndexPage/>}/>
           <Route exact path="/login" element={<LoginPage/>}/>
           <Route exact path="/register" element={<RegistrationPage/>}/>
-          <Route exact path="/dashboard" element={<DashboardPageTeacher/>}/>
-          <Route exact path="/dashboardStudent" element={<DashboardPageStudent/>}/>
+            {localStorage.getItem("role") === "ROLE_TEACHER" && <Route exact path="/dashboard" element={<DashboardPageTeacher/>}/>}
+            {localStorage.getItem("role") === "ROLE_STUDENT" && <Route exact path="/dashboard" element={<DashboardPageStudent/>}/>}
           <Route exact path="/test/creation" element={<TestCreatePage/>}/>
           <Route exact path="/lecture/creation" element={<LectureCreatePage/>}/>
+          <Route exact path="/classroom" element={<ClassRoomPage/>}/>
         </Routes>
       </div>
   );

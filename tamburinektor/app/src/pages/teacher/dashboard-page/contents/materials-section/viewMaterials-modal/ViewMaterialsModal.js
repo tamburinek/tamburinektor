@@ -16,7 +16,6 @@ export const ViewMaterialsModal = (props) => {
     );
 
     let editMaterial = () => {
-        props.onClose()
         props.editMaterial()
     }
 

@@ -13,6 +13,7 @@ export const EditMaterialModal = (props) => {
     return (
         <div className={styles.main} onClick={props.onClose}>
             <div className={styles.form} onClick={event => event.stopPropagation()}>
+                <h1 className={styles.h1}>Upravit materiál</h1>
                 <img onClick={props.onClose} className={styles.close} src={closeImage} alt={"close"}/>
                 {props.type === "definition" && <DefinitionForm/>}
                 {props.type === "image" && <ImageForm/>}

@@ -19,7 +19,9 @@ export const LoginSection = () => {
             return
         }
         AuthService.login(username, password).then(
-            console.log("i am logged")
+            (data) => {
+                window.location = "/dashboard"
+            }
         )
     }
 

@@ -12,15 +12,31 @@ import {TestSection} from "../contents/test-section/TestSection";
 import {LectionSection} from "../contents/lection-section/LectionSection";
 import {MaterialsSection} from "../contents/materials-section/MaterialsSection";
 import {ClassroomSection} from "../contents/classroom-section/ClassroomSection";
+import authHeader from "../../../../services/auth-header";
+import axios from "axios";
+import {baseUrl} from "../../../../config/const";
+import AuthService from "../../../../services/auth.service";
 
 export const SideSection = () => {
 
     const [activeName, setActiveName] = useState("lekce");
+    const [username, setUsername] = useState("");
+
+
     const activeDiv = styles.item + " " + styles.active
     const nonActiveDiv = styles.item
 
+    useEffect(() => {
+        const headers = authHeader();
+        console.log(headers)
+        axios.get(`${baseUrl}/users/me`, {headers}).then(response =>{
+            console.log(response.data)
+            setUsername(response.data.firstName + " " + response.data.lastName)
+            localStorage.setItem("user", response.data.firstName + " " + response.data.lastName)
+        })
+    });
 
-    //todo change name depend on user
+
     return (
         <div className={styles.main}>
             <Link to={'/'}><img className={styles.logo} src={logo} alt={'logo'}/> </Link>
@@ -46,13 +62,13 @@ export const SideSection = () => {
                     <img src={room} alt={"file"}/>
                     <p>Třídy</p>
                 </div>
-                <div className={styles.item + " " + styles.last} >
+                <div onClick={() => AuthService.logout()} className={styles.item + " " + styles.last} >
                     <img src={logout} alt={"file"}/>
                     <p>Odhlásit</p>
                 </div>
             </div>
             <div className={styles.right}>
-                <span className={styles.name}>Tomáš Bahník</span>
+                <span className={styles.name}>{username}</span>
                 {activeName === "testy" && <TestSection/>}
                 {activeName === "lekce" && <LectionSection/>}
                 {activeName === "materialy" && <MaterialsSection/>}
