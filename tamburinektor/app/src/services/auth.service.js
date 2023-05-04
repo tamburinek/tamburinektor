@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {baseUrl} from "../config/const";
+import authHeader from "./auth-header";
 
 
 const login = (username, password) => {
@@ -42,7 +43,9 @@ const register = (name, surname, username, password, userType) => {
 }
 
 const getCurrentUser = () => {
-    return JSON.parse(localStorage.getItem('user'));
+    const headers = authHeader();
+    console.log(headers)
+    return axios.get(`${baseUrl}/users/me`, {headers})
 }
 
 const AuthService = {

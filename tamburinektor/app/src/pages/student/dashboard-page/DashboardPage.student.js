@@ -6,18 +6,17 @@ import axios from "axios";
 import {baseUrl} from "../../../config/const";
 import authHeader from "../../../services/auth-header";
 import {useEffect, useState} from "react";
+import AuthService from "../../../services/auth.service";
 
 export const DashboardPageStudent = () => {
 
     const [username, setUsername] = useState("");
 
     useEffect(() => {
-        const headers = authHeader();
-        console.log(headers)
-        axios.get(`${baseUrl}/users/me`, {headers}).then(response =>{
+        AuthService.getCurrentUser().then(response =>{
             console.log(response.data)
-            setUsername(response.data.firstName + " " + response.data.lastName)
             localStorage.setItem("user", response.data.firstName + " " + response.data.lastName)
+            setUsername(localStorage.getItem("user"))
         })
     },[]);
 

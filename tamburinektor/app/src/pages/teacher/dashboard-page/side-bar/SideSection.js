@@ -27,12 +27,10 @@ export const SideSection = () => {
     const nonActiveDiv = styles.item
 
     useEffect(() => {
-        const headers = authHeader();
-        console.log(headers)
-        axios.get(`${baseUrl}/users/me`, {headers}).then(response =>{
+        AuthService.getCurrentUser().then(response =>{
             console.log(response.data)
-            setUsername(response.data.firstName + " " + response.data.lastName)
             localStorage.setItem("user", response.data.firstName + " " + response.data.lastName)
+            setUsername(localStorage.getItem("user"))
         })
     },[]);
 

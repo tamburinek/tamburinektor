@@ -2,7 +2,10 @@ package fel.cvut.cz.tamburinektor.service;
 
 import fel.cvut.cz.tamburinektor.dao.UserRepository;
 import fel.cvut.cz.tamburinektor.model.User;
+import fel.cvut.cz.tamburinektor.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 
@@ -22,5 +25,11 @@ public class UserService {
 
     public void createUser(User user) {
         userRepository.save(user);
+    }
+
+    public User getCurrentUser(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) auth.getPrincipal();
+        return getUserByUsername(userDetails.getUsername());
     }
 }

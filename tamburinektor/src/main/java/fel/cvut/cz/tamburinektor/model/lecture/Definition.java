@@ -22,6 +22,6 @@ public class Definition extends LectureEntity {
     @Column(nullable = false, length = 1000)
     private String definition;
 
-    @OneToOne
-    private Image imageLink;
+    @Column
+    private String imageLink;
 }
