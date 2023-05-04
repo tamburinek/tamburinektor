@@ -23,14 +23,15 @@ function App() {
           <meta name="description" content="My app description" />
         </Helmet>
         <Routes>
-          <Route exact path="/" element={<IndexPage/>}/>
-          <Route exact path="/login" element={<LoginPage/>}/>
-          <Route exact path="/register" element={<RegistrationPage/>}/>
+            <Route exact path="/" element={<IndexPage/>}/>
+            <Route exact path="/login" element={<LoginPage/>}/>
+            <Route exact path="/register" element={<RegistrationPage/>}/>
             {localStorage.getItem("role") === "ROLE_TEACHER" && <Route exact path="/dashboard" element={<DashboardPageTeacher/>}/>}
             {localStorage.getItem("role") === "ROLE_STUDENT" && <Route exact path="/dashboard" element={<DashboardPageStudent/>}/>}
-          <Route exact path="/test/creation" element={<TestCreatePage/>}/>
-          <Route exact path="/lecture/creation" element={<LectureCreatePage/>}/>
-          <Route exact path="/classroom" element={<ClassRoomPage/>}/>
+            <Route exact path="/dashboard" element={<DashboardPageStudent/>}/>}
+            <Route exact path="/test/creation" element={<TestCreatePage/>}/>
+            <Route exact path="/lecture/creation" element={<LectureCreatePage/>}/>
+            <Route exact path="/classroom" element={<ClassRoomPage/>}/>
         </Routes>
       </div>
   );

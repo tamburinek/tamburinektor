@@ -11,9 +11,6 @@ export const HeaderSection = () => {
             </div>
 
             <div className={styles.rightSide}>
-            <Link to={'/'} className={styles.link}>Profil</Link>
-            <Link to={'/'} className={styles.link}>Materiály</Link>
-            <Link to={'/'} className={styles.link}>Info</Link>
             <Link to={'/login'}>
                 <button type={"button"} className={styles.button}>
                     Přihlásit

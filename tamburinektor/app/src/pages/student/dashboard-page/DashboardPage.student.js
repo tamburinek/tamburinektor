@@ -19,7 +19,7 @@ export const DashboardPageStudent = () => {
             setUsername(response.data.firstName + " " + response.data.lastName)
             localStorage.setItem("user", response.data.firstName + " " + response.data.lastName)
         })
-    });
+    },[]);
 
     return (
         <div>
