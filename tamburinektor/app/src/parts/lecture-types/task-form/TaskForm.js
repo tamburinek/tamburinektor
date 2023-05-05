@@ -5,7 +5,7 @@ import MaterialsListApi from "../../../services/materialsListApi";
 
 export const TaskForm = (props) => {
 
-    const [text, setText] = useState("Přidat obrázek");
+    const [text, setText] = useState("Odstranit obrázek");
 
     const [question, setQuestion] = useState('');
     const [answer, setAnswer] = useState('');
@@ -18,10 +18,11 @@ export const TaskForm = (props) => {
             setText("Odstranit obrázek")
         } else {
             setText("Přidat obrázek")
+            setQuestionImage('')
         }
     }
 
-    const [text2, setText2] = useState("Přidat obrázek");
+    const [text2, setText2] = useState("Odstranit obrázek");
 
     let addImage2 = (event) => {
         event.preventDefault()
@@ -29,6 +30,7 @@ export const TaskForm = (props) => {
             setText2("Odstranit obrázek")
         } else {
             setText2("Přidat obrázek")
+            setAnswerImage('')
         }
     }
 
@@ -62,16 +64,16 @@ export const TaskForm = (props) => {
         <div className={styles.main}>
             <form className={styles.form}>
                 <label>Otázka</label>
-                <input onChange={(e) => {
+                <textarea onChange={(e) => {
                     setQuestion(e.target.value)}}
-                       value={question} className={styles.big} type={"text"}/>
+                       value={question} className={styles.big}/>
                 <button onClick={addImage} className={styles.image}>{text}</button>
                 {text === "Odstranit obrázek" && <input onChange={(e) => {
                     setQuestionImage(e.target.value)}} value={questionImage} className={styles.small} type={"text"}/>}
                 <label>Odpověď</label>
-                <input onChange={(e) => {
+                <textarea onChange={(e) => {
                     setAnswer(e.target.value)}}
-                       value={answer} className={styles.big} type={"text"}/>
+                       value={answer} className={styles.big} />
                 <button onClick={addImage2} className={styles.image}>{text2}</button>
                 {text2 === "Odstranit obrázek" && <input onChange={(e) => {
                     setAnswerImage(e.target.value)}} value={answerImage} className={styles.small} type={"text"}/>}

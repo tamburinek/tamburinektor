@@ -37,7 +37,7 @@ export const SideSection = () => {
 
     return (
         <div className={styles.main}>
-            <Link to={'/'}><img className={styles.logo} src={logo} alt={'logo'}/> </Link>
+            <Link to={'/dashboard'}><img className={styles.logo} src={logo} alt={'logo'}/> </Link>
             <div className={styles.square}/>
             <div className={styles.side}>
                 <div className={activeName === "lekce" ? activeDiv : nonActiveDiv}

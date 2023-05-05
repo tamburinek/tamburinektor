@@ -12,4 +12,6 @@ import java.util.List;
 public interface TaskRepository extends JpaRepository<Task, Integer> {
 
     List<Task> getAllByCreatedBy(User user);
+
+    Task getById(Long id);
 }

@@ -23,10 +23,6 @@ export const MaterialsSection = () => {
     const [lastMaterial, setLastMaterial] = useState(undefined)
     const [materialIndex, setMaterialIndex] = useState(undefined)
 
-    const setLast = () => {
-      setMaterialIndex(lastMaterialObject.id)
-    }
-
     let lastMaterialObject
 
     let handleData = () => {
@@ -43,6 +39,7 @@ export const MaterialsSection = () => {
 
     useEffect(()=> {
         if (createModalVisible === true || viewAllModalVisible === true){
+            setMaterialType("definition")
             return
         }
         CountApi.getCountMaterial().then((response) => {
@@ -66,6 +63,7 @@ export const MaterialsSection = () => {
                 <AllSquare text={"Zobrazit vše"}/>
             </Link>
             {viewAllModalVisible === true && <ViewMaterialsModal
+                type={materialType}
                 editMaterial={(id, type) => {
                     setMaterialIndex(id)
                     setMaterialType(type)

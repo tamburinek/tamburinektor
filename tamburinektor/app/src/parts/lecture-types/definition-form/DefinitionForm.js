@@ -5,7 +5,7 @@ import MaterialsListApi from "../../../services/materialsListApi";
 
 export const DefinitionForm = (props) => {
 
-    const [text, setText] = useState("Přidat obrázek");
+    const [text, setText] = useState("Odstranit obrázek");
     const [description, setDescription] = useState('');
     const [definition, setDefinition] = useState('');
     const [imageUrl, setImage] = useState('');
@@ -27,10 +27,11 @@ export const DefinitionForm = (props) => {
 
     let addImage = (event) => {
         event.preventDefault()
-        if (text === "Přidat obrázek") {
-            setText("Odstranit obrázek")
-        } else {
+        if (text === "Odstranit obrázek"){
+            setImage('')
             setText("Přidat obrázek")
+        }else if (text === "Přidat obrázek") {
+            setText("Odstranit obrázek")
         }
     }
 

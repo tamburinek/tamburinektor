@@ -12,4 +12,6 @@ import java.util.List;
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
     List<Question> getAllByCreatedBy(User user);
+
+    Question getById(Long id);
 }

@@ -73,7 +73,6 @@ export const ViewMaterialsModal = (props) => {
 
     let changeType = (type) => {
         setActiveName(type)
-        //props.onChange(type)
     }
 
     useEffect(() => {
@@ -82,6 +81,9 @@ export const ViewMaterialsModal = (props) => {
         fetchQuestions()
         fetchTasks()
         //fetchQuizes()
+        if (props.type !== undefined){
+            setActiveName(props.type)
+        }
     }, [])
 
     return (
@@ -123,11 +125,11 @@ export const ViewMaterialsModal = (props) => {
                     </select>
                 </div>
                 <div className={styles.items}>
-                    {activeName === "definition" && definitions.length > 1 && listDefinitions}
-                    {activeName === "image" && images.length > 1 && listImages}
-                    {activeName === "question" && questions.length > 1 && listQuestions}
-                    {activeName === "task" && tasks.length > 1 && listTasks}
-                    {activeName === "quiz" && quizes.length > 1 && listQuizes}
+                    {activeName === "definition" && definitions.length > 0 && listDefinitions}
+                    {activeName === "image" && images.length > 0 && listImages}
+                    {activeName === "question" && questions.length > 0 && listQuestions}
+                    {activeName === "task" && tasks.length > 0 && listTasks}
+                    {activeName === "quiz" && quizes.length > 0 && listQuizes}
                 </div>
             </div>
         </div>

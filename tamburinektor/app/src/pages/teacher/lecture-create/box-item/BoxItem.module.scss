@@ -16,10 +16,10 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  width: 80%;
+  width: 70%;
 }
 
-.pencil, .eye{
+.pencil, .plus{
   height: 50%;
   aspect-ratio: 1/1;
   cursor: pointer;
@@ -31,4 +31,8 @@
   justify-content: flex-end;
   align-items: center;
   width: 12%;
+}
+
+.plus{
+  margin-left: 20px;
 }

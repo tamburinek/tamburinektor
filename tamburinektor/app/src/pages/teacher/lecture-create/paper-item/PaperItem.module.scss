@@ -13,14 +13,37 @@
   border-radius: 20px;
 }
 
-.dot{
-  background-color: #61C454;
+.green, .red, .blue, .purple, .white, .brown{
   height: 80%;
   aspect-ratio: 1/1;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 100%;
+}
+
+.green{
+  background-color: #61C454;
+}
+
+.red{
+  background-color: #f50000;
+}
+
+.blue{
+  background-color: #0223ff;
+}
+
+.purple{
+  background-color: #ff02ea;
+}
+
+.white{
+  background-color: #fffeff;
+}
+
+.brown{
+  background-color: #7a5c5c;
 }
 
 .description{
