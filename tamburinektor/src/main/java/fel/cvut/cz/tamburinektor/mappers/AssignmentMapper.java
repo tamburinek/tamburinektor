@@ -12,7 +12,7 @@ public class AssignmentMapper {
         return null;
     }
 
-    public Assignment toUser(AssignmentDto assignmentDto) {
+    public Assignment toAssignment(AssignmentDto assignmentDto) {
         return null;
     }
 }

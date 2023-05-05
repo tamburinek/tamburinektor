@@ -14,7 +14,7 @@ public class TestMapper {
         return null;
     }
 
-    public Test toUser(TestDto testDto) {
+    public Test toTest(TestDto testDto) {
         return null;
     }
 }

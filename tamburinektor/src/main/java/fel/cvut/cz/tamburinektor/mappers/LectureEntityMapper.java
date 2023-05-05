@@ -1,8 +1,6 @@
 package fel.cvut.cz.tamburinektor.mappers;
 
-import fel.cvut.cz.tamburinektor.DTO.LectureDto;
 import fel.cvut.cz.tamburinektor.DTO.LectureEntityDto;
-import fel.cvut.cz.tamburinektor.model.lecture.Lecture;
 import fel.cvut.cz.tamburinektor.model.lecture.LectureEntity;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +12,7 @@ public class LectureEntityMapper {
         return null;
     }
 
-    public LectureEntity toUser(LectureEntityDto lectureEntityDto) {
+    public LectureEntity toLecture(LectureEntityDto lectureEntityDto) {
         return null;
     }
 }

@@ -13,16 +13,22 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping
 @Slf4j
+@CrossOrigin
 public class ImageController {
 
     private final ImageService imageService;
@@ -38,7 +44,8 @@ public class ImageController {
         this.userService = userService;
     }
 
-    @CrossOrigin(origins = UserController.origin)
+
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
     @PostMapping(value = "/image", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createImage(@RequestBody ImageDto imageDto) {
         User user = userService.getCurrentUser();
@@ -47,5 +54,13 @@ public class ImageController {
         log.info("New image created {} by {}", image.getDescription(), user.getUsername());
         final HttpHeaders headers = RestUtil.createLocationHeaderNewUri("/image/{id}", image.getId());
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
+    }
+
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    @GetMapping(value = "/image", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<ImageDto> getAllImagesByUser(){
+        User user = userService.getCurrentUser();
+        List<Image> images = imageService.getAllByUser(user);
+        return images.stream().map(imageMapper::toDto).collect(Collectors.toList());
     }
 }

@@ -8,9 +8,13 @@ import lombok.Setter;
 @Setter
 public class DefinitionDto {
 
+    private Long id;
+
     private String description;
 
     private String imageUrl;
 
     private String definition;
+
+    private String lectureType;
 }

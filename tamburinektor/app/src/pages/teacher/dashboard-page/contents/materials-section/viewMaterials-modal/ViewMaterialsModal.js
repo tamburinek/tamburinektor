@@ -1,7 +1,7 @@
 import styles from './ViewMaterialsModal.module.scss'
-
 import {useEffect, useState} from "react";
 import {BoxItem} from "../../../../lecture-create/box-item/BoxItem";
+import MaterialsListApi from "../../../../../../services/materialsListApi";
 
 export const ViewMaterialsModal = (props) => {
 
@@ -9,11 +9,63 @@ export const ViewMaterialsModal = (props) => {
     const activeDiv = styles.categoryItem + " " + styles.active
     const nonActiveDiv = styles.categoryItem
 
-    let boxItems = ["prvni velmi dlouha definice ktera se cela nevejde zrovna do tohoto okna", "druha definice", 1,2,3,4,5,6,2,3,3,3,3,3,3,3,3]
-    //let boxItems = ["prvni lekce", "druha lekce"]
-    const listBoxItems = boxItems.map((item) =>
-        <BoxItem type={activeName} edit={() => editMaterial()} item={item}/>
-    );
+
+    const [definitions, setDefinitions] = useState([])
+    const [images, setImages] = useState([])
+    const [questions, setQuestions] = useState([])
+    const [tasks, setTasks] = useState([])
+    const [quizes, setQuizes] = useState([])
+
+    let listDefinitions = definitions.map(defin => {
+        return (<BoxItem key={defin.id} type={activeName} edit={() => editMaterial()} item={defin.description}/>)
+    })
+
+    let listImages = images.map(img => {
+        return (<BoxItem key={img.id} type={activeName} edit={() => editMaterial()} item={img.description}/>)
+    })
+
+    let listQuestions = questions.map(quest => {
+        return (<BoxItem key={quest.id} type={activeName} edit={() => editMaterial()} item={quest.questionText}/>)
+    })
+
+    let listTasks = tasks.map(task => {
+        return (<BoxItem key={task.id} type={activeName} edit={() => editMaterial()} item={task.question}/>)
+    })
+
+    let listQuizes = quizes.map(quiz => {
+        return (<BoxItem key={quiz.id} type={activeName} edit={() => editMaterial()} item={quiz.name}/>)
+    })
+
+
+    const fetchDef = () => {
+        MaterialsListApi.getAllDefinitions().then(response => {
+            setDefinitions(response.data)
+        })
+    }
+
+    const fetchImages = () => {
+        MaterialsListApi.getAllImages().then(response => {
+            setImages(response.data)
+        })
+    }
+
+    const fetchQuestions = () => {
+        MaterialsListApi.getAllQuestions().then(response => {
+            setQuestions(response.data)
+        })
+    }
+
+    const fetchTasks = () => {
+        MaterialsListApi.getAllTasks().then(response => {
+            setTasks(response.data)
+        })
+    }
+
+    const fetchQuizes = () => {
+        MaterialsListApi.getAllQuizes().then(response => {
+            setQuizes(response.data)
+        })
+    }
 
     let editMaterial = () => {
         props.editMaterial()
@@ -23,6 +75,14 @@ export const ViewMaterialsModal = (props) => {
         setActiveName(type)
         props.onChange(type)
     }
+
+    useEffect(() => {
+        fetchDef()
+        fetchImages()
+        fetchQuestions()
+        fetchTasks()
+        //fetchQuizes()
+    }, [])
 
     return (
         <div className={styles.main} onClick={props.onClose}>
@@ -63,7 +123,11 @@ export const ViewMaterialsModal = (props) => {
                     </select>
                 </div>
                 <div className={styles.items}>
-                    {listBoxItems}
+                    {activeName === "definition" && definitions.length > 1 && listDefinitions}
+                    {activeName === "image" && images.length > 1 && listImages}
+                    {activeName === "question" && questions.length > 1 && listQuestions}
+                    {activeName === "task" && tasks.length > 1 && listTasks}
+                    {activeName === "quiz" && quizes.length > 1 && listQuizes}
                 </div>
             </div>
         </div>

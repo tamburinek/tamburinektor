@@ -14,7 +14,7 @@ public class TestResultMapper {
         return null;
     }
 
-    public TestResult toUser(TestResultDto testResultDto) {
+    public TestResult toTestResult(TestResultDto testResultDto) {
         return null;
     }
 }

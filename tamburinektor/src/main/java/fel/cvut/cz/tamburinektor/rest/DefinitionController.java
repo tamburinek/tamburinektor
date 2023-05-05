@@ -13,13 +13,19 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.stream.Collectors;
 
+
+@CrossOrigin
 @RestController
 @RequestMapping
 @Slf4j
@@ -38,7 +44,7 @@ public class DefinitionController {
         this.userService = userService;
     }
 
-    @CrossOrigin(origins = UserController.origin)
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
     @PostMapping(value = "/definition", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createDefinition(@RequestBody DefinitionDto definitionDto) {
         User user = userService.getCurrentUser();
@@ -47,5 +53,13 @@ public class DefinitionController {
         log.info("New definition created {} by {}", definition.getDescription(), user.getUsername());
         final HttpHeaders headers = RestUtil.createLocationHeaderNewUri("/definition/{id}", definition.getId());
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
+    }
+
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    @GetMapping(value = "/definition", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<DefinitionDto> getAllDefinitionsByMe(){
+        User user = userService.getCurrentUser();
+        List<Definition> definitions = definitionService.getAllByUser(user);
+        return definitions.stream().map(definitionMapper::toDto).collect(Collectors.toList());
     }
 }

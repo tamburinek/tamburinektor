@@ -14,7 +14,7 @@ public class GraphMapper {
         return null;
     }
 
-    public Graph toUser(GraphDto graphDto) {
+    public Graph toGraph(GraphDto graphDto) {
         return null;
     }
 }

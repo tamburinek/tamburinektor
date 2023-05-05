@@ -1,16 +1,15 @@
 package fel.cvut.cz.tamburinektor.model.lecture;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.util.List;
 
 
@@ -28,15 +27,11 @@ public class QuizQuestion {
     @Column(nullable = false)
     private String question;
 
-    @OneToOne(optional = false)
-    private Quiz quiz;
-
-    @OneToOne
-    private Image imageLink;
-
     @Column
-    @ElementCollection
-    private List<String> rightAnswers;
+    private String imageLink;
+
+    @Column(nullable = false)
+    private String rightAnswer;
 
     @Column
     @ElementCollection

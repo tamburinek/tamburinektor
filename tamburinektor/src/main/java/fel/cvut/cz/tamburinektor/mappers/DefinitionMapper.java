@@ -11,7 +11,13 @@ import org.springframework.stereotype.Component;
 public class DefinitionMapper {
 
     public DefinitionDto toDto(Definition definition) {
-        return null;
+        DefinitionDto definitionDto = new DefinitionDto();
+        definitionDto.setId(definition.getId());
+        definitionDto.setDescription(definition.getDescription());
+        definitionDto.setDefinition(definition.getDefinition());
+        definitionDto.setImageUrl(definition.getImageLink());
+        definitionDto.setLectureType(definition.getType().getName());
+        return definitionDto;
     }
 
     public Definition toDefinition(DefinitionDto definitionDto, User user) {

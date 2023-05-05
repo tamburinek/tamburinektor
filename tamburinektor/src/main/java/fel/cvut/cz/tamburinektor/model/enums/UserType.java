@@ -6,7 +6,6 @@ import lombok.Getter;
 public enum UserType {
     ROLE_STUDENT("student"),
     ROLE_ADMIN("admin"),
-    ROLE_GUEST("guest"),
     ROLE_TEACHER("teacher");
 
     private final String name;

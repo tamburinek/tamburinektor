@@ -11,7 +11,12 @@ import org.springframework.stereotype.Component;
 public class ImageMapper {
 
     public ImageDto toDto(Image image) {
-        return null;
+        ImageDto imageDto = new ImageDto();
+        imageDto.setImageUrl(image.getImageLink());
+        imageDto.setDescription(image.getDescription());
+        imageDto.setId(image.getId());
+        imageDto.setLectureType(image.getType().getName());
+        return imageDto;
     }
 
     public Image toImage(ImageDto imageDto, User user) {

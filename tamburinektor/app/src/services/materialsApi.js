@@ -29,7 +29,33 @@ const createDefinition = (description, definition, imageUrl) => {
     }));
 }
 
+const createQuestion = (question, anonymous) => {
+    console.log("trying to create question: " + question + " " + anonymous)
+    return (axios.post(`${baseUrl}/question`,
+        {
+            "question": question,
+            "anonymous": anonymous
+        },{headers}).then(response => {
+        console.log(response)
+        return response
+    }));
+}
+
+const createTask = (question, questionImage, answer, answerImage) => {
+    console.log("trying to create task: " + question + " " + answer)
+    return (axios.post(`${baseUrl}/task`,
+        {
+            "question": question,
+            "answer": answer,
+            "questionImage": questionImage,
+            "answerImage": answerImage
+        },{headers}).then(response => {
+        console.log(response)
+        return response
+    }));
+}
+
 const MaterialsApi = {
-    createDefinition, createImage
+    createDefinition, createImage, createQuestion, createTask
 };
 export default MaterialsApi;

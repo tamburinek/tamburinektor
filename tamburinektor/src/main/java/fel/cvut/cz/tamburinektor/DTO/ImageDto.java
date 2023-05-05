@@ -8,7 +8,11 @@ import lombok.Setter;
 @Setter
 public class ImageDto {
 
+    private Long id;
+
     private String description;
 
     private String imageUrl;
+
+    private String lectureType;
 }

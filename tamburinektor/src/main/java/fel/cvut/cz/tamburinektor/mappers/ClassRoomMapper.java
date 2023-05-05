@@ -12,7 +12,7 @@ public class ClassRoomMapper {
         return null;
     }
 
-    public Classroom toUser(ClassRoomDto classRoomDto) {
+    public Classroom toClassRoom(ClassRoomDto classRoomDto) {
         return null;
     }
 }
