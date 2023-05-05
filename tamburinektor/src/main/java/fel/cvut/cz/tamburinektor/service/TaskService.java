@@ -27,4 +27,8 @@ public class TaskService {
     public List<Task> getAllByUser(User user){
         return taskRepository.getAllByCreatedBy(user);
     }
+
+    public Task getById(Long id){
+        return taskRepository.getById(id);
+    }
 }

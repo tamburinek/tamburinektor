@@ -1,6 +1,7 @@
 import styles from "./DefinitionForm.module.scss"
 import {useEffect, useState} from "react";
 import MaterialsApi from "../../../services/materialsApi";
+import MaterialsListApi from "../../../services/materialsListApi";
 
 export const DefinitionForm = (props) => {
 
@@ -11,11 +12,17 @@ export const DefinitionForm = (props) => {
 
     let confirm = (event) => {
         event.preventDefault()
-        MaterialsApi.createDefinition(description, definition, imageUrl).then(r => {
-            setDefinition("")
-            setDescription("")
-            setImage("")
-        })
+        if (props.id !== undefined){
+            MaterialsApi.updateDefinition(props.id, description, definition, imageUrl).then(response => {
+                props.onEdit()
+            })
+        }else {
+            MaterialsApi.createDefinition(description, definition, imageUrl).then(r => {
+                setDefinition("")
+                setDescription("")
+                setImage("")
+            })
+        }
     }
 
     let addImage = (event) => {
@@ -26,6 +33,16 @@ export const DefinitionForm = (props) => {
             setText("Přidat obrázek")
         }
     }
+
+    useEffect(() => {
+        if (props.id !== undefined){
+            MaterialsListApi.getDefinitionById(props.id).then(response => {
+                setDefinition(response.data.definition)
+                setDescription(response.data.description)
+                setImage(response.data.imageUrl)
+            })
+        }
+    }, [props.id])
 
     return (
         <div className={styles.main}>

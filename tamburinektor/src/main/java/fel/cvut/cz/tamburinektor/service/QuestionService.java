@@ -29,4 +29,8 @@ public class QuestionService {
     public List<Question> getAllByUser(User user){
         return questionRepository.getAllByCreatedBy(user);
     }
+
+    public Question getById(Long id){
+        return questionRepository.getById(id);
+    }
 }

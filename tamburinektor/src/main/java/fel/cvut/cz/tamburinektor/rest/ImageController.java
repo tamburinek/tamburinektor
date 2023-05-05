@@ -1,8 +1,10 @@
 package fel.cvut.cz.tamburinektor.rest;
 
+import fel.cvut.cz.tamburinektor.DTO.DefinitionDto;
 import fel.cvut.cz.tamburinektor.DTO.ImageDto;
 import fel.cvut.cz.tamburinektor.mappers.ImageMapper;
 import fel.cvut.cz.tamburinektor.model.User;
+import fel.cvut.cz.tamburinektor.model.lecture.Definition;
 import fel.cvut.cz.tamburinektor.model.lecture.Image;
 import fel.cvut.cz.tamburinektor.service.ImageService;
 import fel.cvut.cz.tamburinektor.service.UserService;
@@ -16,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,5 +66,22 @@ public class ImageController {
         User user = userService.getCurrentUser();
         List<Image> images = imageService.getAllByUser(user);
         return images.stream().map(imageMapper::toDto).collect(Collectors.toList());
+    }
+
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    @GetMapping(value = "/image/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ImageDto getImageById(@PathVariable Long id){
+        Image image = imageService.getById(id);
+        return imageMapper.toDto(image);
+    }
+
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    @PatchMapping(value = "/image/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateImage(@PathVariable Long id, @RequestBody ImageDto dto){
+        Image image = imageService.getById(id);
+        image.setImageLink(dto.getImageUrl());
+        image.setDescription(dto.getDescription());
+        imageService.createImage(image);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }

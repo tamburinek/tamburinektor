@@ -29,4 +29,9 @@ public class DefinitionService {
     public List<Definition> getAllByUser(User user) {
         return definitionRepository.getAllByCreatedBy(user);
     }
+
+
+    public Definition getById(Long id) {
+        return definitionRepository.getDefinitionById(id);
+    }
 }

@@ -29,4 +29,8 @@ public class ImageService {
     public List<Image> getAllByUser(User user){
         return imageRepository.getAllByCreatedBy(user);
     }
+
+    public Image getById(Long id){
+        return imageRepository.getById(id);
+    }
 }

@@ -34,7 +34,27 @@ const getLastCreated = () => {
     return (axios.get(`${baseUrl}/material/last`,{headers}));
 }
 
+const getDefinitionById = (id) => {
+    console.log("getting definition with id: " + id)
+    return (axios.get(`${baseUrl}/definition/${id}`,{headers}));
+}
+
+const getImageById = (id) => {
+    console.log("getting image with id: " + id)
+    return (axios.get(`${baseUrl}/image/${id}`,{headers}));
+}
+
+const getTaskById = (id) => {
+    console.log("getting task with id: " + id)
+    return (axios.get(`${baseUrl}/task/${id}`,{headers}));
+}
+
+const getQuestionById = (id) => {
+    console.log("getting question with id: " + id)
+    return (axios.get(`${baseUrl}/question/${id}`,{headers}));
+}
+
 const MaterialsListApi = {
-    getAllDefinitions, getAllImages, getAllQuestions, getAllTasks, getAllQuizes, getLastCreated
+    getAllDefinitions, getAllImages, getAllQuestions, getAllTasks, getAllQuizes, getLastCreated, getDefinitionById, getImageById, getTaskById, getQuestionById
 };
 export default MaterialsListApi;

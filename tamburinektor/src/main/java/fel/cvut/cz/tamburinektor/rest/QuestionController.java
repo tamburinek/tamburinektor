@@ -1,8 +1,10 @@
 package fel.cvut.cz.tamburinektor.rest;
 
+import fel.cvut.cz.tamburinektor.DTO.ImageDto;
 import fel.cvut.cz.tamburinektor.DTO.QuestionDto;
 import fel.cvut.cz.tamburinektor.mappers.QuestionMapper;
 import fel.cvut.cz.tamburinektor.model.User;
+import fel.cvut.cz.tamburinektor.model.lecture.Image;
 import fel.cvut.cz.tamburinektor.model.lecture.Question;
 import fel.cvut.cz.tamburinektor.service.QuestionService;
 import fel.cvut.cz.tamburinektor.service.UserService;
@@ -16,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,5 +65,22 @@ public class QuestionController {
         User user = userService.getCurrentUser();
         List<Question> questions = questionService.getAllByUser(user);
         return questions.stream().map(questionMapper::toDto).collect(Collectors.toList());
+    }
+
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    @GetMapping(value = "/question/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public QuestionDto getQuestionById(@PathVariable Long id){
+        Question question = questionService.getById(id);
+        return questionMapper.toDto(question);
+    }
+
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    @PatchMapping(value = "/question/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateQuestion(@PathVariable Long id, @RequestBody QuestionDto dto){
+        Question question = questionService.getById(id);
+        question.setQuestion(dto.getQuestionText());
+        question.setAnonymous(dto.isAnonymous());
+        questionService.createQuestion(question);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }

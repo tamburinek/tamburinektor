@@ -18,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,5 +65,24 @@ public class TaskController {
         User user = userService.getCurrentUser();
         List<Task> tasks = taskService.getAllByUser(user);
         return tasks.stream().map(taskMapper::toDto).collect(Collectors.toList());
+    }
+
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    @GetMapping(value = "/task/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public TaskDto getTaskById(@PathVariable Long id){
+        Task task = taskService.getById(id);
+        return taskMapper.toDto(task);
+    }
+
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    @PatchMapping(value = "/task/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateQuestion(@PathVariable Long id, @RequestBody TaskDto dto){
+        Task task = taskService.getById(id);
+        task.setQuestion(dto.getQuestion());
+        task.setAnswer(dto.getAnswer());
+        task.setQuestionImage(dto.getQuestionImage());
+        task.setAnswerImage(dto.getAnswerImage());
+        taskService.createTask(task);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }

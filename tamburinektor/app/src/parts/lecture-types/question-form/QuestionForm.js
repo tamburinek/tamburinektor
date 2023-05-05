@@ -1,23 +1,39 @@
 import styles from "./QuestionForm.module.scss"
 import {useEffect, useState} from "react";
 import MaterialsApi from "../../../services/materialsApi";
+import MaterialsListApi from "../../../services/materialsListApi";
 
-export const QuestionForm = () => {
+export const QuestionForm = (props) => {
 
     const [question, setQuestion] = useState('');
     const [anonymous, setAnonymous] = useState(false);
 
     let confirm = (event) => {
         event.preventDefault()
-        MaterialsApi.createQuestion(question, anonymous).then(() => {
-            setQuestion("")
-            setAnonymous(false)
-        })
+        if (props.id !== undefined){
+            MaterialsApi.updateQuestion(props.id, question, anonymous).then(() => {
+                props.onEdit()
+            })
+        }else {
+            MaterialsApi.createQuestion(question, anonymous).then(() => {
+                setQuestion("")
+                setAnonymous(false)
+            })
+        }
     }
 
     const handleChange = (event) => {
         setAnonymous(event.target.checked);
     }
+
+    useEffect(() => {
+        if (props.id !== undefined){
+            MaterialsListApi.getQuestionById(props.id).then(response => {
+                setQuestion(response.data.questionText)
+                setAnonymous(response.data.anonymous)
+            })
+        }
+    }, [props.id])
 
     return (
         <div className={styles.main}>

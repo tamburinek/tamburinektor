@@ -17,23 +17,23 @@ export const ViewMaterialsModal = (props) => {
     const [quizes, setQuizes] = useState([])
 
     let listDefinitions = definitions.map(defin => {
-        return (<BoxItem key={defin.id} type={activeName} edit={() => editMaterial()} item={defin.description}/>)
+        return (<BoxItem key={defin.id} type={activeName} edit={() => editMaterial(defin.id, activeName)} item={defin.description}/>)
     })
 
     let listImages = images.map(img => {
-        return (<BoxItem key={img.id} type={activeName} edit={() => editMaterial()} item={img.description}/>)
+        return (<BoxItem key={img.id} type={activeName} edit={() => editMaterial(img.id, activeName)} item={img.description}/>)
     })
 
     let listQuestions = questions.map(quest => {
-        return (<BoxItem key={quest.id} type={activeName} edit={() => editMaterial()} item={quest.questionText}/>)
+        return (<BoxItem key={quest.id} type={activeName} edit={() => editMaterial(quest.id, activeName)} item={quest.questionText}/>)
     })
 
     let listTasks = tasks.map(task => {
-        return (<BoxItem key={task.id} type={activeName} edit={() => editMaterial()} item={task.question}/>)
+        return (<BoxItem key={task.id} type={activeName} edit={() => editMaterial(task.id, activeName)} item={task.question}/>)
     })
 
     let listQuizes = quizes.map(quiz => {
-        return (<BoxItem key={quiz.id} type={activeName} edit={() => editMaterial()} item={quiz.name}/>)
+        return (<BoxItem key={quiz.id} type={activeName} edit={() => editMaterial(quiz.id, activeName)} item={quiz.name}/>)
     })
 
 
@@ -67,13 +67,13 @@ export const ViewMaterialsModal = (props) => {
         })
     }
 
-    let editMaterial = () => {
-        props.editMaterial()
+    let editMaterial = (id, type) => {
+        props.editMaterial(id, type)
     }
 
     let changeType = (type) => {
         setActiveName(type)
-        props.onChange(type)
+        //props.onChange(type)
     }
 
     useEffect(() => {

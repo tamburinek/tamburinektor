@@ -1,8 +1,9 @@
 import styles from "./TaskForm.module.scss"
 import {useEffect, useState} from "react";
 import MaterialsApi from "../../../services/materialsApi";
+import MaterialsListApi from "../../../services/materialsListApi";
 
-export const TaskForm = () => {
+export const TaskForm = (props) => {
 
     const [text, setText] = useState("Přidat obrázek");
 
@@ -33,13 +34,29 @@ export const TaskForm = () => {
 
     let confirm = (event) => {
         event.preventDefault()
-        MaterialsApi.createTask(question, questionImage, answer, answerImage).then(() => {
-            setQuestion("")
-            setAnswer("")
-            setQuestionImage("")
-            setAnswerImage("")
-        })
+        if (props.id !== undefined){
+            MaterialsApi.updateTask(props.id, question, questionImage, answer, answerImage).then(() => {
+                props.onEdit()
+            })
+        }else {
+            MaterialsApi.createTask(question, questionImage, answer, answerImage).then(() => {
+                setQuestion("")
+                setAnswer("")
+                setQuestionImage("")
+                setAnswerImage("")
+        })}
     }
+
+    useEffect(() => {
+        if (props.id !== undefined){
+            MaterialsListApi.getTaskById(props.id).then(response => {
+                setQuestion(response.data.question)
+                setAnswer(response.data.answer)
+                setQuestionImage(response.data.questionImage)
+                setAnswerImage(response.data.answerImage)
+            })
+        }
+    }, [props.id])
 
     return (
         <div className={styles.main}>

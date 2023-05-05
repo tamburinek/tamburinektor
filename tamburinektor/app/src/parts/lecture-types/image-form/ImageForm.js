@@ -1,19 +1,35 @@
 import styles from "./ImageForm.module.scss"
 import {useEffect, useState} from "react";
 import MaterialsApi from "../../../services/materialsApi";
+import MaterialsListApi from "../../../services/materialsListApi";
 
-export const ImageForm = () => {
+export const ImageForm = (props) => {
 
     const [description, setDescription] = useState('');
     const [imageUrl, setImage] = useState('');
 
     let confirm = (event) => {
         event.preventDefault()
-        MaterialsApi.createImage(description, imageUrl).then(r => {
-            setDescription("")
-            setImage("")
-        })
+        if (props.id !== undefined){
+            MaterialsApi.updateImage(props.id, description, imageUrl).then(() => {
+                props.onEdit()
+            })
+        }else {
+            MaterialsApi.createImage(description, imageUrl).then(() => {
+                setDescription("")
+                setImage("")
+            })
+        }
     }
+
+    useEffect(() => {
+        if (props.id !== undefined){
+            MaterialsListApi.getImageById(props.id).then(response => {
+                setDescription(response.data.description)
+                setImage(response.data.imageUrl)
+            })
+        }
+    }, [props.id])
 
     return (
         <div className={styles.main}>

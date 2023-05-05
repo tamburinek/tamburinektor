@@ -16,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,5 +63,23 @@ public class DefinitionController {
         User user = userService.getCurrentUser();
         List<Definition> definitions = definitionService.getAllByUser(user);
         return definitions.stream().map(definitionMapper::toDto).collect(Collectors.toList());
+    }
+
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    @GetMapping(value = "/definition/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public DefinitionDto getDefinitionById(@PathVariable Long id){
+        Definition definition = definitionService.getById(id);
+        return definitionMapper.toDto(definition);
+    }
+
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    @PatchMapping(value = "/definition/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateDefinition(@PathVariable Long id, @RequestBody DefinitionDto dto){
+        Definition definition = definitionService.getById(id);
+        definition.setDefinition(dto.getDefinition());
+        definition.setDescription(dto.getDescription());
+        definition.setImageLink(dto.getImageUrl());
+        definitionService.createDefinition(definition);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }

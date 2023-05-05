@@ -16,9 +16,34 @@ const createImage = (description, imageUrl) => {
     }));
 }
 
+const updateImage = (id, description, imageUrl) => {
+    console.log("trying to update image: " + description + " " + imageUrl)
+    return (axios.patch(`${baseUrl}/image/${id}`,
+        {
+            "description": description,
+            "imageUrl" : imageUrl
+        },{headers}).then(response => {
+        console.log(response)
+        return response
+    }));
+}
+
 const createDefinition = (description, definition, imageUrl) => {
     console.log("trying to create definition: " + description + " " + definition)
     return (axios.post(`${baseUrl}/definition`,
+        {
+            "description": description,
+            "definition": definition,
+            "imageUrl" : imageUrl
+        },{headers}).then(response => {
+        console.log(response)
+        return response
+    }));
+}
+
+const updateDefinition = (id, description, definition, imageUrl) => {
+    console.log("trying to create definition: " + description + " " + definition)
+    return (axios.patch(`${baseUrl}/definition/${id}`,
         {
             "description": description,
             "definition": definition,
@@ -33,7 +58,19 @@ const createQuestion = (question, anonymous) => {
     console.log("trying to create question: " + question + " " + anonymous)
     return (axios.post(`${baseUrl}/question`,
         {
-            "question": question,
+            "questionText": question,
+            "anonymous": anonymous
+        },{headers}).then(response => {
+        console.log(response)
+        return response
+    }));
+}
+
+const updateQuestion = (id, question, anonymous) => {
+    console.log("trying to update question: " + question + " " + anonymous)
+    return (axios.patch(`${baseUrl}/question/${id}`,
+        {
+            "questionText": question,
             "anonymous": anonymous
         },{headers}).then(response => {
         console.log(response)
@@ -55,7 +92,21 @@ const createTask = (question, questionImage, answer, answerImage) => {
     }));
 }
 
+const updateTask = (id, question, questionImage, answer, answerImage) => {
+    console.log("trying to update task: " + question + " " + answer)
+    return (axios.patch(`${baseUrl}/task/${id}`,
+        {
+            "question": question,
+            "answer": answer,
+            "questionImage": questionImage,
+            "answerImage": answerImage
+        },{headers}).then(response => {
+        console.log(response)
+        return response
+    }));
+}
+
 const MaterialsApi = {
-    createDefinition, createImage, createQuestion, createTask
+    createDefinition, createImage, createQuestion, createTask, updateDefinition, updateImage, updateTask, updateQuestion
 };
 export default MaterialsApi;
