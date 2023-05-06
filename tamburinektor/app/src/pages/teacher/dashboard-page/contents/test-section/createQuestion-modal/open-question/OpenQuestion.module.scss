@@ -9,7 +9,7 @@
 
 .input{
   width: 96%;
-  height: 20%;
+  height: 13%;
   padding-left: 4%;
   background-color: rgb(216, 195, 165, 0.4);
   border: 1px solid #E98074;
@@ -21,4 +21,29 @@
 .main h2{
   color: #8E8D8A;
   font-weight: bold;
+}
+
+.add{
+  align-items: center;
+  background-color: #8E8D8A;
+  border-radius: 24px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #EAE7DC;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "Google Sans",Roboto,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  height: 48px;
+  justify-content: center;
+  letter-spacing: .25px;
+  line-height: normal;
+  max-width: 100%;
+  overflow: visible;
+  padding: 2px 24px;
+  text-align: center;
+  width: 120px;
+  box-shadow: 0px 0px 10px 2px rgb(142, 141, 138, 0.5);
+  margin-bottom: 20px;
 }

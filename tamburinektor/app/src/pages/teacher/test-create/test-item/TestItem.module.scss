@@ -13,14 +13,21 @@
   border-radius: 20px;
 }
 
-.dot{
-  background-color: #61C454;
+.green, .blue{
   height: 80%;
   aspect-ratio: 1/1;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 100%;
+}
+
+.green{
+  background-color: #61C454;
+}
+
+.blue{
+  background-color: #6779e1;
 }
 
 .description{

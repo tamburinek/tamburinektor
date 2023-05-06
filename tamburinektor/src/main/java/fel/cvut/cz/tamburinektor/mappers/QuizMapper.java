@@ -4,8 +4,11 @@ import fel.cvut.cz.tamburinektor.DTO.QuizDto;
 import fel.cvut.cz.tamburinektor.model.User;
 import fel.cvut.cz.tamburinektor.model.enums.LectureType;
 import fel.cvut.cz.tamburinektor.model.lecture.Quiz;
+import fel.cvut.cz.tamburinektor.model.lecture.QuizQuestion;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -26,7 +29,7 @@ public class QuizMapper {
 
     public Quiz toQuiz(QuizDto quizDto, User user) {
         Quiz quiz = new Quiz();
-        quiz.setName(quiz.getName());
+        quiz.setName(quizDto.getName());
         quiz.setType(LectureType.QUIZ);
         quiz.setQuestions(quizDto.getQuestions().stream()
                 .map(quizQuestionMapper::toQuestion)

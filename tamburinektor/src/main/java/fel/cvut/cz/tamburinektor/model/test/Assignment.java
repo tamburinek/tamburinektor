@@ -1,5 +1,6 @@
 package fel.cvut.cz.tamburinektor.model.test;
 
+import fel.cvut.cz.tamburinektor.model.User;
 import fel.cvut.cz.tamburinektor.model.lecture.Image;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -26,13 +27,13 @@ public class Assignment {
     private Long id;
 
     @Column(nullable = false)
-    private int point;
+    private int point = 1;
 
     @Column(nullable = false)
     private String question;
 
-    @OneToOne
-    private Image imageLink;
+    @Column
+    private String imageLink;
 
     @Column(nullable = false)
     private boolean openQuestion;
@@ -44,4 +45,7 @@ public class Assignment {
     @Column
     @ElementCollection
     private List<String> wrongAnswers;
+
+    @OneToOne
+    private User createBy;
 }

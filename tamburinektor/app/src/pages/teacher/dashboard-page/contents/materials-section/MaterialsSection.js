@@ -34,6 +34,8 @@ export const MaterialsSection = () => {
             setLastMaterial("Otázka - " + lastMaterialObject.question)
         } else if (lastMaterialObject.type === "TASK"){
             setLastMaterial("Úkol - " + lastMaterialObject.question)
+        } else if (lastMaterialObject.type === "QUIZ"){
+            setLastMaterial("Quiz - " + lastMaterialObject.name)
         }
     }
 

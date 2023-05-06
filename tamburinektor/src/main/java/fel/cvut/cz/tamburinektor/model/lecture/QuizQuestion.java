@@ -27,9 +27,6 @@ public class QuizQuestion {
     @Column(nullable = false)
     private String question;
 
-    @Column
-    private String imageLink;
-
     @Column(nullable = false)
     private String rightAnswer;
 

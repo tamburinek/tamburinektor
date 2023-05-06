@@ -106,7 +106,21 @@ const updateTask = (id, question, questionImage, answer, answerImage) => {
     }));
 }
 
+const createQuiz = (name, questions) => {
+    console.log("trying to create quiz: " + name + " " + questions.length)
+    console.log(name)
+    return (axios.post(`${baseUrl}/quiz`,
+        {
+            "name": name,
+            "questions": questions
+        },{headers}).then(response => {
+        console.log(response)
+        return response
+    }));
+}
+
 const MaterialsApi = {
-    createDefinition, createImage, createQuestion, createTask, updateDefinition, updateImage, updateTask, updateQuestion
+    createDefinition, createImage, createQuestion, createTask, updateDefinition, updateImage, updateTask, updateQuestion,
+    createQuiz
 };
 export default MaterialsApi;

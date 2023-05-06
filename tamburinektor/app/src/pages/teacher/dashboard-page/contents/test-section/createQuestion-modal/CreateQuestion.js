@@ -9,8 +9,10 @@ import {OpenQuestion} from "./open-question/OpenQuestion";
 export const CreateQuestion = (props) => {
 
     const [type, setType] = useState("close");
+    const [text, setText] = useState("Odstranit obrázek");
 
-    const [text, setText] = useState("Přidat obrázek");
+    const [question, setQuestion] = useState("");
+    const [imageLink, setImage] = useState("");
 
     let addImage = (event) => {
         event.preventDefault()
@@ -18,11 +20,8 @@ export const CreateQuestion = (props) => {
             setText("Odstranit obrázek")
         } else {
             setText("Přidat obrázek")
+            setImage("")
         }
-    }
-
-    let confirm = (event) => {
-        event.preventDefault()
     }
 
     return (
@@ -38,14 +37,23 @@ export const CreateQuestion = (props) => {
                     <option value={"open"}>Otevřená otázka</option>
                 </select>
                 <h2>Otázka</h2>
-                <input className={styles.input}/>
+                <input onChange={(e) => {
+                    setQuestion(e.target.value)
+                }} value={question} className={styles.input}/>
                 <button onClick={addImage} className={styles.image}>{text}</button>
-                {text === "Odstranit obrázek" && <input className={styles.input} placeholder={"Obrázek"} type={"text"}/>}
+                {text === "Odstranit obrázek" && <input onChange={(e) => {
+                    setImage(e.target.value)
+                }} value={imageLink} className={styles.input} placeholder={"Obrázek"} type={"text"}/>}
                 <div className={styles.modal}>
-                    {type === "close" && <CloseQuestion/>}
-                    {type === "open" && <OpenQuestion/>}
+                    {type === "close" && <CloseQuestion onAdd={() => {
+                        setQuestion("")
+                        setImage("")
+                    }} question={question} image={imageLink}/>}
+                    {type === "open" && <OpenQuestion onAdd={() => {
+                        setQuestion("")
+                        setImage("")
+                    }} question={question} image={imageLink}/>}
                 </div>
-                <button onClick={confirm} className={styles.add}>Vytvořit</button>
             </div>
         </div>
     )

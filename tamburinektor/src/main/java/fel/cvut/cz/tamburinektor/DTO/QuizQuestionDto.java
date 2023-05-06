@@ -3,8 +3,6 @@ package fel.cvut.cz.tamburinektor.DTO;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 
 @Getter
 @Setter
@@ -12,10 +10,12 @@ public class QuizQuestionDto{
 
     private String question;
 
-    private String imageLink;
+    private String right;
 
-    private String rightAnswer;
+    private String wrong1;
 
-    private List<String> wrongAnswers;
+    private String wrong2;
+
+    private String wrong3;
 }
 

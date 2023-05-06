@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping
 @Slf4j
+@CrossOrigin
 public class UserController {
 
     private final UserMapper userMapper;
@@ -53,7 +54,6 @@ public class UserController {
         this.jwtUtils = jwtUtils;
     }
 
-    @CrossOrigin
     @GetMapping("/users/me")
     public User getCurrentlyLoggedInUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -61,7 +61,6 @@ public class UserController {
         return userService.getUserByUsername(userDetails.getUsername());
     }
 
-    @CrossOrigin
     @PostMapping(value = "/users", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createUser(@RequestBody UserDto userDTO) {
         User user = userMapper.toUser(userDTO);
@@ -72,7 +71,6 @@ public class UserController {
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
-    @CrossOrigin
     @PostMapping("/users/signin")
     public ResponseEntity<?> authenticate(@RequestBody CredentialsDto credentialsDTO) {
         Authentication authentication = authenticationManager.authenticate(

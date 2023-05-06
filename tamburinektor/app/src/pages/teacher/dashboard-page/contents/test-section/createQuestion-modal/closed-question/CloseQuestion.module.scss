@@ -10,7 +10,7 @@
 .questions{
   display: flex;
   width: 100%;
-  height: 40%;
+  height: 30%;
   justify-content: space-between;
 }
 
@@ -18,14 +18,14 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 45%;
 }
 
-.oneQuestion input{
-  width: 98%;
+.answer{
+  width: 80%;
   padding-left: 2%;
-  height: 40%;
+  height: 100%;
   border-radius: 20px;
   border: 1px solid #E98074;
   background-color: rgb(216, 195, 165, 0.4);
@@ -35,6 +35,7 @@
 .oneQuestion label{
   color: #8E8D8A;
   font-weight: bold;
+  padding-left: 25%;
 }
 
 .buttons{
@@ -49,7 +50,7 @@
   background-color: transparent;
   border: 1px solid #E98074;
   border-radius: 20px;
-  height: 100%;
+  height: 70%;
   cursor: pointer;
   font-weight: bold;
   padding-inline: 10px;
@@ -61,4 +62,39 @@
 
 .remove{
   color: #E98074;
+}
+
+.line{
+  width: 100%;
+  display: flex;
+  height: 40%;
+}
+
+.check{
+  width: 20%;
+}
+
+.create{
+  align-items: center;
+  background-color: #8E8D8A;
+  border-radius: 24px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #EAE7DC;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: "Google Sans",Roboto,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  height: 48px;
+  justify-content: center;
+  letter-spacing: .25px;
+  line-height: normal;
+  max-width: 100%;
+  overflow: visible;
+  padding: 2px 24px;
+  text-align: center;
+  width: 120px;
+  box-shadow: 0px 0px 10px 2px rgb(142, 141, 138, 0.5);
+  margin-bottom: 20px;
 }

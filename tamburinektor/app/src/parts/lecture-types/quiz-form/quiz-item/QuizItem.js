@@ -11,8 +11,8 @@ export const QuizItem = (props) => {
         <div className={styles.main}>
             <span className={styles.name}>{props.item}</span>
             <div className={styles.images}>
-                <img className={styles.pencil} src={pencil} alt={"pencil"}/>
-                <img className={styles.close} src={close} alt={"close"}/>
+                <img onClick={props.edit} className={styles.pencil} src={pencil} alt={"pencil"}/>
+                <img onClick={props.onDelete} className={styles.close} src={close} alt={"close"}/>
             </div>
         </div>
     )

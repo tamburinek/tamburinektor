@@ -4,12 +4,15 @@ import close from "../../../../assets/png/close.png";
 export const TestItem = (props) => {
     return(
         <div className={styles.itemList}>
-            <div className={styles.dot}>
+            {props.category === "closed" && <div className={styles.green}>
                 U
-            </div>
+            </div>}
+            {props.category === "open" && <div className={styles.blue}>
+                O
+            </div>}
             <p className={styles.description}>{props.item}</p>
             <input className={styles.mark} type={"number"} min={1} max={10} step={1} defaultValue={1}/>
-            <img className={styles.close} src={close} alt={"close"}/>
+            <img onClick={props.remove} className={styles.close} src={close} alt={"close"}/>
         </div>
     )
 }

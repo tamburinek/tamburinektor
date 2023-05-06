@@ -5,6 +5,8 @@ import {Link} from "react-router-dom";
 import logo from "../../../assets/png/logo.png";
 import {BoxItem} from "../lecture-create/box-item/BoxItem";
 import {TestItem} from "./test-item/TestItem";
+import MaterialsListApi from "../../../services/materialsListApi";
+import TestApi from "../../../services/testApi";
 
 export const TestCreatePage = () => {
 
@@ -19,17 +21,92 @@ export const TestCreatePage = () => {
         setCreateVisible(true)
     }
 
-    let boxItems = ["prvni velmi dlouha definice ktera se cela nevejde zrovna do tohoto okna", "druha definice", 1,2,3,4,5,6,2,3,3,3,3,3,3,3,3]
-    //let boxItems = ["prvni lekce", "druha lekce"]
-    const listBoxItems = boxItems.map((item) =>
-        <BoxItem item={item}/>
+    const [closedQuestions, setClosedQuestions] = useState([])
+    const [openQuestions, setOpenQuestions] = useState([])
+
+    const [testQuestions, setTestQuestions] = useState([])
+    const [rerender, setRerender] = useState(false)
+
+    const [questionId, setQuestionId] = useState(undefined)
+
+
+    const listTestItems = testQuestions.map((item) =>
+        <TestItem key={item.id} item={item.text} category={item.activeName} remove={() => removeItem(item.id)}/>
     );
 
-    let paperItems = ["prvni velmi dlouha definice ktera se cela nevejde zrovna do tohoto okna", "druha definice", 1,2,3,4,5,6,2,3,3,3,3,3,3,3,3]
-    //let boxItems = ["prvni lekce", "druha lekce"]
-    const listTestItems = boxItems.map((item) =>
-        <TestItem item={item}/>
-    );
+    let listClosed = closedQuestions.map(quest => {
+        return (<BoxItem key={quest.id} type={activeCategory}
+                         add={() => addItem(quest.id, activeCategory, quest.question)}
+                         edit={() => editMaterial(quest.id)} item={quest.question}/>)
+    })
+
+    let listOpen = openQuestions.map(quest => {
+        return (<BoxItem key={quest.id} type={activeCategory}
+                         add={() => addItem(quest.id, activeCategory, quest.question)}
+                         edit={() => editMaterial(quest.id)} item={quest.question}/>)
+    })
+
+    let contain = (id) => {
+        for (const item of testQuestions) {
+            if (item.id === id){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    let addItem = (id, activeName, text) => {
+        if (contain(id)){
+            return
+        }
+        let helper = testQuestions
+        helper.push({id:id, activeName:activeName, text:text})
+        setTestQuestions(helper)
+        if (rerender === true){
+            setRerender(false)
+        }else {
+            setRerender(true)
+        }
+    }
+
+    let editMaterial = (id) => {
+
+    }
+
+    let removeItem = (id) => {
+        let helper = []
+        for (const item of testQuestions) {
+            if (item.id !== id){
+                helper.push(item)
+            }
+        }
+        setTestQuestions(helper)
+        if (rerender === true){
+            setRerender(false)
+        }else {
+            setRerender(true)
+        }
+    }
+
+    const fetchClosed = () => {
+        TestApi.getAllClose().then(response => {
+            setClosedQuestions(response.data)
+        })
+    }
+
+    const fetchOpen = () => {
+        TestApi.getAllOpen().then(response => {
+            setOpenQuestions(response.data)
+        })
+    }
+
+    useEffect(() => {
+        if (createModalVisible === true){
+            return
+        }
+        fetchClosed()
+        fetchOpen()
+    }, [createModalVisible])
 
     return (
         <div className={styles.main}>
@@ -56,7 +133,8 @@ export const TestCreatePage = () => {
                         </select>
                     </div>
                     <div className={styles.items}>
-                        {listBoxItems}
+                        {activeCategory === "closed" && closedQuestions.length > 1 && listClosed}
+                        {activeCategory === "open" && openQuestions.length > 1 && listOpen}
                     </div>
                 </div>
                 <button className={styles.add} onClick={(event) => createQuestion(event)}>
@@ -65,13 +143,16 @@ export const TestCreatePage = () => {
             <div className={styles.right}>
                 <label className={styles.label}>Popis testu</label>
                 <input className={styles.description} placeholder={'Lineární rovnice 4.A.'} type={"text"}/>
-                <div className={styles.paper}>
+                <div className={styles.paper} autoFocus={rerender}>
                     {listTestItems}
                 </div>
                 <button className={styles.create}>Vytvořit test</button>
             </div>
 
-            {createModalVisible === true && <CreateQuestion onClose={() => setCreateVisible(false)}/>}
+            {createModalVisible === true && <CreateQuestion id={questionId} onClose={() => {
+                setCreateVisible(false)
+                setQuestionId(undefined)
+            }}/>}
         </div>
     )
 }
