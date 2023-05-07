@@ -44,8 +44,16 @@ const updateLecture = (id, description, entities) => {
     }));
 }
 
+const getLast = () => {
+    console.log("trying to get last lecture")
+    return (axios.get(`${baseUrl}/lecture/last`,{headers}).then(response => {
+        console.log(response)
+        return response
+    }));
+}
+
 
 const MaterialsApi = {
-    createLecture, getAllLectures, getLectureById, updateLecture
+    createLecture, getAllLectures, getLectureById, updateLecture, getLast
 };
 export default MaterialsApi;

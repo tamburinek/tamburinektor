@@ -9,11 +9,22 @@ import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {CreateQuestion} from "./createQuestion-modal/CreateQuestion";
 import {ViewAllTests} from "./viewAll-modal/ViewAllTests";
+import TestApi from "../../../../../services/testApi";
 
 export const TestSection = () => {
 
     const [createModalVisible, setCreateVisible] = useState(false)
     const [viewAllTestsVisible, setAllTestVisible] = useState(false)
+    const [lastTestText, setLastTestText] = useState(false)
+
+    useEffect(() => {
+        TestApi.getLastTest().then((res) => {
+            if (res.data.description === ""){
+                return
+            }
+            setLastTestText(res.data.description)
+        })
+    })
 
     return (
         <div className={styles.main}>
@@ -24,7 +35,7 @@ export const TestSection = () => {
                 <CountSquare text={"Vytvořit otázku"}/>
             </Link>
             {createModalVisible === true && <CreateQuestion onClose={() => setCreateVisible(false)}/>}
-            <LastSquare onClick={() => window.location = "/test/creation"} text={"TODO"}/>
+            <LastSquare text={lastTestText}/>
             <Link><GraphSquare text={"TODO"}/></Link>
         </div>
     )

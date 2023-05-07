@@ -11,8 +11,6 @@ public class AssignmentDto {
 
     private Long id;
 
-    private int point = 1;
-
     private String question;
 
     private String imageLink;

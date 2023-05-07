@@ -12,4 +12,6 @@ import java.util.List;
 public interface TestRepository extends JpaRepository<Test, Integer> {
 
     List<Test> getAllByCreateBy(User user);
+
+    Test getById(Long id);
 }

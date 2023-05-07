@@ -27,9 +27,6 @@ public class Assignment {
     private Long id;
 
     @Column(nullable = false)
-    private int point = 1;
-
-    @Column(nullable = false)
     private String question;
 
     @Column

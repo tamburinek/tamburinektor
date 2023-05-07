@@ -31,4 +31,8 @@ public class AssignmentService {
     public List<Assignment> getAllByUserOpen(User user){
         return assignmentRepository.getAllByCreateByAndAndOpenQuestion(user, true);
     }
+
+    public Assignment getById(Long id){
+        return assignmentRepository.getById(id);
+    }
 }

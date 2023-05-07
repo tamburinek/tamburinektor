@@ -43,7 +43,45 @@ const getAllOpen = () => {
     return (axios.get(`${baseUrl}/assignment/open`,{headers}));
 }
 
+const createTest = (description, questions) => {
+    console.log("creating test " + description + " " + questions.length)
+    return (axios.post(`${baseUrl}/test`,{
+        "description": description,
+        "assignments": questions
+    },{headers}).then((response) => {
+        console.log(response)
+        return response
+    }));
+}
+
+const getAllTests = () => {
+    console.log("getting all tests")
+    return (axios.get(`${baseUrl}/test`,{headers}));
+}
+
+const getTestById = (id) => {
+    console.log("getting test by id " + id)
+    return (axios.get(`${baseUrl}/test/${id}`,{headers}));
+}
+
+const updateTest = (id, description, questions) => {
+    console.log("updating test " + description + " " + questions.length)
+    return (axios.patch(`${baseUrl}/test/${id}`,{
+        "description": description,
+        "assignments": questions
+    },{headers}).then((response) => {
+        console.log(response)
+        return response
+    }));
+}
+
+const getLastTest = () => {
+    console.log("getting last test")
+    return (axios.get(`${baseUrl}/test/last`,{headers}));
+}
+
 const TestApi = {
-    createOpenTestQuestion, createCloseTestQuestion, getAllClose, getAllOpen
+    createOpenTestQuestion, createCloseTestQuestion, getAllClose, getAllOpen, createTest,
+    getAllTests, getTestById, updateTest, getLastTest
 };
 export default TestApi;

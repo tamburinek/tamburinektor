@@ -1,20 +1,27 @@
 import styles from './TestCreatePage.module.scss'
 import {useEffect, useState} from "react";
 import {CreateQuestion} from "../dashboard-page/contents/test-section/createQuestion-modal/CreateQuestion";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import logo from "../../../assets/png/logo.png";
 import {BoxItem} from "../lecture-create/box-item/BoxItem";
 import {TestItem} from "./test-item/TestItem";
 import MaterialsListApi from "../../../services/materialsListApi";
 import TestApi from "../../../services/testApi";
+import LectureApi from "../../../services/lectureApi";
 
 export const TestCreatePage = () => {
 
     const [createModalVisible, setCreateVisible] = useState(false)
     const [activeCategory, setActiveCategory] = useState("closed")
+    const [fetched, setFetched] = useState(false)
+    const [buttonText, setButtonText] = useState("Vytvořit test")
 
     const activeDiv = styles.category + " " + styles.active
     const nonActiveDiv = styles.category
+
+    //methods for location
+    const location = useLocation();
+    const params = new URLSearchParams(location.search)
 
     let createQuestion = (event) => {
         event.preventDefault()
@@ -31,7 +38,7 @@ export const TestCreatePage = () => {
 
 
     const listTestItems = testQuestions.map((item) =>
-        <TestItem key={item.id} item={item.text} category={item.activeName} remove={() => removeItem(item.id)}/>
+        <TestItem key={item.id} id={item.id} item={item.text} category={item.activeName} remove={() => removeItem(item.id)}/>
     );
 
     let listClosed = closedQuestions.map(quest => {
@@ -91,12 +98,35 @@ export const TestCreatePage = () => {
     const fetchClosed = () => {
         TestApi.getAllClose().then(response => {
             setClosedQuestions(response.data)
-        })
+        }).then(fetchOpen)
     }
 
     const fetchOpen = () => {
         TestApi.getAllOpen().then(response => {
             setOpenQuestions(response.data)
+            setFetched(true)
+        })
+    }
+
+    let pushItemToTest = (id) => {
+        for (const close of closedQuestions) {
+            if (close.id === id){
+                addItem(id, "closed", close.question)
+            }
+        }
+        for (const open of openQuestions) {
+            if (open.id === id){
+                addItem(id, "open", open.question)
+            }
+        }
+    }
+
+    let setTest = (id) => {
+        TestApi.getTestById(id).then((res) => {
+            setDescription(res.data.description)
+            for (const item of res.data.assignments) {
+                pushItemToTest(item)
+            }
         })
     }
 
@@ -105,8 +135,37 @@ export const TestCreatePage = () => {
             return
         }
         fetchClosed()
-        fetchOpen()
     }, [createModalVisible])
+
+    useEffect(() => {
+        if (fetched === false){
+            return
+        }
+        if (params.get("id") !== null){
+            setButtonText("Aktualizovat")
+            setTest(params.get("id"))
+        }
+    }, [fetched])
+
+    const [description, setDescription] = useState("")
+
+    let confirm = (e) => {
+        e.preventDefault()
+        if (description.length < 1){
+            return
+        }
+        let helper = testQuestions.map(item => item.id)
+        if (params.get("id") !== null){
+            TestApi.updateTest(params.get("id"), description, helper).then(() => {
+                window.location = "/dashboard"
+            })
+        } else {
+            TestApi.createTest(description, helper).then((res) => {
+                setDescription("")
+                setTestQuestions([])
+            })
+        }
+    }
 
     return (
         <div className={styles.main}>
@@ -133,8 +192,8 @@ export const TestCreatePage = () => {
                         </select>
                     </div>
                     <div className={styles.items}>
-                        {activeCategory === "closed" && closedQuestions.length > 1 && listClosed}
-                        {activeCategory === "open" && openQuestions.length > 1 && listOpen}
+                        {activeCategory === "closed" && closedQuestions.length > 0 && listClosed}
+                        {activeCategory === "open" && openQuestions.length > 0 && listOpen}
                     </div>
                 </div>
                 <button className={styles.add} onClick={(event) => createQuestion(event)}>
@@ -142,11 +201,12 @@ export const TestCreatePage = () => {
             </div>
             <div className={styles.right}>
                 <label className={styles.label}>Popis testu</label>
-                <input className={styles.description} placeholder={'Lineární rovnice 4.A.'} type={"text"}/>
+                <input onChange={(e) => {setDescription(e.target.value)}}
+                       value={description} className={styles.description} placeholder={'Lineární rovnice 4.A.'} type={"text"}/>
                 <div className={styles.paper} autoFocus={rerender}>
                     {listTestItems}
                 </div>
-                <button className={styles.create}>Vytvořit test</button>
+                <button onClick={confirm} className={styles.create}>{buttonText}</button>
             </div>
 
             {createModalVisible === true && <CreateQuestion id={questionId} onClose={() => {

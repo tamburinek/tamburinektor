@@ -12,4 +12,6 @@ import java.util.List;
 public interface AssignmentRepository extends JpaRepository<Assignment, Integer> {
 
     List<Assignment> getAllByCreateByAndAndOpenQuestion(User user, boolean isOpen);
+
+    Assignment getById(Long id);
 }

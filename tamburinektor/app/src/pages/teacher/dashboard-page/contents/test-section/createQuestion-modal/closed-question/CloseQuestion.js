@@ -107,7 +107,7 @@ export const CloseQuestion = (props) => {
                   <div className={styles.line}>
                       <input onChange={(e) => setFirst(e.target.value)}
                              value={first} className={styles.answer}/>
-                      <input onClick={handleClick1} className={styles.check} type={"checkbox"}/>
+                      <input onClick={handleClick1} checked={firstRight} className={styles.check} type={"checkbox"}/>
                   </div>
               </div>
               <div className={styles.oneQuestion}>
@@ -115,7 +115,7 @@ export const CloseQuestion = (props) => {
                   <div className={styles.line}>
                       <input onChange={(e) => setSecond(e.target.value)}
                              value={second} className={styles.answer}/>
-                      <input onClick={handleClick2} className={styles.check} type={"checkbox"}/>
+                      <input onClick={handleClick2} checked={secondRight} className={styles.check} type={"checkbox"}/>
                   </div>
               </div>
           </div>
@@ -126,7 +126,7 @@ export const CloseQuestion = (props) => {
                       <div className={styles.line}>
                           <input onChange={(e) => setThird(e.target.value)}
                                  value={third} className={styles.answer}/>
-                          <input onClick={handleClick3} className={styles.check} type={"checkbox"}/>
+                          <input onClick={handleClick3} checked={thirdRight} className={styles.check} type={"checkbox"}/>
                       </div>
                   </div>
               }
@@ -136,7 +136,7 @@ export const CloseQuestion = (props) => {
                       <div className={styles.line}>
                           <input onChange={(e) => setForth(e.target.value)}
                                  value={forth} className={styles.answer}/>
-                          <input onClick={handleClick4} className={styles.check} type={"checkbox"}/>
+                          <input onClick={handleClick4} checked={forthRight} className={styles.check} type={"checkbox"}/>
                       </div>
                   </div>
               }

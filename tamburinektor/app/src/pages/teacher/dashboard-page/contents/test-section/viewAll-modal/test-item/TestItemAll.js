@@ -5,7 +5,7 @@ export const TestItemAll = (props) => {
         <div className={styles.item}>
             <p>{props.item}</p>
             <div className={styles.buttons}>
-                <button onClick={() => window.location = "test/creation"} className={styles.edit}>Upravit</button>
+                <button onClick={() => window.location = "test/creation?id=" + props.id} className={styles.edit}>Upravit</button>
             </div>
         </div>
     )

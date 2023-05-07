@@ -136,39 +136,37 @@ export const LectureCreatePage = () => {
     );
 
     let addLectureItem = (id, type) => {
-        let helper = paperItems
         if (type === "definition"){
             for (const definition of definitions) {
                 if (definition.id === id){
-                    helper.push({id:id, lectureType:type, name:definition.description})
+                    addItem(id, type, definition.description)
                 }
             }
         } else if (type === "image"){
             for (const image of images) {
                 if (image.id === id){
-                    helper.push({id:id, lectureType:type, name:image.description})
+                    addItem(id, type, image.description)
                 }
             }
         } else if (type === "question"){
             for (const question of questions) {
                 if (question.id === id){
-                    helper.push({id:id, lectureType:type, name:question.questionText})
+                    addItem(id, type, question.questionText)
                 }
             }
         } else if (type === "task"){
             for (const task of tasks) {
                 if (task.id === id){
-                    helper.push({id:id, lectureType:type, name:task.question})
+                    addItem(id, type, task.question)
                 }
             }
         } else if (type === "quiz"){
             for (const quiz of quizes) {
                 if (quiz.id === id){
-                    helper.push({id:id, lectureType:type, name:quiz.name})
+                    addItem(id, type, quiz.name)
                 }
             }
         }
-        setPaperItems(helper)
         if (rerender === true){
             setrerender(false)
         } else {
@@ -198,7 +196,7 @@ export const LectureCreatePage = () => {
         if (fetched === false){
             return
         }
-        if (params.get("id") !== undefined){
+        if (params.get("id") !== null){
             setButtonText("Aktualizovat")
             setLecture(params.get("id"))
         }
@@ -209,7 +207,7 @@ export const LectureCreatePage = () => {
         if (lectureDescription.length < 1){
             return
         }
-        if (params.get("id") !== undefined){
+        if (params.get("id") !== null){
             LectureApi.updateLecture(params.get("id"), lectureDescription, paperItems).then(() => {
                 window.location = "/dashboard"
             })

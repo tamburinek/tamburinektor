@@ -11,7 +11,6 @@ export const TestItem = (props) => {
                 O
             </div>}
             <p className={styles.description}>{props.item}</p>
-            <input className={styles.mark} type={"number"} min={1} max={10} step={1} defaultValue={1}/>
             <img onClick={props.remove} className={styles.close} src={close} alt={"close"}/>
         </div>
     )

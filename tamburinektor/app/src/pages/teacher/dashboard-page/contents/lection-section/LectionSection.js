@@ -8,11 +8,22 @@ import {LastSquare} from "../../../../../parts/squares/last-square/LastSquare";
 import {GraphSquare} from "../../../../../parts/squares/graph-square/GraphSquare";
 import {CreateMaterialModal} from "../materials-section/createMaterials-modal/CreateMaterialModal";
 import {ViewAllLecturesModal} from "./viewAll-modal/ViewAllLecturesModal";
+import LectureApi from "../../../../../services/lectureApi";
 
 export const LectionSection = () => {
 
     const [createModalVisible, setCreateVisible] = useState(false)
     const [viewAllModal, setAllModal] = useState(false)
+    const [lastDescr, setLastDesc] = useState(undefined)
+
+    useEffect(() => {
+        LectureApi.getLast().then((res) => {
+            if (res.data === ""){
+                return
+            }
+            setLastDesc(res.data)
+        })
+    },[])
 
     return (
         <div className={styles.main}>
@@ -23,7 +34,7 @@ export const LectionSection = () => {
                 <CountSquare text={"Vytvořit materiál"}/>
             </Link>
             {createModalVisible === true && <CreateMaterialModal onClose={() => setCreateVisible(false)}/>}
-            <LastSquare onClick={() => window.location = "/lecture/creation"} button={"Spustit"} text={"TODO"}/>
+            <LastSquare text={lastDescr}/>
             <Link><GraphSquare text={"TODO"}/></Link>
         </div>
     )

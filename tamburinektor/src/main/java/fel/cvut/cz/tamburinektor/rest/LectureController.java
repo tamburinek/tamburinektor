@@ -104,6 +104,17 @@ public class LectureController {
         return new ResponseEntity<>(headers, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    @GetMapping(value = "/lecture/last", produces = MediaType.APPLICATION_JSON_VALUE)
+    public String getLastLectureName(){
+        User user = userService.getCurrentUser();
+        Lecture lecture = lectureService.getLast(user);
+        if (lecture == null){
+            return null;
+        }
+        return lecture.getDescription();
+    }
+
     private List<LectureEntity> getAllEntitiesFromDto(List<LectureEntityDto> dtos){
         List<LectureEntity> entities = new LinkedList<>();
         dtos.forEach(dto -> entities.add(lectureEntityService.getEntityById(dto.getId())));

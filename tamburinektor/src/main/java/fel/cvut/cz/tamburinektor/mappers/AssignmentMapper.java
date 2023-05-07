@@ -14,7 +14,6 @@ public class AssignmentMapper {
         dto.setId(assignment.getId());
         dto.setQuestion(assignment.getQuestion());
         dto.setImageLink(assignment.getImageLink());
-        dto.setPoint(assignment.getPoint());
         dto.setOpenQuestion(assignment.isOpenQuestion());
         dto.setRightAnswers(assignment.getRightAnswers());
         dto.setWrongAnswers(assignment.getWrongAnswers());
