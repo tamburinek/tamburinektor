@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
@@ -31,10 +32,10 @@ public class Lecture {
     @Column(nullable = false, length = 100)
     private String description;
 
-    @OneToOne(optional = false)
+    @OneToOne
     private User createdBy;
 
-    @OneToMany
+    @ManyToMany
     @OrderColumn
     private List<LectureEntity> lectureEntities;
 }

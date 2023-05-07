@@ -12,4 +12,6 @@ import java.util.List;
 public interface LectureEntityRepository extends JpaRepository<LectureEntity, Integer> {
 
     List<LectureEntity> getAllByCreatedBy(User user);
+
+    LectureEntity getById(Long id);
 }

@@ -12,7 +12,7 @@ public class LectureEntityMapper {
         return null;
     }
 
-    public LectureEntity toLecture(LectureEntityDto lectureEntityDto) {
+    public LectureEntity toLectureEntity(LectureEntityDto lectureEntityDto) {
         return null;
     }
 }

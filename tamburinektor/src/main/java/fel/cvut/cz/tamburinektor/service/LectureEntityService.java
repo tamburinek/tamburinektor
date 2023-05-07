@@ -19,6 +19,9 @@ public class LectureEntityService {
         this.lectureEntityRepository = lectureEntityRepository;
     }
 
+    public LectureEntity getEntityById(Long id){
+        return lectureEntityRepository.getById(id);
+    }
 
     public int getCountByUser(User user) {
         return lectureEntityRepository.getAllByCreatedBy(user).size();

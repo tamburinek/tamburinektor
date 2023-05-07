@@ -1,5 +1,6 @@
 package fel.cvut.cz.tamburinektor.dao;
 
+import fel.cvut.cz.tamburinektor.model.User;
 import fel.cvut.cz.tamburinektor.model.lecture.Quiz;
 import fel.cvut.cz.tamburinektor.model.lecture.QuizQuestion;
 import org.springframework.data.jpa.repository.JpaRepository;

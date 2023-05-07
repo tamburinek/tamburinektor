@@ -24,6 +24,7 @@ export const ClassroomSection = () => {
             setCount(response.data)
         })
         ClassRoomApi.getLastClass().then((response) => {
+            //todo check if is null
             setLastName(response.data.name)
         })
     },[createModalVisible])

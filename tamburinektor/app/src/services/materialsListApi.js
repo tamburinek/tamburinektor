@@ -54,7 +54,13 @@ const getQuestionById = (id) => {
     return (axios.get(`${baseUrl}/question/${id}`,{headers}));
 }
 
+const getQuizById = (id) => {
+    console.log("getting quiz with id: " + id)
+    return (axios.get(`${baseUrl}/quiz/${id}`,{headers}));
+}
+
 const MaterialsListApi = {
-    getAllDefinitions, getAllImages, getAllQuestions, getAllTasks, getAllQuizes, getLastCreated, getDefinitionById, getImageById, getTaskById, getQuestionById
+    getAllDefinitions, getAllImages, getAllQuestions, getAllTasks, getAllQuizes, getLastCreated,
+    getDefinitionById, getImageById, getTaskById, getQuestionById, getQuizById
 };
 export default MaterialsListApi;

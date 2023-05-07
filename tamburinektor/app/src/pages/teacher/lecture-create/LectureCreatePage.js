@@ -10,6 +10,7 @@ import {BoxItem} from "./box-item/BoxItem";
 import {PaperItem} from "./paper-item/PaperItem";
 import {EditMaterialModal} from "../dashboard-page/contents/materials-section/editMaterial-modal/EditMaterialModal";
 import MaterialsListApi from "../../../services/materialsListApi";
+import LectureApi from "../../../services/lectureApi";
 
 
 export const LectureCreatePage = () => {
@@ -98,7 +99,7 @@ export const LectureCreatePage = () => {
             return
         }
         let helper = paperItems
-        helper.push({id:id, type:type, text:text})
+        helper.push({id:id, lectureType:type, name:text})
         setPaperItems(helper)
         if (rerender === true){
             setrerender(false)
@@ -126,7 +127,7 @@ export const LectureCreatePage = () => {
     const [rerender, setrerender] = useState(true)
 
     const listPaperItems = paperItems.map((item) =>
-        <PaperItem key={item.id} remove={() => removeItem(item.id)} type={item.type} item={item.text}/>
+        <PaperItem key={item.id} remove={() => removeItem(item.id)} type={item.lectureType} item={item.name}/>
     );
 
     useEffect(() => {
@@ -137,8 +138,23 @@ export const LectureCreatePage = () => {
         fetchImages()
         fetchQuestions()
         fetchTasks()
-        //fetchQuizes()
+        fetchQuizes()
     }, [createModal, editMaterialVisible])
+
+
+
+    let confirm = (e) => {
+        e.preventDefault()
+        if (lectureDescription.length < 1){
+            return
+        }
+        LectureApi.createLecture(lectureDescription, paperItems).then((res) => {
+            setLectureDescription("")
+            setPaperItems([])
+        })
+    }
+
+    const [lectureDescription, setLectureDescription] = useState("")
 
     return (
         <div className={styles.main}>
@@ -181,11 +197,11 @@ export const LectureCreatePage = () => {
                         </select>
                     </div>
                     <div className={styles.items}>
-                        {activeName === "definition" && definitions.length > 1 && listDefinitions}
-                        {activeName === "image" && images.length > 1 && listImages}
-                        {activeName === "question" && questions.length > 1 && listQuestions}
-                        {activeName === "task" && tasks.length > 1 && listTasks}
-                        {activeName === "quiz" && quizes.length > 1 && listQuizes}
+                        {activeName === "definition" && definitions.length > 0 && listDefinitions}
+                        {activeName === "image" && images.length > 0 && listImages}
+                        {activeName === "question" && questions.length > 0 && listQuestions}
+                        {activeName === "task" && tasks.length > 0 && listTasks}
+                        {activeName === "quiz" && quizes.length > 0 && listQuizes}
                     </div>
                 </div>
                 <button className={styles.add} onClick={() => setCreateModal(true)}>Vytvořit materiál</button>
@@ -200,11 +216,14 @@ export const LectureCreatePage = () => {
 
             <div className={styles.right}>
                 <label className={styles.label}>Popis lekce</label>
-                <input className={styles.description} placeholder={'Lineární rovnice 4.A.'} type={"text"}/>
-                <div className={styles.paper} placeholder={rerender}>
+                <input onChange={e => {
+                    setLectureDescription(e.target.value)}}
+                       value={lectureDescription} className={styles.description}
+                       placeholder={'Lineární rovnice 4.A.'} type={"text"}/>
+                <div className={styles.paper} autoFocus={rerender}>
                     {listPaperItems}
                 </div>
-                <button className={styles.create}>Vytvořit lekci</button>
+                <button onClick={confirm} className={styles.create}>Vytvořit lekci</button>
                 {editMaterialVisible === true && <EditMaterialModal id={materialIndex} type={activeName} onClose={() => setMaterialVisible(false)}/>}
             </div>
         </div>

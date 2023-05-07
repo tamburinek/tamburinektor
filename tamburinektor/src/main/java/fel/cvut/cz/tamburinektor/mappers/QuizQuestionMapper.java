@@ -12,7 +12,20 @@ import java.util.List;
 public class QuizQuestionMapper {
 
     public QuizQuestionDto toDto(QuizQuestion quizQuestion) {
-        return null;
+        QuizQuestionDto dto = new QuizQuestionDto();
+        dto.setQuestion(quizQuestion.getQuestion());
+        dto.setRight(quizQuestion.getRightAnswer());
+        List<String> wrongAnswers = quizQuestion.getWrongAnswers();
+        if (wrongAnswers.get(0) != null){
+            dto.setWrong1(wrongAnswers.get(0));
+        }
+        if (wrongAnswers.get(1) != null){
+            dto.setWrong2(wrongAnswers.get(1));
+        }
+        if (wrongAnswers.get(2) != null){
+            dto.setWrong3(wrongAnswers.get(2));
+        }
+        return dto;
     }
 
     public QuizQuestion toQuestion(QuizQuestionDto quizQuestionDto) {

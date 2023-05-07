@@ -64,6 +64,7 @@ public class ClassRoomController {
     @GetMapping(value = "/class/last", produces = MediaType.APPLICATION_JSON_VALUE)
     public ClassRoomDto getLastClass(){
         User user = userService.getCurrentUser();
-        return mapper.toDto(classRoomService.getLastClass(user));
+        Classroom room = classRoomService.getLastClass(user);
+        return room != null ? mapper.toDto(classRoomService.getLastClass(user)) : null;
     }
 }

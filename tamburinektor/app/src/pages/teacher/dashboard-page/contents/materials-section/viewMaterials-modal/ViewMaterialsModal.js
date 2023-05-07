@@ -80,7 +80,7 @@ export const ViewMaterialsModal = (props) => {
         fetchImages()
         fetchQuestions()
         fetchTasks()
-        //fetchQuizes()
+        fetchQuizes()
         if (props.type !== undefined){
             setActiveName(props.type)
         }

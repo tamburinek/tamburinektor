@@ -1,10 +1,11 @@
 import styles from "./QuizForm.module.scss"
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {QuizItem} from "./quiz-item/QuizItem";
 import MaterialsApi from "../../../services/materialsApi";
+import MaterialsListApi from "../../../services/materialsListApi";
 
-export const QuizForm = () => {
+export const QuizForm = (props) => {
 
     const [answersCount, setAnswersCount] = useState(4);
 
@@ -32,16 +33,21 @@ export const QuizForm = () => {
 
     let confirm = (event) => {
         event.preventDefault()
-        MaterialsApi.createQuiz(description, boxItems).then((res) => {
-            setQuestion("")
-            setRight("")
-            setWrong1("")
-            setWrong2("")
-            setWrong3("")
-            setAnswersCount(4)
-            setDescription("")
-            setBoxItems([])
-        })
+        if (props.id !== undefined){
+            MaterialsApi.updateQuiz(props.id, description, boxItems).then(() => {
+                props.onEdit()
+            })
+        } else {
+            MaterialsApi.createQuiz(description, boxItems).then((res) => {
+                setQuestion("")
+                setRight("")
+                setWrong1("")
+                setWrong2("")
+                setWrong3("")
+                setAnswersCount(4)
+                setDescription("")
+                setBoxItems([])
+        })}
     }
 
     let contain = (question) => {
@@ -98,6 +104,16 @@ export const QuizForm = () => {
         setWrong3(wrong3)
     }
 
+    useEffect(() => {
+        if (props.id !== undefined){
+            MaterialsListApi.getQuizById(props.id).then(response => {
+                console.log(response.data)
+                setDescription(response.data.name)
+                setBoxItems(response.data.questions)
+            })
+        }
+    }, [props.id])
+
     const [boxItems, setBoxItems] = useState([]);
     const [rerender, setRerender] = useState(false);
 
@@ -151,7 +167,7 @@ export const QuizForm = () => {
                         <div className={styles.divName}>
                             <span className={styles.questionName}>Otázky</span>
                         </div>
-                        <div className={styles.questions} placeholder={rerender}>
+                        <div className={styles.questions} autoFocus={rerender}>
                             {listBoxItems}
                         </div>
                     </div>

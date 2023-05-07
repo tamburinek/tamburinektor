@@ -31,6 +31,6 @@ public class LectureEntity {
     @Column(nullable = false)
     private LectureType type;
 
-    @OneToOne(optional = false)
+    @OneToOne(optional = true)
     private User createdBy;
 }

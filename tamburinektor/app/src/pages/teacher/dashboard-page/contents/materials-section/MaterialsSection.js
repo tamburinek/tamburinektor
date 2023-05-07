@@ -49,6 +49,7 @@ export const MaterialsSection = () => {
         })
         MaterialsListApi.getLastCreated().then(response => {
             lastMaterialObject = response.data
+            //todo check if is null
             handleData()
             console.log(lastMaterialObject)
         })

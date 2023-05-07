@@ -3,9 +3,12 @@ package fel.cvut.cz.tamburinektor.service;
 import fel.cvut.cz.tamburinektor.dao.LectureEntityRepository;
 import fel.cvut.cz.tamburinektor.dao.QuizQuestionRepository;
 import fel.cvut.cz.tamburinektor.dao.QuizRepository;
+import fel.cvut.cz.tamburinektor.model.User;
 import fel.cvut.cz.tamburinektor.model.lecture.Quiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -24,5 +27,15 @@ public class QuizService {
     public void createQuiz(Quiz quiz){
         quizQuestionRepository.saveAll(quiz.getQuestions());
         quizRepository.save(quiz);
+    }
+
+
+    public List<Quiz> getAllByUser(User user) {
+        return quizRepository.getAllByCreatedBy(user);
+    }
+
+
+    public Quiz getById(Long id) {
+        return quizRepository.getQuizById(id);
     }
 }
