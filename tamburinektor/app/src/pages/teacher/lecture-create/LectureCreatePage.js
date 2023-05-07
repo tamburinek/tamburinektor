@@ -1,5 +1,5 @@
 import styles from './LectureCreatePage.module.scss'
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import logo from "../../../assets/png/logo.png";
 
 import {useEffect, useState} from "react";
@@ -15,15 +15,15 @@ import LectureApi from "../../../services/lectureApi";
 
 export const LectureCreatePage = () => {
 
+    //methods for location
+    const location = useLocation();
+    const params = new URLSearchParams(location.search)
     const [createModal, setCreateModal] = useState(false);
     const [activeName, setActiveName] = useState("definition");
     const [editMaterialVisible, setMaterialVisible] = useState(false)
-
     const [materialIndex, setMaterialIndex] = useState(undefined)
-
     const activeDiv = styles.categoryItem + " " + styles.active
     const nonActiveDiv = styles.categoryItem
-
     const [definitions, setDefinitions] = useState([])
     const [images, setImages] = useState([])
     const [questions, setQuestions] = useState([])
@@ -50,33 +50,38 @@ export const LectureCreatePage = () => {
         return (<BoxItem key={quiz.id} type={activeName} add={() => addItem(quiz.id, activeName, quiz.name)} edit={() => editMaterial(quiz.id)} item={quiz.name}/>)
     })
 
+    const fetchMat = () => {
+        fetchDef()
+    }
+
     const fetchDef = () => {
         MaterialsListApi.getAllDefinitions().then(response => {
             setDefinitions(response.data)
-        })
+        }).then(fetchImages)
     }
 
     const fetchImages = () => {
         MaterialsListApi.getAllImages().then(response => {
             setImages(response.data)
-        })
+        }).then(fetchQuestions)
     }
 
     const fetchQuestions = () => {
         MaterialsListApi.getAllQuestions().then(response => {
             setQuestions(response.data)
-        })
+        }).then(fetchTasks)
     }
 
     const fetchTasks = () => {
         MaterialsListApi.getAllTasks().then(response => {
             setTasks(response.data)
-        })
+        }).then(fetchQuizes)
     }
 
     const fetchQuizes = () => {
         MaterialsListApi.getAllQuizes().then(response => {
             setQuizes(response.data)
+            setFetched(true)
         })
     }
 
@@ -130,31 +135,94 @@ export const LectureCreatePage = () => {
         <PaperItem key={item.id} remove={() => removeItem(item.id)} type={item.lectureType} item={item.name}/>
     );
 
+    let addLectureItem = (id, type) => {
+        let helper = paperItems
+        if (type === "definition"){
+            for (const definition of definitions) {
+                if (definition.id === id){
+                    helper.push({id:id, lectureType:type, name:definition.description})
+                }
+            }
+        } else if (type === "image"){
+            for (const image of images) {
+                if (image.id === id){
+                    helper.push({id:id, lectureType:type, name:image.description})
+                }
+            }
+        } else if (type === "question"){
+            for (const question of questions) {
+                if (question.id === id){
+                    helper.push({id:id, lectureType:type, name:question.questionText})
+                }
+            }
+        } else if (type === "task"){
+            for (const task of tasks) {
+                if (task.id === id){
+                    helper.push({id:id, lectureType:type, name:task.question})
+                }
+            }
+        } else if (type === "quiz"){
+            for (const quiz of quizes) {
+                if (quiz.id === id){
+                    helper.push({id:id, lectureType:type, name:quiz.name})
+                }
+            }
+        }
+        setPaperItems(helper)
+        if (rerender === true){
+            setrerender(false)
+        } else {
+            setrerender(true)
+        }
+    }
+
+    let setLecture = (id) => {
+        LectureApi.getLectureById(id).then((res) => {
+            setLectureDescription(res.data.description)
+            for (const item of res.data.lectureEntities) {
+                addLectureItem(item.id, item.lectureType)
+            }
+        })
+    }
+
+    const [fetched, setFetched] = useState(false)
+
     useEffect(() => {
         if (createModal === true || editMaterialVisible === true){
             return
         }
-        fetchDef()
-        fetchImages()
-        fetchQuestions()
-        fetchTasks()
-        fetchQuizes()
+        fetchMat()
     }, [createModal, editMaterialVisible])
 
-
+    useEffect(() => {
+        if (fetched === false){
+            return
+        }
+        if (params.get("id") !== undefined){
+            setButtonText("Aktualizovat")
+            setLecture(params.get("id"))
+        }
+    }, [fetched])
 
     let confirm = (e) => {
         e.preventDefault()
         if (lectureDescription.length < 1){
             return
         }
-        LectureApi.createLecture(lectureDescription, paperItems).then((res) => {
-            setLectureDescription("")
-            setPaperItems([])
-        })
+        if (params.get("id") !== undefined){
+            LectureApi.updateLecture(params.get("id"), lectureDescription, paperItems).then(() => {
+                window.location = "/dashboard"
+            })
+        } else {
+            LectureApi.createLecture(lectureDescription, paperItems).then((res) => {
+                setLectureDescription("")
+                setPaperItems([])
+            })
+        }
     }
 
     const [lectureDescription, setLectureDescription] = useState("")
+    const [buttonText, setButtonText] = useState("Vytvořit lekci")
 
     return (
         <div className={styles.main}>
@@ -223,7 +291,7 @@ export const LectureCreatePage = () => {
                 <div className={styles.paper} autoFocus={rerender}>
                     {listPaperItems}
                 </div>
-                <button onClick={confirm} className={styles.create}>Vytvořit lekci</button>
+                <button onClick={confirm} className={styles.create}>{buttonText}</button>
                 {editMaterialVisible === true && <EditMaterialModal id={materialIndex} type={activeName} onClose={() => setMaterialVisible(false)}/>}
             </div>
         </div>

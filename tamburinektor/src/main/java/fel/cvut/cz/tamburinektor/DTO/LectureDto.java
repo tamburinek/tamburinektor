@@ -10,6 +10,8 @@ import java.util.List;
 @Setter
 public class LectureDto {
 
+    private Long id;
+
     private String description;
 
     private List<LectureEntityDto> lectureEntities;

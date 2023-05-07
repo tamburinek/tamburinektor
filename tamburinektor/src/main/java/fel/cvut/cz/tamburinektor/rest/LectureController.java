@@ -2,6 +2,7 @@ package fel.cvut.cz.tamburinektor.rest;
 
 import fel.cvut.cz.tamburinektor.DTO.LectureDto;
 import fel.cvut.cz.tamburinektor.DTO.LectureEntityDto;
+import fel.cvut.cz.tamburinektor.mappers.LectureEntityMapper;
 import fel.cvut.cz.tamburinektor.mappers.LectureMapper;
 import fel.cvut.cz.tamburinektor.model.User;
 import fel.cvut.cz.tamburinektor.model.lecture.Lecture;
@@ -18,14 +19,17 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -40,19 +44,22 @@ public class LectureController {
 
     private final LectureMapper mapper;
 
+    private final LectureEntityMapper entityMapper;
+
     private final LectureEntityService lectureEntityService;
 
     @Autowired
-    public LectureController(LectureService lectureService, UserService userService, LectureMapper mapper, LectureEntityService lectureEntityService) {
+    public LectureController(LectureService lectureService, UserService userService, LectureMapper mapper, LectureEntityMapper entityMapper, LectureEntityService lectureEntityService) {
         this.lectureService = lectureService;
         this.userService = userService;
         this.mapper = mapper;
+        this.entityMapper = entityMapper;
         this.lectureEntityService = lectureEntityService;
     }
 
     @PreAuthorize("hasRole('ROLE_TEACHER')")
     @PostMapping(value = "/lecture", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createQuiz(@RequestBody LectureDto lectureDto){
+    public ResponseEntity<?> createLecture(@RequestBody LectureDto lectureDto){
         User user = userService.getCurrentUser();
         List<LectureEntity> entities = getAllEntitiesFromDto(lectureDto.getLectureEntities());
         Lecture lecture = mapper.toLecture(lectureDto, user, entities);
@@ -62,9 +69,50 @@ public class LectureController {
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    @GetMapping(value = "/lecture", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<LectureDto> getAllLecturesByMe(){
+        User user = userService.getCurrentUser();
+        List<LectureDto> result = new LinkedList<>();
+
+        List<Lecture> lectures = lectureService.getAllLecturesByUser(user);
+        for (Lecture lecture : lectures) {
+            List<LectureEntityDto> entityDtos = getAllDtosFromPojo(lecture.getLectureEntities());
+            result.add(mapper.toDto(lecture, entityDtos));
+        }
+        return result;
+    }
+
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    @GetMapping(value = "/lecture/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public LectureDto getLectureById(@PathVariable Long id){
+        Lecture lecture = lectureService.getById(id);
+        List<LectureEntityDto> dtos = lecture.getLectureEntities().stream().map(entityMapper::toDto).collect(Collectors.toList());
+        return mapper.toDto(lecture, dtos);
+    }
+
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    @PatchMapping(value = "/lecture/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateLecture(@PathVariable Long id, @RequestBody LectureDto lectureDto){
+        List<LectureEntity> entities = getAllEntitiesFromDto(lectureDto.getLectureEntities());
+        Lecture lecture = lectureService.getById(id);
+        lecture.setDescription(lectureDto.getDescription());
+        lecture.setLectureEntities(entities);
+        lectureService.createOrUpdateLecture(lecture);
+        log.info("Lecture updated {}", lecture.getDescription());
+        final HttpHeaders headers = RestUtil.createLocationHeaderNewUri("/lecture/{id}", lecture.getId());
+        return new ResponseEntity<>(headers, HttpStatus.OK);
+    }
+
     private List<LectureEntity> getAllEntitiesFromDto(List<LectureEntityDto> dtos){
         List<LectureEntity> entities = new LinkedList<>();
         dtos.forEach(dto -> entities.add(lectureEntityService.getEntityById(dto.getId())));
         return entities;
+    }
+
+    private List<LectureEntityDto> getAllDtosFromPojo(List<LectureEntity> entities){
+        List<LectureEntityDto> result = new LinkedList<>();
+        entities.forEach(lectureEntity -> result.add(entityMapper.toDto(lectureEntity)));
+        return result;
     }
 }

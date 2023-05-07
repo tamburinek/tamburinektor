@@ -16,8 +16,36 @@ const createLecture = (description, entities) => {
     }));
 }
 
+const getAllLectures = () => {
+    console.log("trying to get all lectures")
+    return (axios.get(`${baseUrl}/lecture`,{headers}).then(response => {
+        console.log(response)
+        return response
+    }));
+}
+
+const getLectureById = (id) => {
+    console.log("trying to get lecture " + id)
+    return (axios.get(`${baseUrl}/lecture/${id}`,{headers}).then(response => {
+        console.log(response)
+        return response
+    }));
+}
+
+const updateLecture = (id, description, entities) => {
+    console.log("trying to update lecture: " + description + " " + entities.length)
+    return (axios.patch(`${baseUrl}/lecture/${id}`,
+        {
+            "description": description,
+            "lectureEntities": entities
+        },{headers}).then(response => {
+        console.log(response)
+        return response
+    }));
+}
+
 
 const MaterialsApi = {
-    createLecture
+    createLecture, getAllLectures, getLectureById, updateLecture
 };
 export default MaterialsApi;

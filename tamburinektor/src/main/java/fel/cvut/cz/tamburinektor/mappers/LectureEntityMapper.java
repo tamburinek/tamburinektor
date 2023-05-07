@@ -9,7 +9,10 @@ import org.springframework.stereotype.Component;
 public class LectureEntityMapper {
 
     public LectureEntityDto toDto(LectureEntity lectureEntity) {
-        return null;
+        LectureEntityDto dto = new LectureEntityDto();
+        dto.setId(lectureEntity.getId());
+        dto.setLectureType(lectureEntity.getType().getName());
+        return dto;
     }
 
     public LectureEntity toLectureEntity(LectureEntityDto lectureEntityDto) {
