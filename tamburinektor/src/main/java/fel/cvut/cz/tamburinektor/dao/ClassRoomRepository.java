@@ -14,4 +14,6 @@ public interface ClassRoomRepository extends JpaRepository<Classroom, Integer> {
     Classroom getClassroomByName(String name);
 
     List<Classroom> getAllByCreateBy(User user);
+
+    Classroom getById(Long id);
 }

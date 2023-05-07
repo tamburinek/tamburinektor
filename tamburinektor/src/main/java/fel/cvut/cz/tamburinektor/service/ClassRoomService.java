@@ -3,11 +3,13 @@ package fel.cvut.cz.tamburinektor.service;
 import fel.cvut.cz.tamburinektor.dao.ClassRoomRepository;
 import fel.cvut.cz.tamburinektor.model.Classroom;
 import fel.cvut.cz.tamburinektor.model.User;
+import fel.cvut.cz.tamburinektor.model.lecture.Lecture;
 import fel.cvut.cz.tamburinektor.model.lecture.LectureEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -29,6 +31,10 @@ public class ClassRoomService {
         return classRoomRepository.getAllByCreateBy(user).size();
     }
 
+    public List<Classroom> getClassesCreatedBy(User user){
+        return classRoomRepository.getAllByCreateBy(user);
+    }
+
 
     public Classroom getLastClass(User user) {
         List<Classroom> entities = classRoomRepository.getAllByCreateBy(user);
@@ -42,5 +48,26 @@ public class ClassRoomService {
             }
         }
         return last;
+    }
+
+
+    public Classroom getClassById(Long id) {
+        return classRoomRepository.getById(id);
+    }
+
+
+    public void addLectureToClass(Classroom classroom, Lecture lecture) {
+        List<Lecture> lectures = classroom.getLectures();
+        lectures.add(lecture);
+        classroom.setLectures(lectures);
+        classRoomRepository.save(classroom);
+    }
+
+
+    public void removeLectureFromClass(Classroom classroom, Lecture lecture) {
+        List<Lecture> lectures = classroom.getLectures().stream()
+                .filter(lecture1 -> lecture1.getId() != lecture.getId()).collect(Collectors.toList());
+        classroom.setLectures(lectures);
+        classRoomRepository.save(classroom);
     }
 }

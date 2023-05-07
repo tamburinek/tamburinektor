@@ -1,0 +1,147 @@
+.logo{
+  width: 80px;
+  height: 80px;
+  border-radius: 20%;
+  position: absolute;
+  left: 60px;
+  top: 60px;
+  z-index: 100;
+  box-shadow: 0px 0px 10px 5px rgb(142, 141, 138, 0.5);
+  cursor: pointer;
+}
+
+.test{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main{
+  width: 100vw;
+  height: 100vh;
+}
+
+.classes{
+  width: 15%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.className{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 5%;
+  color: #E98074;
+  font-weight: bold;
+}
+
+.classList{
+  width: 90%;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid #E98074;
+  border-radius: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  overflow: auto;
+}
+
+.classItem{
+  color: #E98074;
+  cursor: pointer;
+  width: 90%;
+  min-height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.right{
+  width: 85%;
+  height: 100%;
+  display: flex;
+}
+
+.users{
+  height: 100%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightFromUsers{
+  height: 100%;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.lectures{
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.classLectures{
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.classLecturesItems{
+  width: 90%;
+  height: 90%;
+  border: 1px solid #E98074;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  overflow-y: scroll;
+}
+
+.allLectures{
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tests{
+  height: 50%;
+  width: 100%;
+  background-color: green;
+}
+
+.active{
+  color: #D8C3A5;
+  background-color: #E98074;
+}
+
+.usersList{
+  height: 85%;
+  width: 90%;
+  border: 1px solid #E98074;
+  border-radius: 40px;
+}

@@ -5,9 +5,7 @@ import {Link, useLocation} from "react-router-dom";
 import logo from "../../../assets/png/logo.png";
 import {BoxItem} from "../lecture-create/box-item/BoxItem";
 import {TestItem} from "./test-item/TestItem";
-import MaterialsListApi from "../../../services/materialsListApi";
 import TestApi from "../../../services/testApi";
-import LectureApi from "../../../services/lectureApi";
 
 export const TestCreatePage = () => {
 

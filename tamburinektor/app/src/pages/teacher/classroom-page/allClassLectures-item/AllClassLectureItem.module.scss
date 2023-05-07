@@ -1,0 +1,26 @@
+.main{
+  width: 90%;
+  min-height: 15%;
+  background-color: rgb(233, 128, 116, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 10px;
+  border-radius: 20px;
+  color: #505050;
+  margin-bottom: 10px;
+  overflow-y: scroll;
+}
+
+.plus{
+  cursor: pointer;
+  height: 40%;
+  aspect-ratio: 1/1;
+}
+
+.text{
+  width: 80%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: scroll;
+}

@@ -26,7 +26,12 @@ const getLastClass = () => {
     return (axios.get(`${baseUrl}/class/last`,{headers}));
 }
 
+const getAllClassesCreated = () => {
+    console.log("getting all classes")
+    return (axios.get(`${baseUrl}/class`,{headers}));
+}
+
 const ClassRoomApi = {
-    createClass, getCountClass, getLastClass
+    createClass, getCountClass, getLastClass, getAllClassesCreated
 };
 export default ClassRoomApi;
