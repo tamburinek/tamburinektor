@@ -5,10 +5,12 @@ import fel.cvut.cz.tamburinektor.model.Classroom;
 import fel.cvut.cz.tamburinektor.model.User;
 import fel.cvut.cz.tamburinektor.model.lecture.Lecture;
 import fel.cvut.cz.tamburinektor.model.lecture.LectureEntity;
+import fel.cvut.cz.tamburinektor.model.test.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -66,8 +68,24 @@ public class ClassRoomService {
 
     public void removeLectureFromClass(Classroom classroom, Lecture lecture) {
         List<Lecture> lectures = classroom.getLectures().stream()
-                .filter(lecture1 -> lecture1.getId() != lecture.getId()).collect(Collectors.toList());
+                .filter(lecture1 -> !Objects.equals(lecture1.getId(), lecture.getId())).collect(Collectors.toList());
         classroom.setLectures(lectures);
+        classRoomRepository.save(classroom);
+    }
+
+
+    public void addTestToClass(Classroom classroom, Test test) {
+        List<Test> tests = classroom.getTests();
+        tests.add(test);
+        classroom.setTests(tests);
+        classRoomRepository.save(classroom);
+    }
+
+
+    public void removeTestFromClass(Classroom classroom, Test test) {
+        List<Test> tests = classroom.getTests().stream()
+                .filter(test1 -> !Objects.equals(test1.getId(), test.getId())).collect(Collectors.toList());
+        classroom.setTests(tests);
         classRoomRepository.save(classroom);
     }
 }

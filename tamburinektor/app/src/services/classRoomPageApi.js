@@ -31,8 +31,35 @@ const getAllLecturesOfClass = (id) => {
     }));
 }
 
+const addTestToClass = (id, test) => {
+    console.log("adding test " + test + " to class " + id)
+    return (axios.post(`${baseUrl}/class/${id}/test/${test}`,
+        {
+            "lectureId": test
+        },{headers}).then(response => {
+        console.log(response)
+        return response
+    }));
+}
+
+const removeTestFromCLass = (id, test) => {
+    console.log("removing test " + test + " to class " + id)
+    return (axios.delete(`${baseUrl}/class/${id}/test/${test}`,{headers}).then(response => {
+        console.log(response)
+        return response
+    }));
+}
+
+const getAllTestsOfClass = (id) => {
+    console.log("geting test from class " + id)
+    return (axios.get(`${baseUrl}/class/${id}/test`,{headers}).then(response => {
+        console.log(response)
+        return response
+    }));
+}
+
 
 const ClassRoomApi = {
-    addLectureToClass, removeLectureFromClass, getAllLecturesOfClass
+    addLectureToClass, removeLectureFromClass, getAllLecturesOfClass, addTestToClass, removeTestFromCLass, getAllTestsOfClass
 };
 export default ClassRoomApi;

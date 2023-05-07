@@ -7,6 +7,7 @@ import LectureApi from "../../../services/lectureApi";
 import {AllLectureItem} from "./allLectures-item/AllLectureItem";
 import {AllClassLectureItem} from "./allClassLectures-item/AllClassLectureItem";
 import ClassRoomPageApi from "../../../services/classRoomPageApi";
+import TestApi from "../../../services/testApi";
 
 
 export const ClassRoomPage = () => {
@@ -19,6 +20,7 @@ export const ClassRoomPage = () => {
     const nonActiveDiv = styles.classItem
 
     const [lecturesOfClass, setLectureClass] = useState([])
+    const [testsOfClass, setTestsOfClass] = useState([])
 
     let listClasses = classes.map((classItem) => {
         return <div key={classItem.id} id={classItem.id} onClick={() => {
@@ -29,11 +31,26 @@ export const ClassRoomPage = () => {
     const [lecturesAll, setLecturesAll] = useState([])
     let listAllLectures = lecturesAll.map(item => {
         return <AllLectureItem key={item.id} id={item.id} description={item.description}
-                               lectures={lecturesOfClass} click={() => addToClass(item.id, item.description)}/>;
+                               lectures={lecturesOfClass} click={() => addToClassLecture(item.id, item.description)}/>;
     })
 
-    const classContains = (id) => {
+    const [testsAll, setTestsAll] = useState([])
+    let listAllTests = testsAll.map(item => {
+        return <AllLectureItem key={item.id} id={item.id} description={item.description}
+                               lectures={lecturesOfClass} click={() => addToClassTest(item.id, item.description)}/>;
+    })
+
+    const classContainsLecture = (id) => {
         for (const item of lecturesOfClass) {
+            if (item.id === id){
+                return true
+            }
+        }
+        return false
+    }
+
+    const classContainsTest = (id) => {
+        for (const item of testsOfClass) {
             if (item.id === id){
                 return true
             }
@@ -44,12 +61,20 @@ export const ClassRoomPage = () => {
     let changeActive = (id) => {
         setActiveClass(id)
         setLectureClass([])
+        setTestsOfClass([])
         ClassRoomPageApi.getAllLecturesOfClass(id).then((res) => {
             let helper = []
             for (const item of res.data) {
                 helper.push({id:item.id, description:item.description})
             }
             setLectureClass(helper)
+        })
+        ClassRoomPageApi.getAllTestsOfClass(id).then((res) => {
+            let helper = []
+            for (const item of res.data) {
+                helper.push({id:item.id, description:item.description})
+            }
+            setTestsOfClass(helper)
         })
         if (rerender === true){
             setRerender(false)
@@ -58,8 +83,8 @@ export const ClassRoomPage = () => {
         }
     }
 
-    let addToClass = (id, description) => {
-        if (classContains(id) || activeClass === 0){
+    let addToClassLecture = (id, description) => {
+        if (classContainsLecture(id) || activeClass === 0){
             return
         }
         let helper = lecturesOfClass
@@ -75,13 +100,35 @@ export const ClassRoomPage = () => {
         }
     }
 
+    let addToClassTest = (id, description) => {
+        if (classContainsTest(id) || activeClass === 0){
+            return
+        }
+        let helper = testsOfClass
+        helper.push({id:id, description:description})
+        ClassRoomPageApi.addTestToClass(activeClass, id).then(res => {
+            console.log(res)
+            setTestsOfClass(helper)
+        })
+        if (rerender === true){
+            setRerender(false)
+        } else {
+            setRerender(true)
+        }
+    }
+
 
     let listClassLectures = lecturesOfClass.map(item => {
         return <AllClassLectureItem key={item.id} id={item.id} description={item.description}
-                               click={() => removeFromClass(item.id, item.description)}/>;
+                               click={() => removeFromClassLecture(item.id)}/>;
     })
 
-    let removeFromClass = (id, description) => {
+    let listTestClasses = testsOfClass.map(item => {
+        return <AllClassLectureItem key={item.id} id={item.id} description={item.description}
+                                    click={() => removeFromClassTest(item.id)}/>;
+    })
+
+    let removeFromClassLecture = (id) => {
         ClassRoomPageApi.removeLectureFromClass(activeClass, id).then(res => {
             console.log(res)
             let helper = []
@@ -99,12 +146,33 @@ export const ClassRoomPage = () => {
         })
     }
 
+    let removeFromClassTest = (id) => {
+        ClassRoomPageApi.removeTestFromCLass(activeClass, id).then(res => {
+            console.log(res)
+            let helper = []
+            for (const item of testsOfClass) {
+                if (item.id !== id){
+                    helper.push({id:item.id, description:item.description})
+                }
+            }
+            setTestsOfClass(helper)
+            if (rerender === true){
+                setRerender(false)
+            } else {
+                setRerender(true)
+            }
+        })
+    }
+
     useEffect(() => {
         ClassRoomApi.getAllClassesCreated().then((res) => {
             setClasses(res.data)
         })
         LectureApi.getAllLectures().then(res => {
             setLecturesAll(res.data)
+        })
+        TestApi.getAllTests().then(res => {
+            setTestsAll(res.data)
         })
     },[])
 
@@ -128,7 +196,7 @@ export const ClassRoomPage = () => {
                     <div className={styles.rightFromUsers}>
                         <div className={styles.lectures}>
                             <div className={styles.classLectures}>
-                                <p className={styles.className}>Lekce</p>
+                                <p className={styles.className}>Lekce, které vidí studenti</p>
                                 <div className={styles.classLecturesItems} autoFocus={rerender}>
                                     {listClassLectures}
                                 </div>
@@ -140,12 +208,18 @@ export const ClassRoomPage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className={styles.tests}>
-                            <div className={styles.classTests}>
-                                <p>Testy</p>
+                        <div className={styles.lectures}>
+                            <div className={styles.classLectures}>
+                                <p className={styles.className}>Testy, které vidí studenti</p>
+                                <div className={styles.classLecturesItems} autoFocus={rerender}>
+                                    {listTestClasses}
+                                </div>
                             </div>
-                            <div className={styles.allTests}>
-
+                            <div className={styles.allLectures}>
+                                <p className={styles.className}>Všechny testy</p>
+                                <div className={styles.classLecturesItems}>
+                                    {activeClass !== 0 && listAllTests}
+                                </div>
                             </div>
                         </div>
                     </div>

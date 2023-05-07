@@ -6,12 +6,15 @@ import fel.cvut.cz.tamburinektor.DTO.TestDto;
 import fel.cvut.cz.tamburinektor.DTO.UsernameDto;
 import fel.cvut.cz.tamburinektor.mappers.ClassRoomMapper;
 import fel.cvut.cz.tamburinektor.mappers.LectureMapper;
+import fel.cvut.cz.tamburinektor.mappers.TestMapper;
 import fel.cvut.cz.tamburinektor.mappers.UsernameMapper;
 import fel.cvut.cz.tamburinektor.model.Classroom;
 import fel.cvut.cz.tamburinektor.model.User;
 import fel.cvut.cz.tamburinektor.model.lecture.Lecture;
+import fel.cvut.cz.tamburinektor.model.test.Test;
 import fel.cvut.cz.tamburinektor.service.ClassRoomService;
 import fel.cvut.cz.tamburinektor.service.LectureService;
+import fel.cvut.cz.tamburinektor.service.TestService;
 import fel.cvut.cz.tamburinektor.service.UserService;
 import fel.cvut.cz.tamburinektor.util.RestUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -52,14 +55,20 @@ public class ClassRoomController {
 
     private final LectureMapper lectureMapper;
 
+    private final TestMapper testMapper;
+
+    private final TestService testService;
+
     @Autowired
-    public ClassRoomController(ClassRoomService classRoomService, ClassRoomMapper mapper, UserService userService, UsernameMapper usernameMapper, LectureService lectureService, LectureMapper lectureMapper) {
+    public ClassRoomController(ClassRoomService classRoomService, ClassRoomMapper mapper, UserService userService, UsernameMapper usernameMapper, LectureService lectureService, LectureMapper lectureMapper, TestMapper testMapper, TestService testService) {
         this.classRoomService = classRoomService;
         this.mapper = mapper;
         this.userService = userService;
         this.usernameMapper = usernameMapper;
         this.lectureService = lectureService;
         this.lectureMapper = lectureMapper;
+        this.testMapper = testMapper;
+        this.testService = testService;
     }
 
     @PreAuthorize("hasRole('ROLE_TEACHER')")
@@ -104,10 +113,12 @@ public class ClassRoomController {
                 .map(lecture -> lectureMapper.toDto(lecture, null)).collect(Collectors.toList());
     }
 
-    //todo
-    @GetMapping(value = "/class/{id}/tests", produces = MediaType.APPLICATION_JSON_VALUE)
+
+    @GetMapping(value = "/class/{id}/test", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<TestDto> getTestsFromClass(@PathVariable Long id){
-        return null;
+        Classroom classroom = classRoomService.getClassById(id);
+        return classroom.getTests().stream()
+                .map(testMapper::toDto).collect(Collectors.toList());
     }
 
 
@@ -133,6 +144,24 @@ public class ClassRoomController {
         Classroom classroom = classRoomService.getClassById(id);
         Lecture lecture = lectureService.getById(lectureId);
         classRoomService.removeLectureFromClass(classroom, lecture);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    @PostMapping(value = "/class/{id}/test/{testId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> addTestToClass(@PathVariable Long id, @PathVariable Long testId){
+        Classroom classroom = classRoomService.getClassById(id);
+        Test test = testService.getById(testId);
+        classRoomService.addTestToClass(classroom, test);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasRole('ROLE_TEACHER')")
+    @DeleteMapping(value = "/class/{id}/test/{testId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> deleteTestFromClass(@PathVariable Long id, @PathVariable Long testId){
+        Classroom classroom = classRoomService.getClassById(id);
+        Test test = testService.getById(testId);
+        classRoomService.removeTestFromClass(classroom, test);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }
