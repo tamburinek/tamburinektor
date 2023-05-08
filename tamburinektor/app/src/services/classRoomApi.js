@@ -48,7 +48,12 @@ const addMeToClass = (id, password) => {
     },{headers}));
 }
 
+const getAllStudentsOfClass = (id) => {
+    console.log("getting all students of class " + id)
+    return (axios.get(`${baseUrl}/class/${id}/users`,{headers}));
+}
+
 const ClassRoomApi = {
-    createClass, getCountClass, getLastClass, getAllClassesCreated, getAllClasses, getMyClasses, addMeToClass
+    createClass, getCountClass, getLastClass, getAllClassesCreated, getAllClasses, getMyClasses, addMeToClass, getAllStudentsOfClass
 };
 export default ClassRoomApi;

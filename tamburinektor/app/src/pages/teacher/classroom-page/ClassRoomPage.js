@@ -21,6 +21,7 @@ export const ClassRoomPage = () => {
 
     const [lecturesOfClass, setLectureClass] = useState([])
     const [testsOfClass, setTestsOfClass] = useState([])
+    const [studentsOfClass, setStudents] = useState([])
 
     let listClasses = classes.map((classItem) => {
         return <div key={classItem.id} id={classItem.id} onClick={() => {
@@ -76,6 +77,9 @@ export const ClassRoomPage = () => {
             }
             setTestsOfClass(helper)
         })
+        ClassRoomApi.getAllStudentsOfClass(id).then((res) => {
+            setStudents(res.data)
+        })
         if (rerender === true){
             setRerender(false)
         } else {
@@ -126,6 +130,10 @@ export const ClassRoomPage = () => {
     let listTestClasses = testsOfClass.map(item => {
         return <AllClassLectureItem key={item.id} id={item.id} description={item.description}
                                     click={() => removeFromClassTest(item.id)}/>;
+    })
+
+    let listUsers = studentsOfClass.map(item => {
+        return <div className={styles.user}>{item.firstName + " " + item.lastName}</div>;
     })
 
     let removeFromClassLecture = (id) => {
@@ -190,7 +198,7 @@ export const ClassRoomPage = () => {
                     <div className={styles.users}>
                         <p className={styles.className}>Uživatelé</p>
                         <div className={styles.usersList}>
-
+                            {listUsers}
                         </div>
                     </div>
                     <div className={styles.rightFromUsers}>
