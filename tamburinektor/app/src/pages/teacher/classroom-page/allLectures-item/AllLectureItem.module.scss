@@ -1,24 +1,37 @@
 .main{
   width: 85%;
   min-height: 15%;
-  background-color: rgb(233, 128, 116, 0.5);
+  background-color: rgb(233, 128, 116, 0.3);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-inline: 10px;
   border-radius: 20px;
   color: #505050;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   overflow-y: scroll;
+  box-shadow: 0px 0px 8px #E98074;
 }
 
 .plus{
   cursor: pointer;
+  height: 50%;
 }
 
 .text{
-  width: 80%;
+  width: 70%;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: scroll;
+}
+
+.buttons{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.play{
+  width: 40%;
+  cursor: pointer;
 }

@@ -11,6 +11,7 @@ export const TaskForm = (props) => {
     const [answer, setAnswer] = useState('');
     const [questionImage, setQuestionImage] = useState('');
     const [answerImage, setAnswerImage] = useState('');
+    const [buttonText, setButtonText] = useState("Vytvořit");
 
     let addImage = (event) => {
         event.preventDefault()
@@ -57,6 +58,7 @@ export const TaskForm = (props) => {
                 setQuestionImage(response.data.questionImage)
                 setAnswerImage(response.data.answerImage)
             })
+            setButtonText("Aktualizovat")
         }
     }, [props.id])
 
@@ -77,7 +79,7 @@ export const TaskForm = (props) => {
                 <button onClick={addImage2} className={styles.image}>{text2}</button>
                 {text2 === "Odstranit obrázek" && <input onChange={(e) => {
                     setAnswerImage(e.target.value)}} value={answerImage} className={styles.small} type={"text"}/>}
-                <button onClick={confirm} className={styles.add}>Přídat</button>
+                <button onClick={confirm} className={styles.add}>{buttonText}</button>
             </form>
         </div>
     )

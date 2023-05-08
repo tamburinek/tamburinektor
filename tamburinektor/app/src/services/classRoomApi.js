@@ -31,7 +31,24 @@ const getAllClassesCreated = () => {
     return (axios.get(`${baseUrl}/class`,{headers}));
 }
 
+const getAllClasses = () => {
+    console.log("getting all classes")
+    return (axios.get(`${baseUrl}/class/all`,{headers}));
+}
+
+const getMyClasses = () => {
+    console.log("getting my classes")
+    return (axios.get(`${baseUrl}/class/my`,{headers}));
+}
+
+const addMeToClass = (id, password) => {
+    console.log("add me to class " + id + " " + password)
+    return (axios.post(`${baseUrl}/class/${id}`, {
+        password:password
+    },{headers}));
+}
+
 const ClassRoomApi = {
-    createClass, getCountClass, getLastClass, getAllClassesCreated
+    createClass, getCountClass, getLastClass, getAllClassesCreated, getAllClasses, getMyClasses, addMeToClass
 };
 export default ClassRoomApi;

@@ -35,7 +35,9 @@ export const LectionSection = () => {
             </Link>
             {createModalVisible === true && <CreateMaterialModal onClose={() => setCreateVisible(false)}/>}
             <LastSquare text={lastDescr}/>
-            <Link><GraphSquare text={"TODO"}/></Link>
+            <Link><GraphSquare text={"Toto je stránka pro lekce. Tady lze vytvořit novou lekci (nejprve je potřeba vytvořit " +
+                "materiály v pravém dolním rohu nebo přímo při vytváření lekce). Zobrazit vše ukáže všechny lekce, kde " +
+                "je lze spustit nebo aktualizovat. Buňka vpravo nahoře ukazuje poslední vytvořenou lekci. "}/></Link>
         </div>
     )
 }

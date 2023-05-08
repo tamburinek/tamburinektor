@@ -66,7 +66,7 @@ public class UserController {
         User user = userMapper.toUser(userDTO);
         user.setPassword(encoder.encode(userDTO.getPassword()));
         userService.createUser(user);
-        log.info("New user created {}", user);
+        log.info("New user created {}", user.getUsername());
         final HttpHeaders headers = RestUtil.createLocationHeaderNewUri("/users/{username}", user.getUsername());
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }

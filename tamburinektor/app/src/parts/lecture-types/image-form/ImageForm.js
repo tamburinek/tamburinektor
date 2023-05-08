@@ -8,6 +8,8 @@ export const ImageForm = (props) => {
     const [description, setDescription] = useState('');
     const [imageUrl, setImage] = useState('');
 
+    const [buttonText, setButtonText] = useState("Přidat");
+
     let confirm = (event) => {
         event.preventDefault()
         if (props.id !== undefined){
@@ -28,6 +30,7 @@ export const ImageForm = (props) => {
                 setDescription(response.data.description)
                 setImage(response.data.imageUrl)
             })
+            setButtonText("Aktualizovat")
         }
     }, [props.id])
 
@@ -41,7 +44,7 @@ export const ImageForm = (props) => {
                 <label className={styles.label}>Odkaz</label>
                 <input value={imageUrl} onChange={(e) => {
                     setImage(e.target.value)}} className={styles.link} type={"text"}/>
-                <button onClick={confirm} className={styles.add}>Přídat</button>
+                <button onClick={confirm} className={styles.add}>{buttonText}</button>
             </form>
         </div>
     )

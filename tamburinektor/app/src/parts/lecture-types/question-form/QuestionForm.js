@@ -6,6 +6,7 @@ import MaterialsListApi from "../../../services/materialsListApi";
 export const QuestionForm = (props) => {
 
     const [question, setQuestion] = useState('');
+    const [buttonText, setButtonText] = useState("Vytvořit");
     const [anonymous, setAnonymous] = useState(false);
 
     let confirm = (event) => {
@@ -32,6 +33,7 @@ export const QuestionForm = (props) => {
                 setQuestion(response.data.questionText)
                 setAnonymous(response.data.anonymous)
             })
+            setButtonText("Aktualizovat")
         }
     }, [props.id])
 
@@ -46,7 +48,7 @@ export const QuestionForm = (props) => {
                     <label className={styles.label} htmlFor={"anonymous"}>Anonymní</label>
                     <input onChange={handleChange} checked={anonymous} className={styles.check} type={"checkbox"} name={"anonymous"} id={"anonymous"}/>
                 </div>
-                <button onClick={confirm} className={styles.add}>Přídat</button>
+                <button onClick={confirm} className={styles.add}>{buttonText}</button>
             </form>
         </div>
     )

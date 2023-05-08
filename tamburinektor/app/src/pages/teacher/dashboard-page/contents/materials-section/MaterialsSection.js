@@ -49,7 +49,9 @@ export const MaterialsSection = () => {
         })
         MaterialsListApi.getLastCreated().then(response => {
             lastMaterialObject = response.data
-            //todo check if is null
+            if (response.data == null){
+                return
+            }
             handleData()
             console.log(lastMaterialObject)
         })
@@ -81,9 +83,12 @@ export const MaterialsSection = () => {
                 setMaterialEditVisible(false)
                 setViewAllModalVisible(true)
             }}/>}
-            <CountSquare text={definitionsCount + " materiálů"}/>
+            <CountSquare text={definitionsCount < 5 ? definitionsCount + " materiály" : definitionsCount + " materiálů"}/>
             <LastSquare text={lastMaterial}/>
-            <Link><GraphSquare text={"TODO"}/></Link>
+            <Link><GraphSquare text={"Toto je stránka pro materiály. Na této stránce lze vytvořit materiály, které lze " +
+                "následně použít při vytváření lekce. Counter vpravo ukazuje počet vytvořených materiálů a buňka " +
+                "vpravo nahoře ukazuje typ a název posledního vytvořenýho materiálu. Zobrazit vše ukáže všechny materiály " +
+                "rozdělené do skupin. Tam lze také materiály aktualizovat."}/></Link>
         </div>
     )
 }

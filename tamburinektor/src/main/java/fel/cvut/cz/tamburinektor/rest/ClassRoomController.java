@@ -1,6 +1,7 @@
 package fel.cvut.cz.tamburinektor.rest;
 
 import fel.cvut.cz.tamburinektor.DTO.ClassRoomDto;
+import fel.cvut.cz.tamburinektor.DTO.CredentialsDto;
 import fel.cvut.cz.tamburinektor.DTO.LectureDto;
 import fel.cvut.cz.tamburinektor.DTO.TestDto;
 import fel.cvut.cz.tamburinektor.DTO.UsernameDto;
@@ -163,5 +164,29 @@ public class ClassRoomController {
         Test test = testService.getById(testId);
         classRoomService.removeTestFromClass(classroom, test);
         return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/class/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<ClassRoomDto> getAllClasses(){
+        List<Classroom> classrooms = classRoomService.getAllClasses();
+        return classrooms.stream().map(mapper::toDto).collect(Collectors.toList());
+    }
+
+    @GetMapping(value = "/class/my", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<ClassRoomDto> getAllClassesIAmIn(){
+        User user = userService.getCurrentUser();
+        List<Classroom> classrooms = classRoomService.getAllClassesMy(user);
+        return classrooms.stream().map(mapper::toDto).collect(Collectors.toList());
+    }
+
+    @PreAuthorize("hasRole('ROLE_STUDENT')")
+    @PostMapping(value = "/class/{id}" , consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> addMeToClass(@PathVariable Long id, @RequestBody CredentialsDto dto){
+        User user = userService.getCurrentUser();
+        Classroom classroom = classRoomService.getClassById(id);
+        if (classRoomService.putUserToClass(classroom, user, dto.getPassword())){
+            return new ResponseEntity<>(null, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.CONFLICT);
     }
 }

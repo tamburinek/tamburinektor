@@ -1,20 +1,18 @@
 import styles from './AllClassLectureItem.module.scss'
 import {Link} from "react-router-dom";
 import close from "../../../../assets/png/close.png"
-
-import {useEffect, useState} from "react";
+import play from "../../../../assets/png/play.png";
 
 
 export const AllClassLectureItem = (props) => {
 
-    useEffect(() => {
-
-    },[])
-
     return(
         <div className={styles.main}>
             <span className={styles.text}>{props.description}</span>
-            <img onClick={props.click} className={styles.plus} src={close} alt={"close"}/>
+            <div className={styles.buttons}>
+                {props.type === "lection" && <img className={styles.play} src={play} alt={"play"}/>}
+                <img onClick={props.click} className={styles.plus} src={close} alt={"close"}/>
+            </div>
         </div>
     )
 }

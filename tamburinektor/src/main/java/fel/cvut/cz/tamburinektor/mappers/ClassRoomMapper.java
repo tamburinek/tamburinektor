@@ -12,8 +12,8 @@ public class ClassRoomMapper {
     public ClassRoomDto toDto(Classroom classroom) {
         ClassRoomDto dto = new ClassRoomDto();
         dto.setName(classroom.getName());
-        dto.setPassword(classroom.getPassword());
         dto.setId(classroom.getId());
+        dto.setUsername(classroom.getCreateBy().getFirstName() + " " + classroom.getCreateBy().getLastName());
         return dto;
     }
 

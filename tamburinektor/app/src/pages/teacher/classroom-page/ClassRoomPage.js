@@ -30,7 +30,7 @@ export const ClassRoomPage = () => {
 
     const [lecturesAll, setLecturesAll] = useState([])
     let listAllLectures = lecturesAll.map(item => {
-        return <AllLectureItem key={item.id} id={item.id} description={item.description}
+        return <AllLectureItem key={item.id} id={item.id} type={"lection"} description={item.description}
                                lectures={lecturesOfClass} click={() => addToClassLecture(item.id, item.description)}/>;
     })
 
@@ -119,7 +119,7 @@ export const ClassRoomPage = () => {
 
 
     let listClassLectures = lecturesOfClass.map(item => {
-        return <AllClassLectureItem key={item.id} id={item.id} description={item.description}
+        return <AllClassLectureItem key={item.id} id={item.id} type={"lection"} description={item.description}
                                click={() => removeFromClassLecture(item.id)}/>;
     })
 
@@ -181,7 +181,7 @@ export const ClassRoomPage = () => {
             <div className={styles.test}>
                 <img onClick={() => window.location = "/dashboard"} className={styles.logo} alt={"logo"} src={logo}/>
                 <div className={styles.classes}>
-                    <p className={styles.className}>Třídy</p>
+                    <p className={styles.className}>Vybrat třídu</p>
                     <div className={styles.classList}>
                         {listClasses}
                     </div>

@@ -24,7 +24,9 @@ export const ClassroomSection = () => {
             setCount(response.data)
         })
         ClassRoomApi.getLastClass().then((response) => {
-            //todo check if is null
+            if (response.data.name === "") {
+                return
+            }
             setLastName(response.data.name)
         })
     },[createModalVisible])
@@ -38,7 +40,9 @@ export const ClassroomSection = () => {
             <Link to={"/classroom"}><AllSquare text={"Správa tříd"}/></Link>
             <CountSquare text={countClass > 4 ? countClass + " tříd" : countClass + " třídy"}/>
             <LastSquare text={lastName}/>
-            <Link><GraphSquare text={"TODO"}/></Link>
+            <Link><GraphSquare text={"Toto je stránka pro správu třídy. Dá se zde vytvořit nová třída (nedá se měnit jméno ani heslo), counter vpravo " +
+                "ukazuje počet vytvořených tříd. V pravém horním rohu je název poslední vytvořené třídy a ve Správa tříd lze zpřístupnit lekce a testy pro studenty (do té doby jsou " +
+                "viditelné pouze pro učitele - stačí vybrat třídu z nabídky)"}/></Link>
         </div>
     )
 }

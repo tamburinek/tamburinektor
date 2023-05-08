@@ -31,7 +31,7 @@ public class Classroom {
     @Column
     private String password;
 
-    @Column(unique = true)
+    @Column
     private String name;
 
     @OneToOne

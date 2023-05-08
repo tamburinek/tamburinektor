@@ -36,7 +36,10 @@ export const TestSection = () => {
             </Link>
             {createModalVisible === true && <CreateQuestion onClose={() => setCreateVisible(false)}/>}
             <LastSquare text={lastTestText}/>
-            <Link><GraphSquare text={"TODO"}/></Link>
+            <Link><GraphSquare text={"Toto je stránka pro tvorbu a správu testů. Lze zde vytvořit test. K vytvoření " +
+                "testu je potřeba mít vytvořené testovací otázky, které lze vytvořit v buňce vpravo dole nebo přímo " +
+                "při tvorbě testu. Buňka vpravo nahoře ukazuje název posledního vytvořených testu. Zobrazit vše ukáže " +
+                "všechny testy, kde se dají také aktualizovat."}/></Link>
         </div>
     )
 }

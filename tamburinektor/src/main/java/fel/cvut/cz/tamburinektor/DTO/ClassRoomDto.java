@@ -13,4 +13,6 @@ public class ClassRoomDto {
     private String name;
 
     private String password;
+
+    private String username;
 }

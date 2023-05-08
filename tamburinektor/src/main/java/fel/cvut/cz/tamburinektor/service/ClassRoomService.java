@@ -88,4 +88,26 @@ public class ClassRoomService {
         classroom.setTests(tests);
         classRoomRepository.save(classroom);
     }
+
+
+    public List<Classroom> getAllClasses() {
+        return classRoomRepository.findAll();
+    }
+
+
+    public List<Classroom> getAllClassesMy(User user) {
+        return classRoomRepository.getAllByUsersContaining(user);
+    }
+
+
+    public boolean putUserToClass(Classroom classroom, User user, String password) {
+        if (Objects.equals(classroom.getPassword(), "") || classroom.getPassword().equals(password)){
+            List<User> users = classroom.getUsers();
+            users.add(user);
+            classroom.setUsers(users);
+            classRoomRepository.save(classroom);
+            return true;
+        }
+        return false;
+    }
 }

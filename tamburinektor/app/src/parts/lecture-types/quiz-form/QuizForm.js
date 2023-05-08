@@ -10,6 +10,7 @@ export const QuizForm = (props) => {
     const [answersCount, setAnswersCount] = useState(4);
 
     const [description, setDescription] = useState("");
+    const [buttonText, setButtonText] = useState("Vytvořit");
 
 
     const [question, setQuestion] = useState("");
@@ -111,6 +112,7 @@ export const QuizForm = (props) => {
                 setDescription(response.data.name)
                 setBoxItems(response.data.questions)
             })
+            setButtonText("Aktualizovat")
         }
     }, [props.id])
 
@@ -172,7 +174,7 @@ export const QuizForm = (props) => {
                         </div>
                     </div>
                 </div>
-                <button onClick={confirm} className={styles.add}>Přídat</button>
+                <button onClick={confirm} className={styles.add}>{buttonText}</button>
             </form>
         </div>
     )
