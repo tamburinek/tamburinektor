@@ -1,0 +1,147 @@
+.logo{
+  width: 80px;
+  height: 80px;
+  border-radius: 20%;
+  position: fixed;
+  left: 60px;
+  top: 60px;
+  z-index: 100;
+  box-shadow: 0px 0px 10px 5px rgb(142, 141, 138, 0.5);
+}
+
+.main{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.description{
+  height: 15%;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #E98074;
+}
+
+.question{
+  height: 75%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.questionCount{
+  height: 2%;
+  align-self: flex-end;
+  color: #8E8D8A;
+}
+
+.oneQuestion{
+  height: 58%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: large;
+  align-items: center;
+  color: #E98074;
+  font-weight: bold;
+}
+
+.answer{
+  height: 40%;
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.oneAnswer{
+  height: 45%;
+  width: 48%;
+  background-color: rgb(233, 128, 116, 0.2);
+  border: 1px solid #E98074;
+  color: #505050;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.buttons{
+  height: 10%;
+  width: 60%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.answerButton{
+  height: 70%;
+  aspect-ratio: 2/1;
+  background-color: rgb(97, 196, 84, 0.4);
+  border-radius: 30px;
+  border: 0px solid #61C454;
+  color: #505050;
+  font-weight: bold;
+  box-shadow: 0px 0px 4px #505050;
+}
+
+.answerButton:hover{
+  cursor: pointer;
+  background-color: rgb(97, 196, 84, 0.6);
+  box-shadow: 0px 0px 6px #61C454;
+}
+
+.exit{
+  height: 70%;
+  aspect-ratio: 2/1;
+  background-color: rgb(233, 128, 116, 0.4);
+  border-radius: 30px;
+  border: 0px solid #E98074;
+  color: #505050;
+  font-weight: bold;
+  box-shadow: 0px 0px 4px #505050;
+}
+
+.exit:hover{
+  cursor: pointer;
+  background-color: rgb(233, 128, 116, 0.6);
+  box-shadow: 0px 0px 6px #E98074;
+}
+
+.image{
+  height: 90%;
+}
+
+.userInput{
+  width: 100%;
+  text-align: center;
+  height: 15%;
+  border-radius: 30px;
+  border: 1px solid #E98074;
+  box-shadow: 0px 0px 4px #E98074;
+  background-color: rgb(233, 128, 116, 0.1);
+}
+
+.active{
+  background-color: rgb(233, 128, 116, 0.7);
+}
+
+.span{
+  width: 100%;
+  text-align: center;
+  color: #E98074;
+  font-weight: bold;
+}

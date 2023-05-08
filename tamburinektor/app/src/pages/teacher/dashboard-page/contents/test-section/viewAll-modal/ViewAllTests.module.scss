@@ -63,6 +63,7 @@
   padding-left: 5px;
   background-color: #EAE7DC;
   color: #8E8D8A;
+  visibility: hidden;
 }
 
 .filterName{
@@ -82,4 +83,5 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  visibility: hidden;
 }

@@ -8,7 +8,7 @@ import {
     RegistrationPage,
     TestCreatePage,
     LectureCreatePage,
-    ClassRoomPage
+    ClassRoomPage, TestStudentPage
 } from "./pages";
 
 import {Route, Routes} from "react-router-dom";
@@ -26,11 +26,14 @@ function App() {
             <Route exact path="/" element={<IndexPage/>}/>
             <Route exact path="/login" element={<LoginPage/>}/>
             <Route exact path="/register" element={<RegistrationPage/>}/>
-            {localStorage.getItem("role") === "ROLE_TEACHER" && <Route exact path="/dashboard" element={<DashboardPageTeacher/>}/>}
+
             {localStorage.getItem("role") === "ROLE_STUDENT" && <Route exact path="/dashboard" element={<DashboardPageStudent/>}/>}
-            <Route exact path="/test/creation" element={<TestCreatePage/>}/>
-            <Route exact path="/lecture/creation" element={<LectureCreatePage/>}/>
-            <Route exact path="/classroom" element={<ClassRoomPage/>}/>
+            {localStorage.getItem("role") === "ROLE_STUDENT" && <Route exact path="/test" element={<TestStudentPage/>}/>}
+
+            {localStorage.getItem("role") === "ROLE_TEACHER" && <Route exact path="/dashboard" element={<DashboardPageTeacher/>}/>}
+            {localStorage.getItem("role") === "ROLE_TEACHER" && <Route exact path="/test/creation" element={<TestCreatePage/>}/>}
+            {localStorage.getItem("role") === "ROLE_TEACHER" && <Route exact path="/lecture/creation" element={<LectureCreatePage/>}/>}
+            {localStorage.getItem("role") === "ROLE_TEACHER" && <Route exact path="/classroom" element={<ClassRoomPage/>}/>}
         </Routes>
       </div>
   );

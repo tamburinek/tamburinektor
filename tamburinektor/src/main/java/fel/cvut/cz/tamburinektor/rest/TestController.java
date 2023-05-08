@@ -85,7 +85,6 @@ public class TestController {
         return tests.stream().map(mapper::toDto).collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasRole('ROLE_TEACHER')")
     @GetMapping(value = "/test/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public TestDto getTestById(@PathVariable Long id){
         Test test = testService.getById(id);

@@ -1,7 +1,6 @@
 import styles from "./LectionSection.module.scss"
 import {LectionItem} from "./lection-item/LectionItem";
 import {useEffect, useState} from "react";
-import {TestItem} from "../test-section/test-item/TestItem";
 import ClassRoomApi from "../../../../../services/classRoomApi";
 import ClassRoomPageApi from "../../../../../services/classRoomPageApi";
 

@@ -12,9 +12,4 @@ export * from './teacher/test-create/TestCreatePage'
 
 //STUDENT
 export * from './student/dashboard-page/DashboardPage.student'
-/*export * from './student/dashboard-page/DashboardPage.client'
-export * from './student/events-page/EventsPage.client'
-export * from './student/reservations-page/ReservationsPage.client'
-export * from './student/customers-page/CustomersPage.client'
-export * from './student/settings-page/SettingsPage.client'
-export * from './student/profile-page/ProfilePage.client'*/
+export * from './student/test-page/TestStudentPage'
