@@ -5,6 +5,7 @@ import closeImage from "../../../../../../assets/png/close.png"
 import {useEffect, useState} from "react";
 import {CloseQuestion} from "./closed-question/CloseQuestion";
 import {OpenQuestion} from "./open-question/OpenQuestion";
+import TestApi from "../../../../../../services/testApi";
 
 export const CreateQuestion = (props) => {
 
@@ -13,6 +14,9 @@ export const CreateQuestion = (props) => {
 
     const [question, setQuestion] = useState("");
     const [imageLink, setImage] = useState("");
+
+    const [right, setRight] = useState([])
+    const [wrong, setWrong] = useState([])
 
     let addImage = (event) => {
         event.preventDefault()
@@ -23,6 +27,18 @@ export const CreateQuestion = (props) => {
             setImage("")
         }
     }
+
+    useEffect(() => {
+        if (props.id !== undefined){
+            TestApi.getAssignmentById(props.id).then((res) => {
+                setQuestion(res.data.question)
+                setImage(res.data.imageLink)
+                setRight(res.data.rightAnswers)
+                setWrong(res.data.wrongAnswers)
+                setType(res.data.openQuestion ? "open" : "close")
+            })
+        }
+    },[])
 
     return (
         <div className={styles.main} onClick={props.onClose}>
@@ -45,14 +61,14 @@ export const CreateQuestion = (props) => {
                     setImage(e.target.value)
                 }} value={imageLink} className={styles.input} placeholder={"Obrázek"} type={"text"}/>}
                 <div className={styles.modal}>
-                    {type === "close" && <CloseQuestion onAdd={() => {
+                    {type === "close" && <CloseQuestion id={props.id} right={right} wrong={wrong} onAdd={() => {
                         setQuestion("")
                         setImage("")
-                    }} question={question} image={imageLink}/>}
-                    {type === "open" && <OpenQuestion onAdd={() => {
+                    }} onEdit={() => props.onClose()} question={question} image={imageLink}/>}
+                    {type === "open" && <OpenQuestion id={props.id} right={right} onAdd={() => {
                         setQuestion("")
                         setImage("")
-                    }} question={question} image={imageLink}/>}
+                    }} onEdit={() => props.onClose()} question={question} image={imageLink}/>}
                 </div>
             </div>
         </div>

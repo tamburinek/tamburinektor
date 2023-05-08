@@ -8,6 +8,10 @@
   align-items: center;
   flex-direction: column;
   margin: 2%;
+  box-shadow: 0px 0px 4px #505050;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .lecture:hover{
@@ -28,11 +32,11 @@
   width: 50%;
   height: 15%;
   border-radius: 20px;
-  border: 1px solid #E98074;
+  border: 0px solid #E98074;
   background-color: #EAE7DC;
   color: #8E8D8A;
   font-weight: bold;
-  box-shadow: 0px 0px 4px #E98074;
+  box-shadow: 0px 0px 4px #505050;
   cursor: pointer;
 }
 

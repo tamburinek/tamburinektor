@@ -1,5 +1,4 @@
 import styles from "./MyClassItem.module.scss"
-import {useEffect, useState} from "react";
 
 export const MyClassItem = (props) => {
 

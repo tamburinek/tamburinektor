@@ -18,7 +18,7 @@ export const ClassRoomSection = () => {
     );
 
     const listMyClasses = myClasses.map((item) =>
-        <MyClassItem onClick={() => setActiveClass(item.id)} key={item.id} id={item.id} name={item.name}/>
+        <MyClassItem key={item.id} id={item.id} name={item.name}/>
     );
 
     let confirm = (e) => {

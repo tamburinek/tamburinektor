@@ -75,7 +75,8 @@ export const TestCreatePage = () => {
     }
 
     let editMaterial = (id) => {
-
+        setQuestionId(id)
+        setCreateVisible(true)
     }
 
     let removeItem = (id) => {

@@ -6,6 +6,8 @@ export const CloseQuestion = (props) => {
 
     const [questions, setQuestions] = useState(4);
 
+    const [buttonText, setButtonText] = useState("Vytvořit");
+
     const [first, setFirst] = useState("");
     const [second, setSecond] = useState("");
     const [third, setThird] = useState("");
@@ -54,17 +56,23 @@ export const CloseQuestion = (props) => {
         } else {
             wrongAnswers.push(forth)
         }
-        TestApi.createCloseTestQuestion(props.question, props.image, rightAnswers, wrongAnswers).then(() => {
-            setFirst("")
-            setSecond("")
-            setThird("")
-            setForth("")
-            setFirstRight(false)
-            setSecondRight(false)
-            setThirdRight(false)
-            setForthRight(false)
-            props.onAdd()
-        })
+        if (props.id !== undefined){
+            TestApi.updateClosedQuestion(props.id, props.question, props.image, rightAnswers, wrongAnswers).then(res => {
+                props.onEdit()
+            })
+        } else {
+            TestApi.createCloseTestQuestion(props.question, props.image, rightAnswers, wrongAnswers).then(() => {
+                setFirst("")
+                setSecond("")
+                setThird("")
+                setForth("")
+                setFirstRight(false)
+                setSecondRight(false)
+                setThirdRight(false)
+                setForthRight(false)
+                props.onAdd()
+            })
+        }
     }
 
     let handleClick1 = () => {
@@ -98,6 +106,64 @@ export const CloseQuestion = (props) => {
             setForthRight(true)
         }
     }
+
+    let setRight = () => {
+        if (props.right[0] !== undefined){
+            setFirstRight(true)
+            setFirst(props.right[0])
+        } else {
+            return
+        }
+        if (props.right[1] !== undefined){
+            setSecondRight(true)
+            setSecond(props.right[1])
+        } else {
+            return
+        }
+        if (props.right[2] !== undefined){
+            setThirdRight(true)
+            setThird(props.right[1])
+        } else {
+            return
+        }
+        if (props.right[3] !== undefined){
+            setForthRight(true)
+            setForth(props.right[1])
+        }
+    }
+
+    let setWrong = () => {
+        if (props.wrong[0] !== undefined){
+            setForthRight(false)
+            setForth(props.wrong[1])
+        } else {
+            return
+        }
+        if (props.wrong[1] !== undefined){
+            setThirdRight(false)
+            setThird(props.wrong[1])
+        } else {
+            return
+        }
+        if (props.wrong[2] !== undefined){
+            setSecondRight(false)
+            setSecond(props.wrong[1])
+        } else {
+            return
+        }
+        if (props.wrong[3] !== undefined){
+            setFirstRight(false)
+            setFirst(props.wrong[0])
+        }
+    }
+
+    useEffect(() => {
+        if (props.id !== undefined){
+            setRight()
+            setWrong()
+            setButtonText("Aktualizovat")
+        }
+    }, [props.id, props.right])
 
   return(
       <div className={styles.main}>
@@ -145,7 +211,7 @@ export const CloseQuestion = (props) => {
               <button className={styles.add} onClick={addQuestion}>Přidat odpověď</button>
               <button className={styles.remove} onClick={removeQuestion}>Smazat odpověď</button>
           </div>
-          <button onClick={confirm} className={styles.create}>Vytvořit</button>
+          <button onClick={confirm} className={styles.create}>{buttonText}</button>
       </div>
   )
 }

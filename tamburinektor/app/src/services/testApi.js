@@ -80,8 +80,44 @@ const getLastTest = () => {
     return (axios.get(`${baseUrl}/test/last`,{headers}));
 }
 
+const getAssignmentById = (id) => {
+    console.log("getting assignment " + id)
+    return (axios.get(`${baseUrl}/assignment/${id}`,{headers}));
+}
+
+const updateClosedQuestion = (id, question, imageLink, rightAnswers, wrongAnswers) => {
+    console.log("updating close question")
+    return (axios.patch(`${baseUrl}/assignment`,{
+        "id" : id,
+        "question": question,
+        "imageLink": imageLink,
+        "openQuestion":false,
+        "rightAnswers":rightAnswers,
+        "wrongAnswers":wrongAnswers
+    },{headers}).then((response) => {
+        console.log(response)
+        return response
+    }));
+}
+
+const updateOpenQuestion = (id, question, imageLink, answer) => {
+    let helper = []
+    helper.push(answer)
+    console.log("updating open question")
+    return (axios.patch(`${baseUrl}/assignment`,{
+        "id" : id,
+        "question": question,
+        "imageLink": imageLink,
+        "openQuestion":true,
+        "rightAnswers":helper
+    },{headers}).then((response) => {
+        console.log(response)
+        return response
+    }));
+}
+
 const TestApi = {
     createOpenTestQuestion, createCloseTestQuestion, getAllClose, getAllOpen, createTest,
-    getAllTests, getTestById, updateTest, getLastTest
+    getAllTests, getTestById, updateTest, getLastTest, getAssignmentById, updateClosedQuestion, updateOpenQuestion
 };
 export default TestApi;
