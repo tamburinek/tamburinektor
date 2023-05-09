@@ -30,10 +30,6 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
-}
-
 task stage(type: Copy, dependsOn: [clean, build]) {
     from jar.archivePath
     into project.rootDir 
