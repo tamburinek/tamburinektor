@@ -38,3 +38,12 @@ task stage(type: Copy, dependsOn: [clean, build]) {
     }
 }
 stage.mustRunAfter(clean)
+
+jar {
+  manifest {
+    attributes(
+      'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+      'Main-Class': 'fel.cvut.cz.tamburinektor.TamburinektorApplication'
+    )
+  }
+}
