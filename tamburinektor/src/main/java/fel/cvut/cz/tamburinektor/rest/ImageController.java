@@ -68,7 +68,6 @@ public class ImageController {
         return images.stream().map(imageMapper::toDto).collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasRole('ROLE_TEACHER')")
     @GetMapping(value = "/image/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ImageDto getImageById(@PathVariable Long id){
         Image image = imageService.getById(id);

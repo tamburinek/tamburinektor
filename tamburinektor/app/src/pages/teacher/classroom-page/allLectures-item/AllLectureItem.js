@@ -10,7 +10,7 @@ export const AllLectureItem = (props) => {
         <div className={styles.main}>
             <span className={styles.text}>{props.description}</span>
             <div className={styles.buttons}>
-                {props.type === "lection" && <img className={styles.play} src={play} alt={"play"}/>}
+                {props.type === "lection" && <img onClick={() => window.location = "lecture?id=" + props.id} className={styles.play} src={play} alt={"play"}/>}
                 <img onClick={props.click} className={styles.plus} src={plus} alt={"plus"}/>
             </div>
         </div>

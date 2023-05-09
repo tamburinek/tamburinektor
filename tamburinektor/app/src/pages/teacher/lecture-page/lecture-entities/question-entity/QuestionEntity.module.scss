@@ -1,0 +1,24 @@
+.main{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.description{
+  height: 20%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #E98074;
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+.answers{
+  height: 80%;
+  width: 100%;
+}

@@ -65,7 +65,7 @@ public class QuizController {
         return quizzes.stream().map(quizMapper::toDto).collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasRole('ROLE_TEACHER')")
+
     @GetMapping(value = "/quiz/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public QuizDto getQuizById(@PathVariable Long id){
         Quiz quiz = quizService.getById(id);

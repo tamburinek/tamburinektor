@@ -1,5 +1,6 @@
 package fel.cvut.cz.tamburinektor.rest;
 
+import fel.cvut.cz.tamburinektor.DTO.LectureActiveDto;
 import fel.cvut.cz.tamburinektor.DTO.LectureDto;
 import fel.cvut.cz.tamburinektor.DTO.LectureEntityDto;
 import fel.cvut.cz.tamburinektor.mappers.LectureEntityMapper;
@@ -83,7 +84,6 @@ public class LectureController {
         return result;
     }
 
-    @PreAuthorize("hasRole('ROLE_TEACHER')")
     @GetMapping(value = "/lecture/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public LectureDto getLectureById(@PathVariable Long id){
         Lecture lecture = lectureService.getById(id);
@@ -113,6 +113,29 @@ public class LectureController {
             return null;
         }
         return lecture.getDescription();
+    }
+
+    @GetMapping(value = "/lecture/{id}/active", produces = MediaType.APPLICATION_JSON_VALUE)
+    public boolean getLectureIsActive(@PathVariable Long id){
+        Lecture lecture = lectureService.getById(id);
+        return lecture.isOpen();
+    }
+
+    @PostMapping(value = "/lecture/{id}" , produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> setActiveForLecture(@PathVariable Long id, @RequestBody LectureActiveDto dto){
+        Lecture lecture = lectureService.getById(id);
+        lecture.setOpen(dto.isActive());
+        lectureService.createOrUpdateLecture(lecture);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/lecture/{id}/last", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Long getActiveEntityIndex(@PathVariable Long id){
+        Lecture lecture = lectureService.getById(id);
+        if (!lecture.isOpen()){
+            return 0L;
+        }
+        return lecture.getLastEntity().getId();
     }
 
     private List<LectureEntity> getAllEntitiesFromDto(List<LectureEntityDto> dtos){

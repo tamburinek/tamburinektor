@@ -38,4 +38,10 @@ public class Lecture {
     @ManyToMany
     @OrderColumn
     private List<LectureEntity> lectureEntities;
+
+    @OneToOne(optional = true)
+    private  LectureEntity lastEntity;
+
+    @Column
+    private boolean isOpen = false;
 }

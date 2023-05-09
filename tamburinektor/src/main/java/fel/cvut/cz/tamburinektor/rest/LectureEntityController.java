@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,5 +43,11 @@ public class LectureEntityController {
     public LectureEntity getLastEntity(){
         User user = userService.getCurrentUser();
         return lectureEntityService.getLastMaterial(user);
+    }
+
+
+    @GetMapping(value = "/material/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public LectureEntity getLastEntity(@PathVariable Long id){
+        return lectureEntityService.getEntityById(id);
     }
 }

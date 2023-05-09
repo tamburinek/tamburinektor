@@ -5,7 +5,7 @@ export const LectionItem = (props) => {
       <div className={styles.lecture}>
           <div className={styles.box}>
               <p>{props.item}</p>
-              <button className={styles.button}>Spustit</button>
+              <button onClick={() => window.location = "lecture?id=" + props.id} className={styles.button}>Spustit</button>
           </div>
       </div>
   )

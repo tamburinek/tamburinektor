@@ -1,0 +1,42 @@
+.main{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.description{
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #E98074;
+  font-weight: bold;
+  font-size: medium;
+}
+
+.definition{
+  height: 40%;
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #E98074;
+  font-weight: bold;
+  font-size: larger;
+}
+
+.image{
+  height: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.oneImage{
+  height: 100%;
+
+}

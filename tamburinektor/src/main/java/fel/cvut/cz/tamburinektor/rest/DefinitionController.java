@@ -65,7 +65,7 @@ public class DefinitionController {
         return definitions.stream().map(definitionMapper::toDto).collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasRole('ROLE_TEACHER')")
+
     @GetMapping(value = "/definition/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public DefinitionDto getDefinitionById(@PathVariable Long id){
         Definition definition = definitionService.getById(id);

@@ -67,7 +67,7 @@ public class QuestionController {
         return questions.stream().map(questionMapper::toDto).collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasRole('ROLE_TEACHER')")
+
     @GetMapping(value = "/question/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public QuestionDto getQuestionById(@PathVariable Long id){
         Question question = questionService.getById(id);

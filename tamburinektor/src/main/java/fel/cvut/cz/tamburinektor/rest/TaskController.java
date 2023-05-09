@@ -67,7 +67,7 @@ public class TaskController {
         return tasks.stream().map(taskMapper::toDto).collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasRole('ROLE_TEACHER')")
+
     @GetMapping(value = "/task/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public TaskDto getTaskById(@PathVariable Long id){
         Task task = taskService.getById(id);

@@ -59,8 +59,14 @@ const getQuizById = (id) => {
     return (axios.get(`${baseUrl}/quiz/${id}`,{headers}));
 }
 
+
+const getEntity = (id) => {
+    console.log("getting entity with id: " + id)
+    return (axios.get(`${baseUrl}/material/${id}`,{headers}));
+}
+
 const MaterialsListApi = {
     getAllDefinitions, getAllImages, getAllQuestions, getAllTasks, getAllQuizes, getLastCreated,
-    getDefinitionById, getImageById, getTaskById, getQuestionById, getQuizById
+    getDefinitionById, getImageById, getTaskById, getQuestionById, getQuizById, getEntity
 };
 export default MaterialsListApi;
