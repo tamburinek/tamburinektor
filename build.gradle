@@ -40,9 +40,10 @@ task stage(type: Copy, dependsOn: [clean, build]) {
 stage.mustRunAfter(clean)
 
 jar {
-  manifest {
-    attributes(
-      'Main-Class': 'fel.cvut.cz.tamburinektor.TamburinektorApplication'
-    )
-  }
+    enabled = false
+    manifest {
+        attributes(
+            'Main-Class': 'fel.cvut.cz.tamburinektor.TamburinektorApplication'
+        )
+    }
 }
