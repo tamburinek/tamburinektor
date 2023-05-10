@@ -130,12 +130,20 @@ public class LectureController {
     }
 
     @GetMapping(value = "/lecture/{id}/last", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Long getActiveEntityIndex(@PathVariable Long id){
+    public LectureEntity getActiveEntityIndex(@PathVariable Long id){
         Lecture lecture = lectureService.getById(id);
         if (!lecture.isOpen()){
-            return 0L;
+            return null;
         }
-        return lecture.getLastEntity().getId();
+        return lecture.getLastEntity();
+    }
+
+    @PostMapping(value = "/lecture/{id}/last" , produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> setLastEntityId(@PathVariable Long id, @RequestBody LectureActiveDto dto){
+        Lecture lecture = lectureService.getById(id);
+        lecture.setLastEntity(lectureEntityService.getEntityById(dto.getId()));
+        lectureService.createOrUpdateLecture(lecture);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     private List<LectureEntity> getAllEntitiesFromDto(List<LectureEntityDto> dtos){

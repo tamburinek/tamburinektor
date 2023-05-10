@@ -23,4 +23,5 @@ public class Quiz extends LectureEntity{
 
     @OneToMany
     private List<QuizQuestion> questions;
+
 }

@@ -9,4 +9,6 @@ import lombok.Setter;
 public class LectureActiveDto {
 
     private boolean active;
+
+    private Long id;
 }

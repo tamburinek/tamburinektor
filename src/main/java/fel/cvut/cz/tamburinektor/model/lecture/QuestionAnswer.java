@@ -31,7 +31,4 @@ public class QuestionAnswer {
 
     @ManyToOne(optional = false)
     private User createdBy;
-
-    @ManyToOne(optional = false)
-    private Question question;
 }

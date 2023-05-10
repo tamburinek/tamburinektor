@@ -14,4 +14,6 @@ public class QuestionAnswerDto {
     private Long questionId;
 
     private String answer;
+
+    private String user;
 }

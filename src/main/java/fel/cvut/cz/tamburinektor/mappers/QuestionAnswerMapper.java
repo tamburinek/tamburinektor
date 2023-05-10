@@ -11,10 +11,17 @@ import org.springframework.stereotype.Component;
 public class QuestionAnswerMapper {
 
     public QuestionAnswerDto toDto(QuestionAnswer testResult) {
-        return null;
+        QuestionAnswerDto dto = new QuestionAnswerDto();
+        dto.setAnswer(testResult.getMessage());
+        dto.setId(testResult.getId());
+        dto.setUser(testResult.getCreatedBy().getFirstName() + " " + testResult.getCreatedBy().getLastName());
+        return dto;
     }
 
-    public QuestionAnswer toQuestionAnswer(QuestionAnswerDto testResultDto, User user, Question question) {
-        return null;
+    public QuestionAnswer toQuestionAnswer(QuestionAnswerDto testResultDto, User user) {
+        QuestionAnswer answer = new QuestionAnswer();
+        answer.setMessage(testResultDto.getAnswer());
+        answer.setCreatedBy(user);
+        return answer;
     }
 }
