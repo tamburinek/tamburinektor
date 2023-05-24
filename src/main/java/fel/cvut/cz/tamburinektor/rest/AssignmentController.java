@@ -1,11 +1,8 @@
 package fel.cvut.cz.tamburinektor.rest;
 
 import fel.cvut.cz.tamburinektor.DTO.AssignmentDto;
-import fel.cvut.cz.tamburinektor.DTO.DefinitionDto;
 import fel.cvut.cz.tamburinektor.mappers.AssignmentMapper;
-import fel.cvut.cz.tamburinektor.model.Classroom;
 import fel.cvut.cz.tamburinektor.model.User;
-import fel.cvut.cz.tamburinektor.model.lecture.Definition;
 import fel.cvut.cz.tamburinektor.model.test.Assignment;
 import fel.cvut.cz.tamburinektor.service.AssignmentService;
 import fel.cvut.cz.tamburinektor.service.UserService;

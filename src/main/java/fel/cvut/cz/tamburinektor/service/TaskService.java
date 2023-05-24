@@ -1,6 +1,5 @@
 package fel.cvut.cz.tamburinektor.service;
 
-import fel.cvut.cz.tamburinektor.dao.LectureEntityRepository;
 import fel.cvut.cz.tamburinektor.dao.TaskRepository;
 import fel.cvut.cz.tamburinektor.model.User;
 import fel.cvut.cz.tamburinektor.model.lecture.Task;

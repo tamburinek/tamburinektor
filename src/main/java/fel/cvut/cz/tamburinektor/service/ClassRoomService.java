@@ -4,7 +4,6 @@ import fel.cvut.cz.tamburinektor.dao.ClassRoomRepository;
 import fel.cvut.cz.tamburinektor.model.Classroom;
 import fel.cvut.cz.tamburinektor.model.User;
 import fel.cvut.cz.tamburinektor.model.lecture.Lecture;
-import fel.cvut.cz.tamburinektor.model.lecture.LectureEntity;
 import fel.cvut.cz.tamburinektor.model.test.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

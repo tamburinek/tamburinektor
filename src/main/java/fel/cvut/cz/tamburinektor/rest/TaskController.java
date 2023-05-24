@@ -1,10 +1,8 @@
 package fel.cvut.cz.tamburinektor.rest;
 
-import fel.cvut.cz.tamburinektor.DTO.QuestionDto;
 import fel.cvut.cz.tamburinektor.DTO.TaskDto;
 import fel.cvut.cz.tamburinektor.mappers.TaskMapper;
 import fel.cvut.cz.tamburinektor.model.User;
-import fel.cvut.cz.tamburinektor.model.lecture.Question;
 import fel.cvut.cz.tamburinektor.model.lecture.Task;
 import fel.cvut.cz.tamburinektor.service.TaskService;
 import fel.cvut.cz.tamburinektor.service.UserService;

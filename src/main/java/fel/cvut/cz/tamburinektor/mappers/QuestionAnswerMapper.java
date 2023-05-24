@@ -2,7 +2,6 @@ package fel.cvut.cz.tamburinektor.mappers;
 
 import fel.cvut.cz.tamburinektor.DTO.QuestionAnswerDto;
 import fel.cvut.cz.tamburinektor.model.User;
-import fel.cvut.cz.tamburinektor.model.lecture.Question;
 import fel.cvut.cz.tamburinektor.model.lecture.QuestionAnswer;
 import org.springframework.stereotype.Component;
 

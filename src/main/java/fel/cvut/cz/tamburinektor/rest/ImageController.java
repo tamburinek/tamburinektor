@@ -1,10 +1,8 @@
 package fel.cvut.cz.tamburinektor.rest;
 
-import fel.cvut.cz.tamburinektor.DTO.DefinitionDto;
 import fel.cvut.cz.tamburinektor.DTO.ImageDto;
 import fel.cvut.cz.tamburinektor.mappers.ImageMapper;
 import fel.cvut.cz.tamburinektor.model.User;
-import fel.cvut.cz.tamburinektor.model.lecture.Definition;
 import fel.cvut.cz.tamburinektor.model.lecture.Image;
 import fel.cvut.cz.tamburinektor.service.ImageService;
 import fel.cvut.cz.tamburinektor.service.UserService;

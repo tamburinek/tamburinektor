@@ -28,6 +28,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     runtimeOnly 'org.postgresql:postgresql'
+    implementation group: 'org.springframework.security', name: 'spring-security-test', version: '4.0.0.RELEASE'
 }
 
 task stage(type: Copy, dependsOn: [clean, build]) {
@@ -46,4 +47,8 @@ jar {
             'Main-Class': 'fel.cvut.cz.tamburinektor.TamburinektorApplication'
         )
     }
+}
+
+test {
+    useJUnitPlatform()
 }

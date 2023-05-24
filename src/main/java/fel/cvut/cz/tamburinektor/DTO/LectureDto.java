@@ -14,5 +14,8 @@ public class LectureDto {
 
     private String description;
 
+    //todo add to mapper
+    private boolean active;
+
     private List<LectureEntityDto> lectureEntities;
 }

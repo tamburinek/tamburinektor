@@ -1,7 +1,6 @@
 package fel.cvut.cz.tamburinektor.model.enums;
 
 import lombok.Getter;
-import lombok.Setter;
 
 
 @Getter

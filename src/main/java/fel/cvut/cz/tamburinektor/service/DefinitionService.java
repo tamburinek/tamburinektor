@@ -1,11 +1,8 @@
 package fel.cvut.cz.tamburinektor.service;
 
 import fel.cvut.cz.tamburinektor.dao.DefinitionRepository;
-import fel.cvut.cz.tamburinektor.dao.LectureEntityRepository;
 import fel.cvut.cz.tamburinektor.model.User;
-import fel.cvut.cz.tamburinektor.model.enums.LectureType;
 import fel.cvut.cz.tamburinektor.model.lecture.Definition;
-import fel.cvut.cz.tamburinektor.model.lecture.LectureEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
